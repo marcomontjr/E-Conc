@@ -14,7 +14,6 @@ C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E-Conc.ru
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E-Conc.runtimeconfig.dev.json
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E-Conc.dll
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E-Conc.pdb
-C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.csprojResolveAssemblyReference.cache
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.csproj.CoreCompileInputs.cache
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.AssemblyInfoInputs.cache
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.AssemblyInfo.cs

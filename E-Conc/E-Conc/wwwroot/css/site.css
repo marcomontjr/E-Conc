@@ -34,6 +34,18 @@
     }
 }
 
-.left.carousel-control, .right.carousel-control {
+.left.carousel-control, 
+.right.carousel-control {
     background-image: none;
+}
+
+.navbar-brand {
+    background: url('../images/CabecalhoLogo.png');
+    width: 203px;
+    height: 65px;
+}
+
+.navbar-inverse {
+    background-color: #F2F5F4;
+    height: 11%;
 }
