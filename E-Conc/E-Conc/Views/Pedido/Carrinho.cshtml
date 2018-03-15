@@ -1,0 +1,75 @@
+﻿@{
+    ViewData["Title"] = "Carrinho";
+}
+
+<br />
+
+<h3>Meu Carrinho</h3>
+
+<div class="panel panel-default" id="Carrinho">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6">Item</div>
+            <div class="col-md-4">Categoria</div>
+            <div class="col-md-2">Orientador</div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <img src="~/images/Produtos/DesenvolvimentoCarrinho.jpg" />
+            </div>
+            <div class="col-md-3">E-commerce</div>
+            <div class="col-md-4">Desenvolvimento</div>
+            <div class="col-md-2">Marco Monteiro.</div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <div class="row">
+            <div class="col-md-10">
+                Análise e Desenvolvimento de Sistemas
+            </div>
+            <div class="col-md-2">
+                ADS
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+       <a asp-action="resumo" 
+          class="btn btn-success pull-right">
+           Finalizar Pedido
+        </a>   
+    </div>
+</div>
+
+<!--Modal-->
+@*<div class="modal fade" id="CarrinhoModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="title">Aviso!</h5>
+                </div>
+                <div class="modal-body">
+                    <p class="text-justify">
+                        Bem-Vindo, este é o seu carrinho, aqui você pode revisar o produto que comprou e verificar se está tudo certo.
+                        Portanto, só clique em "Finalizar Pedido" se tiver 100% de certeza de que irá desenvolver este estudo, ao confirmar
+                        sua compra, concorda com o tema proposto, bem como está apto a desenvolvê-lo de acordo com as exigências do professor,
+                        e concorda ainda com o orientador especificado neste tema.
+                    </p>
+                    <p class="text-justify">
+                        Se tem 100% de certeza de que irá desenvolver este tema, o E-Conc deseja Boa Sorte no Desenvolvimento deste estudo
+                        e que a Força Esteja com Você!
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="~/js/Carrinho.js"></script>
