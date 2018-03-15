@@ -19,3 +19,4 @@ C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.As
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.AssemblyInfo.cs
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.dll
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.pdb
+C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E-Conc.csprojResolveAssemblyReference.cache
