@@ -1,4 +1,5 @@
 ﻿using E_Conc.Models;
+using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -14,12 +15,13 @@ namespace E_Conc.Controllers
             new Produto(3, "História da Computação", "PesquisaAcademicaProduto.jpg", "Pesquisa Acadêmica")
         };
         
-        Orientador orientador = new Orientador("Marco Jr.");
-        Curso curso = new Curso("Análise e Desenvolvimento de Sistemas", "ADS");
+        Orientador orientador = new Orientador(1, "Marco Jr.");
+        Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");
 
         public IActionResult Carrossel()
         {
-            return View(produtos);
+            CarrosselViewModel viewModel = new CarrosselViewModel(produtos);
+            return View(viewModel);
         }
 
         public IActionResult Carrinho()

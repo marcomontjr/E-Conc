@@ -2,10 +2,12 @@
 {
     public class Orientador
     {
-        public string Nome { get; set; }
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
 
-        public Orientador(string nome)
+        public Orientador(int id, string nome)
         {
+            Id = id;
             Nome = nome;
         }
     }
