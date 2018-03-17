@@ -2,9 +2,13 @@
     ViewData["Title"] = "Carrinho";
 }
 
+@model ItemPedido
+
 <br />
 
 <h3>Meu Carrinho</h3>
+<br />
+<h5>Número do Pedido: @(Model.Id)</h5>
 
 <div class="panel panel-default" id="Carrinho">
     <div class="panel-heading">
@@ -17,20 +21,20 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-3">
-                <img src="~/images/Produtos/DesenvolvimentoCarrinho.jpg" />
+                <img src="~/images/Produtos/@(Model.Produto.Arquivo)" />
             </div>
-            <div class="col-md-3">E-commerce</div>
-            <div class="col-md-4">Desenvolvimento</div>
-            <div class="col-md-2">Marco Monteiro.</div>
+            <div class="col-md-3">@(Model.Produto.Nome)</div>
+            <div class="col-md-4">@(Model.Produto.Categoria)</div>
+            <div class="col-md-2">@(Model.Orientador.Nome)</div>
         </div>
     </div>
     <div class="panel-footer">
         <div class="row">
             <div class="col-md-10">
-                Análise e Desenvolvimento de Sistemas
+                @(Model.Curso.Nome)
             </div>
             <div class="col-md-2">
-                ADS
+                @(Model.Curso.Sigla)
             </div>
         </div>
     </div>
