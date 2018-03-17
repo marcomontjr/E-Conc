@@ -2,11 +2,13 @@
 {
     public class Curso
     {
-        public string Nome { get; set; }
-        public string Sigla { get; set; }
+        public int Id { get; private set; }
+        public string Nome { get; private set; }
+        public string Sigla { get; private set; }
 
-        public Curso(string nome, string sigla)
+        public Curso(int id, string nome, string sigla)
         {
+            Id = id;
             Nome = nome;
             Sigla = sigla;
         }
