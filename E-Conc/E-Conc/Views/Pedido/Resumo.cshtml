@@ -2,6 +2,8 @@
     ViewData["Title"] = "Resumo";
 }
 
+@model E_Conc.Models.ViewModels.ResumoViewModel
+
 <br />
 
 <h3>Resumo do Pedido</h3>
@@ -10,35 +12,35 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <h3>Nº Do Pedido: 12345678</h3>
+                <h3>Nº Do Pedido: @(Model.ItemPedido.Id)</h3>
             </div>
         </div>
         <hr/>
         <div class="row">
             <div class="col-md-8">
                 <h3>Seus Dados</h3>
-                <div>Nome: João da Silva</div>
-                <div>Tel: (11) 1234-6789</div>
-                <div>RA: 0030481513030</div>
-                <div>Instituição: José Crespo Gonzáles</div>
-                <div>Sigla: Fatec-SO</div>
-                <div>Curso: Análise e Desenvolvimento de Sistemas</div>
-                <div>Sigla: ADS</div>
+                <div>Nome: @(Model.Aluno.Nome)</div>
+                <div>Tel: @(Model.Aluno.Telefone)</div>
+                <div>RA: @(Model.Aluno.Ra)</div>
+                <div>Instituição: @(Model.Aluno.Instituicao)</div>
+                <div>Sigla: @(Model.Aluno.InstituicaoSigla)</div>
+                <div>Curso: @(Model.Curso.Nome)</div>
+                <div>Sigla: @(Model.Curso.Sigla)</div>
             </div>
             <div class="col-md-4">
                 <h3>Endereco de Entrega</h3>
-                <div>marco.monteiro@gmail.com</div>
+                <div>@(Model.Aluno.Nome)</div>
             </div>
         </div>
         <hr/>
         <div class="row">
             <div class="col-md-8">
                 <h3>Item</h3>
-                <div>Desenvolvimento de E-Commerces</div>
+                <div>@(Model.Produto.Nome)</div>
             </div>
             <div class="col-md-4">
                 <h3>Categoria</h3>
-                <div>Desenvolvimento</div>
+                <div>@(Model.Produto.Categoria)</div>
             </div>
         </div>
     </div>

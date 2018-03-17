@@ -50,4 +50,9 @@
 .navbar-inverse {
     background-color: #F2F5F4;
     height: 11%;
-}   
+}
+
+.row-center {
+    display: flex;
+    align-items: center;
+}

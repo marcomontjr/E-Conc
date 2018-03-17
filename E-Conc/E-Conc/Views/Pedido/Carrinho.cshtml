@@ -13,19 +13,19 @@
 <div class="panel panel-default" id="Carrinho">
     <div class="panel-heading">
         <div class="row">
-            <div class="col-md-6">Item</div>
-            <div class="col-md-4">Categoria</div>
-            <div class="col-md-2">Orientador</div>
+            <div class="col-md-6 text-center">Item</div>
+            <div class="col-md-4 text-center">Categoria</div>
+            <div class="col-md-2 text-center">Orientador</div>
         </div>
     </div>
     <div class="panel-body">
-        <div class="row">
+        <div class="row row-center">
             <div class="col-md-3">
                 <img src="~/images/Produtos/@(Model.Produto.Arquivo)" />
             </div>
-            <div class="col-md-3">@(Model.Produto.Nome)</div>
-            <div class="col-md-4">@(Model.Produto.Categoria)</div>
-            <div class="col-md-2">@(Model.Orientador.Nome)</div>
+            <div class="col-md-3 text-center">@(Model.Produto.Nome)</div>
+            <div class="col-md-4 text-center">@(Model.Produto.Categoria)</div>
+            <div class="col-md-2 text-center">@(Model.Orientador.Nome)</div>
         </div>
     </div>
     <div class="panel-footer">
