@@ -10,7 +10,7 @@ A Plataforma Segue um mecanismo consagrado na UX (User Experience) que são os E
 
 O problema que a plataforma visa confrontar é a dificuldade dos alunos em escolherem temas para seus trabalhos de conclusão, uma pesquisa realizada por uma rede social famosa inidicou com uma certa precisão da necessidade deste confronto com alguns dados mostrados abaixo.
 
-As Entrevistas realizadas de maneira digital tiveram um resultado esperado, as perguntas realiziadas foram as seguintes:
+As Entrevistas realizadas de maneira digital tiveram um resultado esperado, as perguntas realizadas foram as seguintes:
 
 <p align="center">
   <img src="http://i63.tinypic.com/14udcw2.jpg"/>
