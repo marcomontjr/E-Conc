@@ -12,11 +12,11 @@ namespace E_Conc.Controllers
             new Produto(0, "E-Commerce", "DesenvolvimentoProduto.jpg", "Desenvolvimento"),
             new Produto(1, "StartUp", "EmpreendedorismoProduto.jpg", "Empreendedorismo"),
             new Produto(2, "Software BitCoins", "IniciacaoCientificaProduto.jpg", "Iniciação Cientifica"),
-            new Produto(3, "História da Computação", "PesquisaAcademicaProduto.jpg", "Pesquisa Acadêmica")
+            new Produto(4, "Teste de Carrinho", "DesenvolvimentoProduto.jpg", "Desenvolvimento")
         };
         
         Orientador orientador = new Orientador(1, "Marco Jr.");
-        Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");
+        Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");        
 
         public IActionResult Carrossel()
         {
@@ -26,14 +26,16 @@ namespace E_Conc.Controllers
 
         public IActionResult Carrinho()
         {
-            var itemCarrinho = new ItemPedido(1, produtos[0], orientador, curso);           
-
+            ItemPedido itemCarrinho = new ItemPedido(4, produtos[0], orientador, curso);
             return View(itemCarrinho);
-        }
+        }        
 
         public IActionResult Resumo()
         {
-            return View();
+            Aluno aluno = new Aluno(1, "Marco", "12345", "José Crespo", "Fatec-SO", curso, "marco@email.com");
+            ItemPedido itemCarrinho = new ItemPedido(4, produtos[0], orientador, curso);
+            ResumoViewModel resumo = new ResumoViewModel(produtos[0], itemCarrinho, aluno, curso);
+            return View(resumo);
         }
     }
 }
