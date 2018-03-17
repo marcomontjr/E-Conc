@@ -1,4 +1,5 @@
 ﻿using E_Conc.Models;
+using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -11,11 +12,7 @@ namespace E_Conc.Controllers
             new Produto(0, "E-Commerce", "DesenvolvimentoProduto.jpg", "Desenvolvimento"),
             new Produto(1, "StartUp", "EmpreendedorismoProduto.jpg", "Empreendedorismo"),
             new Produto(2, "Software BitCoins", "IniciacaoCientificaProduto.jpg", "Iniciação Cientifica"),
-            new Produto(3, "História da Computação", "PesquisaAcademicaProduto.jpg", "Pesquisa Acadêmica"),
-            new Produto(4, "E-Commerce", "DesenvolvimentoProduto.jpg", "Desenvolvimento"),
-            new Produto(5, "StartUp", "EmpreendedorismoProduto.jpg", "Empreendedorismo"),
-            new Produto(6, "Software BitCoins", "IniciacaoCientificaProduto.jpg", "Iniciação Cientifica"),
-            new Produto(7, "História da Computação", "PesquisaAcademicaProduto.jpg", "Pesquisa Acadêmica"),
+            new Produto(3, "História da Computação", "PesquisaAcademicaProduto.jpg", "Pesquisa Acadêmica")
         };
         
         Orientador orientador = new Orientador(1, "Marco Jr.");
@@ -23,7 +20,8 @@ namespace E_Conc.Controllers
 
         public IActionResult Carrossel()
         {
-            return View(produtos);
+            CarrosselViewModel viewModel = new CarrosselViewModel(produtos);
+            return View(viewModel);
         }
 
         public IActionResult Carrinho()

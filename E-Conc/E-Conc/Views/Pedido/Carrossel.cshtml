@@ -4,49 +4,22 @@
 
 <br /><br />
 
+@model E_Conc.Models.ViewModels.CarrosselViewModel
+
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
 
     <!-- Wrapper for slides -->
+    <h3>Desenvovimento</h3>
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <div class="row">
-                @foreach (var produto in Model)
-                {
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="~/images/Produtos/@(produto.Arquivo)" />
-                            </div>
-                            <div class="panel-footer text-center">
-                                <div>@(produto.Nome)</div>
-                                <div>
-                                    <a asp-action="carrinho">Adicionar ao Carrinho</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
+                @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.Produto)
             </div>
         </div>
-
+        
         <div class="item">
             <div class="row">
-                @foreach (var produto in Model)
-                {
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-body">
-                                <img src="~/images/Produtos/@(produto.Arquivo)" />
-                            </div>
-                            <div class="panel-footer text-center">
-                                <div>@(produto.Nome)</div>
-                                <div>
-                                    <a asp-action="carrinho">Adicionar ao Carrinho</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                }
+                @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.Produto)
             </div>
         </div>
 
