@@ -1,14 +1,21 @@
-﻿using System.Collections.Generic;
-
-namespace E_Conc.Models.ViewModels
+﻿namespace E_Conc.Models.ViewModels
 {
     public class CarrosselViewModel
     {
-        public List<Produto> Produto { get; private set; }
+        public DesenvolvimentoViewModel DesenvolvimentoViewModel { get; set; }
+        public EmpreendedorismoViewModel EmpreendedorismoViewModel { get; set; }
+        public IniciacaoCientificaViewModel IniciacaoCientificaViewModel { get; set; }
+        public PesquisaAcademicaViewModel PesquisaAcademicaViewModel { get; set; }
 
-        public CarrosselViewModel(List<Produto> produtos)
+        public CarrosselViewModel(DesenvolvimentoViewModel desenvolvimentoViewModel, 
+                                  EmpreendedorismoViewModel empreendedorismoViewModel, 
+                                  IniciacaoCientificaViewModel iniciacaoCientificaViewModel, 
+                                  PesquisaAcademicaViewModel pesquisaAcademicaViewModel)
         {
-            Produto = produtos;
+            DesenvolvimentoViewModel = desenvolvimentoViewModel;
+            EmpreendedorismoViewModel = empreendedorismoViewModel;
+            IniciacaoCientificaViewModel = iniciacaoCientificaViewModel;
+            PesquisaAcademicaViewModel = pesquisaAcademicaViewModel;
         }
     }
 }
