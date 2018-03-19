@@ -2,13 +2,11 @@
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace E_Conc.Controllers
 {
     public class PedidoController : Controller
-    {        
-        
+    {                
         List<Produto> produtos = new List<Produto>
         {
             new Produto(0, "E-Commerce", "DesenvolvimentoProduto.jpg", Categoria.Desenvolvimento),
@@ -21,14 +19,8 @@ namespace E_Conc.Controllers
         Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");        
 
         public IActionResult Carrossel()
-        {  
-            DesenvolvimentoViewModel desenvolvimento = new DesenvolvimentoViewModel(produtos);
-            EmpreendedorismoViewModel empreendedorismo = new EmpreendedorismoViewModel(produtos);
-            IniciacaoCientificaViewModel iniciacao = new IniciacaoCientificaViewModel(produtos);
-            PesquisaAcademicaViewModel pesquisa = new PesquisaAcademicaViewModel(produtos);            
-
-            CarrosselViewModel carrossel = new CarrosselViewModel(desenvolvimento, empreendedorismo, iniciacao, pesquisa);
-            return View(carrossel);
+        {          
+            return View();
         }
 
         public IActionResult Carrinho()

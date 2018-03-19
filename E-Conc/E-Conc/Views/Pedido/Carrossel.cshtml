@@ -13,7 +13,10 @@
     <div class="carousel-inner" role="listbox">
         <div class="item active">
             <div class="row">
-                @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.DesenvolvimentoViewModel.Produtos)
+                @foreach (var categoriaViewModel in Model.CategoriasViewModel)
+                {
+                    @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", categoriaViewModel)
+                }
             </div>
         </div>
 
@@ -22,7 +25,7 @@
                 @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.DesenvolvimentoViewModel.Produtos)
             </div>
         </div>
-        
+
         <!-- Controls -->
         <a class="left carousel-control" href="#my-carouselDesenvolvimento" role="button" data-slide="prev">
             <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -97,7 +100,7 @@
     </div>
 </div>
 
-<br/>
+<br />
 
 <div id="my-carouselPesquisaAcademica" class="carousel slide" data-ride="carousel">
 
