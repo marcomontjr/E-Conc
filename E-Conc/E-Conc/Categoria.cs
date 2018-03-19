@@ -4,7 +4,7 @@
     {
         Desenvolvimento,
         Empreendedorismo,
-        IniciacaoCientifica,
+        IniciacaoCientifica,       
         PesquisaAcademica
-    }
+    } 
 }

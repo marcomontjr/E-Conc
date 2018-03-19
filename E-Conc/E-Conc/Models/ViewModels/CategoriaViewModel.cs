@@ -11,6 +11,6 @@ namespace E_Conc.Models.ViewModels
         {
             Categoria = categoria;
             Produtos = produtos;
-        }
+        }        
     }
 }

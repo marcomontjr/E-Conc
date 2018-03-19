@@ -23,8 +23,8 @@ namespace E_Conc.Controllers
             List<CategoriaViewModel> categoria = new List<CategoriaViewModel>
             {
                 new CategoriaViewModel(Categoria.Desenvolvimento, produtos)
-            };  
-            
+            };
+
             CarrosselViewModel carrossel = new CarrosselViewModel(categoria);
             
             return View(carrossel);

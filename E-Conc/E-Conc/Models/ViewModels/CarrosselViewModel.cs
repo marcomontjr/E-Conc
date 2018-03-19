@@ -9,6 +9,6 @@ namespace E_Conc.Models.ViewModels
         public CarrosselViewModel(IList<CategoriaViewModel> categoriasViewModel)
         {
             CategoriasViewModel = categoriasViewModel;
-        }
+        }       
     }
 }
