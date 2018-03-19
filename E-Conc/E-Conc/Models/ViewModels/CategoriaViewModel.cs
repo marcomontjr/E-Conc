@@ -4,12 +4,12 @@ namespace E_Conc.Models.ViewModels
 {
     public class CategoriaViewModel
     {
-        public string Titulo { get; set; }
+        public Categoria Categoria { get; set; }
         public IList<Produto> Produtos { get; set; }
 
-        public CategoriaViewModel(string titulo, IList<Produto> produtos)
+        public CategoriaViewModel(Categoria categoria, IList<Produto> produtos)
         {
-            Titulo = titulo;
+            Categoria = categoria;
             Produtos = produtos;
         }
     }

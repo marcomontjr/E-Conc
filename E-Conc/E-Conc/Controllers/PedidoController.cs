@@ -19,8 +19,15 @@ namespace E_Conc.Controllers
         Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");        
 
         public IActionResult Carrossel()
-        {          
-            return View();
+        {
+            List<CategoriaViewModel> categoria = new List<CategoriaViewModel>
+            {
+                new CategoriaViewModel(Categoria.Desenvolvimento, produtos)
+            };  
+            
+            CarrosselViewModel carrossel = new CarrosselViewModel(categoria);
+            
+            return View(carrossel);
         }
 
         public IActionResult Carrinho()

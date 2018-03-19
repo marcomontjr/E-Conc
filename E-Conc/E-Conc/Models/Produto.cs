@@ -14,5 +14,10 @@
             Arquivo = arquivo;
             Categoria = categoria;
         }
+
+        public override string ToString()
+        {
+            return Nome;
+        }
     }
 }
