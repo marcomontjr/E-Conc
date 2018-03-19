@@ -4,11 +4,11 @@ namespace E_Conc.Models.ViewModels
 {
     public class CarrosselViewModel
     {
-        public List<Produto> Produto { get; private set; }
+        public IList<CategoriaViewModel> CategoriasViewModel { get; set; } = new List<CategoriaViewModel>();
 
-        public CarrosselViewModel(List<Produto> produtos)
+        public CarrosselViewModel(IList<CategoriaViewModel> categoriasViewModel)
         {
-            Produto = produtos;
-        }
+            CategoriasViewModel = categoriasViewModel;
+        }       
     }
 }

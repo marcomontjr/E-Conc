@@ -6,31 +6,41 @@
 
 @model E_Conc.Models.ViewModels.CarrosselViewModel
 
-<div id="my-carousel" class="carousel slide" data-ride="carousel">
+@for (var i = 0; i < 4; i++)
+{
+    <div id="my-carousel@(i)" class="carousel slide" data-ride="carousel">
 
-    <!-- Wrapper for slides -->
-    <h3>Desenvovimento</h3>
-    <div class="carousel-inner" role="listbox">
-        <div class="item active">
-            <div class="row">
-                @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.Produto)
+        <!-- Wrapper for slides -->
+        <h3>@((Categoria)i)</h3>
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="row">
+                    @foreach (var categoriaViewModel in Model.CategoriasViewModel.ToList())
+                    {
+                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", categoriaViewModel.Produtos)
+                    }
+                </div>
             </div>
-        </div>
-        
-        <div class="item">
-            <div class="row">
-                @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.Produto)
-            </div>
-        </div>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#my-carousel" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#my-carousel" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
+            <div class="item">
+                <div class="row">
+                    @foreach (var categoriaViewModel in Model.CategoriasViewModel.ToList())
+                    {
+                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", categoriaViewModel.Produtos)
+                    }
+                </div>
+            </div>
+
+            <!--Controls-->
+            <a class="left carousel-control" href="#my-carousel@(i)" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="right carousel-control" href="#my-carousel@(i)" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+            <!-- Controls -->
+        </div>
     </div>
-</div>
+}

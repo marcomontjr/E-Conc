@@ -6,22 +6,28 @@ using System.Collections.Generic;
 namespace E_Conc.Controllers
 {
     public class PedidoController : Controller
-    {     
+    {                
         List<Produto> produtos = new List<Produto>
         {
-            new Produto(0, "E-Commerce", "DesenvolvimentoProduto.jpg", "Desenvolvimento"),
-            new Produto(1, "StartUp", "EmpreendedorismoProduto.jpg", "Empreendedorismo"),
-            new Produto(2, "Software BitCoins", "IniciacaoCientificaProduto.jpg", "Iniciação Cientifica"),
-            new Produto(4, "Teste de Carrinho", "DesenvolvimentoProduto.jpg", "Desenvolvimento")
-        };
+            new Produto(0, "E-Commerce", "DesenvolvimentoProduto.jpg", Categoria.Desenvolvimento),
+            new Produto(1, "StartUp", "EmpreendedorismoProduto.jpg", Categoria.Empreendedorismo),
+            new Produto(2, "Software BitCoins", "IniciacaoCientificaProduto.jpg", Categoria.IniciacaoCientifica),
+            new Produto(4, "Teste", "IniciacaoCientificaProduto.jpg", Categoria.IniciacaoCientifica)
+        };      
         
         Orientador orientador = new Orientador(1, "Marco Jr.");
         Curso curso = new Curso(1, "Análise e Desenvolvimento de Sistemas", "ADS");        
 
         public IActionResult Carrossel()
         {
-            CarrosselViewModel viewModel = new CarrosselViewModel(produtos);
-            return View(viewModel);
+            List<CategoriaViewModel> categoria = new List<CategoriaViewModel>
+            {
+                new CategoriaViewModel(Categoria.Desenvolvimento, produtos)
+            };
+
+            CarrosselViewModel carrossel = new CarrosselViewModel(categoria);
+            
+            return View(carrossel);
         }
 
         public IActionResult Carrinho()
