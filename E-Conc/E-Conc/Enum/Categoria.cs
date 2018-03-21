@@ -1,4 +1,4 @@
-﻿namespace E_Conc
+﻿namespace E_Conc.Enum
 {
     public enum Categoria
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using E_Conc.Enum;
+using System.Collections.Generic;
 
 namespace E_Conc.Models.ViewModels
 {
