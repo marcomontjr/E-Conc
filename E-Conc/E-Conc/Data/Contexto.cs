@@ -1,7 +1,7 @@
 ﻿using E_Conc.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace E_Conc
+namespace E_Conc.Data
 {
     public class Contexto : DbContext
     {
@@ -11,6 +11,11 @@ namespace E_Conc
         public Contexto(DbContextOptions<Contexto> options) : base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
         }
     }
 }

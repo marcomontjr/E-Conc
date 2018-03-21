@@ -1,4 +1,6 @@
-﻿namespace E_Conc.Models
+﻿using E_Conc.Enum;
+
+namespace E_Conc.Models
 {
     public class Produto
     {
