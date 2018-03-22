@@ -18,7 +18,7 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contato()
         {
             ViewData["Message"] = "Your contact page.";
 

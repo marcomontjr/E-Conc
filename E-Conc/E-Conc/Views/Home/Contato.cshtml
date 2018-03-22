@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Contato";
+}
+<br />
+<h2>@ViewData["Title"]</h2>
+<br />
+<p>Precisa de Ajuda? Entre em Contato Conosco.</p>
+<br />
+<form method="post">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome">
+    </div>
+    <div class="form-group">
+        <label for="email">E-mail:</label>
+        <input type="email" class="form-control" id="email">
+    </div>
+    <div class="form-group">
+        <label for="msg">Mensagem:</label>
+        <textarea class="form-control" id="msg"></textarea>
+    </div>   
+    <button type="submit" class="btn btn-success">Enviar</button>
+</form>
