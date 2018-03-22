@@ -1,10 +1,11 @@
 ﻿using E_Conc.Data;
+using E_Conc.Interface;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace E_Conc
 {
@@ -20,12 +21,19 @@ namespace E_Conc
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            string connectionString = Configuration.GetConnectionString("DefaultConnection");
-            services.AddDbContext<Contexto>(options => options.UseSqlServer(connectionString));
+            string connectionString = Configuration
+                .GetConnectionString("DefaultConnection");
+
+            services
+                .AddDbContext<Contexto>(options => options
+                .UseSqlServer(connectionString));
+
+            services.AddTransient<IDataService, DataService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env,
+            IServiceProvider serviceProvider)
         {
             if (env.IsDevelopment())
             {
@@ -45,6 +53,11 @@ namespace E_Conc
                     name: "default",
                     template: "{controller=Pedido}/{action=Carrossel}/{id?}");
             });
+
+            IDataService dataService = serviceProvider
+                .GetService<IDataService>();
+
+            dataService.InicializaDB();
         }
     }
 }

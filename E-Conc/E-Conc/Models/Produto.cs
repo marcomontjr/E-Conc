@@ -9,12 +9,19 @@ namespace E_Conc.Models
         public string Arquivo { get; private set; }
         public Categoria Categoria { get; private set; }
 
-        public Produto(int id, string nome, string arquivo, Categoria categoria)
+        public Produto() { }
+
+        public Produto(int id, string nome, string arquivo, Categoria categoria) 
+            : this(nome, arquivo, categoria)
         {
-            Id = id;
+            Id = id;            
+        }
+
+        public Produto(string nome, string arquivo, Categoria categoria)
+        {
             Nome = nome;
             Arquivo = arquivo;
             Categoria = categoria;
-        }
+        }        
     }
 }
