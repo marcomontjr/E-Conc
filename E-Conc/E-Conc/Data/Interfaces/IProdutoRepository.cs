@@ -1,11 +1,10 @@
 ﻿using E_Conc.Models;
 using System.Collections.Generic;
 
-namespace E_Conc.Interface
+namespace E_Conc.Data.Repository.Interfaces
 {
-    public interface IDataService
+    public interface IProdutoRepository : IRepository<Produto>
     {
-        void InicializaDB();
         List<Produto> GetProdutos();
     }
 }

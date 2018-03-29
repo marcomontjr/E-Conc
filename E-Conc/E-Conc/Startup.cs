@@ -1,5 +1,6 @@
 ﻿using E_Conc.Data;
-using E_Conc.Interface;
+using E_Conc.Data.Repository;
+using E_Conc.Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -20,15 +21,15 @@ namespace E_Conc
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
             string connectionString = Configuration
                 .GetConnectionString("DefaultConnection");
 
             services
-                .AddDbContext<Contexto>(options => options
-                .UseSqlServer(connectionString));
+               .AddDbContext<Contexto>(options => options
+               .UseSqlServer(connectionString));
 
-            services.AddTransient<IDataService, DataService>();
+            services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,13 +52,8 @@ namespace E_Conc
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Pedido}/{action=Carrossel}/{id?}");
+                    template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            IDataService dataService = serviceProvider
-                .GetService<IDataService>();
-
-            dataService.InicializaDB();
         }
     }
 }
