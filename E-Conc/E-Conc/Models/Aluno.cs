@@ -1,4 +1,6 @@
-﻿namespace E_Conc.Models
+﻿using System.Collections.Generic;
+
+namespace E_Conc.Models
 {
     public class Aluno
     {
@@ -7,11 +9,11 @@
         public string Telefone { get; private set; }
         public string Instituicao { get; private set; }
         public string InstituicaoSigla { get; private set; }
-        public Curso Curso { get; private set; }
+        public List<Curso> Curso { get; private set; }
         public string Email { get; private set; }
 
         public Aluno(int ra, string nome, string telefone, string instituicao, string instituicaoSigla, 
-            Curso curso, string email)
+            List<Curso> curso, string email)
         {
             Ra = ra;
             Nome = nome;

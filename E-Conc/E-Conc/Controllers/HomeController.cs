@@ -11,14 +11,14 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Sobre()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "E-Conc";
 
             return View();
         }
 
-        public IActionResult Contact()
+        public IActionResult Contato()
         {
             ViewData["Message"] = "Your contact page.";
 
