@@ -1,26 +1,16 @@
 ﻿using E_Conc.Models;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace E_Conc.Data.Configuration
 {
-    internal class AlunoConfiguration : IEntityTypeConfiguration<Aluno>
+    internal class AlunoConfiguration : UsuarioConfiguration<Aluno>
     {
-        public void Configure(EntityTypeBuilder<Aluno> builder)
+        public override void Configure(EntityTypeBuilder<Aluno> builder)
         {
-            builder
-                .HasKey(a => a.Ra);
+            base.Configure(builder);
 
             builder
-             .Property(a => a.Nome)
-             .IsRequired();
-
-            builder
-                .Property(a => a.Instituicao)
-                .IsRequired();         
-
-            builder
-                .Property(a => a.Email)
+                .Property(a => a.Ra)
                 .IsRequired();
         }
     }

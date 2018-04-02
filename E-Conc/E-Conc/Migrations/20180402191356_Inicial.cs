@@ -30,7 +30,10 @@ namespace E_Conc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Email = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(nullable: false)
+                    Instituicao = table.Column<string>(nullable: false),
+                    Login = table.Column<string>(nullable: false),
+                    Nome = table.Column<string>(nullable: false),
+                    Senha = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -41,18 +44,19 @@ namespace E_Conc.Migrations
                 name: "Alunos",
                 columns: table => new
                 {
-                    Ra = table.Column<int>(nullable: false)
+                    Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CursoId = table.Column<int>(nullable: true),
                     Email = table.Column<string>(nullable: false),
                     Instituicao = table.Column<string>(nullable: false),
-                    InstituicaoSigla = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(nullable: false),
                     Nome = table.Column<string>(nullable: false),
-                    Telefone = table.Column<string>(nullable: true)
+                    Ra = table.Column<int>(nullable: false),
+                    Senha = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Alunos", x => x.Ra);
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Alunos_Cursos_CursoId",
                         column: x => x.CursoId,
@@ -97,7 +101,8 @@ namespace E_Conc.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Disponivel = table.Column<bool>(nullable: false),
-                    ProdutoId = table.Column<int>(nullable: true)
+                    ProdutoId = table.Column<int>(nullable: true),
+                    SolicitanteId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -106,6 +111,12 @@ namespace E_Conc.Migrations
                         name: "FK_ItensPedido_Produtos_ProdutoId",
                         column: x => x.ProdutoId,
                         principalTable: "Produtos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ItensPedido_Alunos_SolicitanteId",
+                        column: x => x.SolicitanteId,
+                        principalTable: "Alunos",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -121,6 +132,11 @@ namespace E_Conc.Migrations
                 column: "ProdutoId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_ItensPedido_SolicitanteId",
+                table: "ItensPedido",
+                column: "SolicitanteId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Produtos_CursoId",
                 table: "Produtos",
                 column: "CursoId");
@@ -134,19 +150,19 @@ namespace E_Conc.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Alunos");
-
-            migrationBuilder.DropTable(
                 name: "ItensPedido");
 
             migrationBuilder.DropTable(
                 name: "Produtos");
 
             migrationBuilder.DropTable(
-                name: "Cursos");
+                name: "Alunos");
 
             migrationBuilder.DropTable(
                 name: "Orientadores");
+
+            migrationBuilder.DropTable(
+                name: "Cursos");
         }
     }
 }

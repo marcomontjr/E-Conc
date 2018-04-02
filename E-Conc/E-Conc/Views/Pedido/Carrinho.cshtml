@@ -39,17 +39,23 @@
         </div>
     </div>
 </div>
-
 <div class="row">
-    <div class="col-md-12">
-       <a asp-action="resumo" 
-          class="btn btn-success pull-right">
-           Finalizar Pedido
-        </a>   
+    <div class="col-md-10">
+        <a class="btn btn-danger pull-right" id="removeButton">
+            Remover Item do Carrinho
+        </a>
+    </div>
+    <div class="col-md-2">
+        <a class="btn btn-success pull-right" id="resumoButton">
+            Finalizar Pedido
+        </a>
     </div>
 </div>
 
-@*@Html.Partial("~/Views/Modals/CarrinhoAlerta.cshtml")*@
+
+@Html.Partial("~/Views/Modals/CarrinhoAlerta.cshtml")
+@Html.Partial("~/Views/Modals/FinalizarPedido.cshtml")
+@Html.Partial("~/Views/Modals/RemoverItemCarrinho.cshtml")
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/Carrinho.js"></script>

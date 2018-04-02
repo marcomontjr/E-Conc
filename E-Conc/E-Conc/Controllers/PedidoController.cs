@@ -33,11 +33,10 @@ namespace E_Conc.Controllers
         {
             List<Produto> produtos = _produtoRepo.GetProdutos();
             var produto = produtos.First();
-            var orientador = new Orientador(1, "Marco Jr.");
+            var orientador = new Orientador();
             var curso = new Curso(1, "Análise de Sistemas", "ADS");
             produto.Orientador = orientador;
             produto.Curso = curso;
-            _itemPedido = new ItemPedido(true, produto);
             return View(_itemPedido);
         }
 
@@ -45,17 +44,12 @@ namespace E_Conc.Controllers
         {
             List<Produto> produtos = _produtoRepo.GetProdutos();
             var produto = produtos.First();
-            var orientador = new Orientador(1, "Marco Jr.");
+            var orientador = new Orientador();
             var curso = new Curso(1, "Análise de Sistemas", "ADS");
             produto.Orientador = orientador;
             produto.Curso = curso;
-            _itemPedido = new ItemPedido(true, produto);
-
-            var aluno = new Aluno(1, "Marco", "123456789", "José Crespo Gonzáles", "FATEC-SO", curso, "email@email.com");            
-
-            var resumoViewModel = new ResumoViewModel(_itemPedido, aluno);
-
-            return View(resumoViewModel);
+            
+            return View();
         }
     }
 }

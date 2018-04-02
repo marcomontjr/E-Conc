@@ -23,7 +23,7 @@ namespace E_Conc.Migrations
 
             modelBuilder.Entity("E_Conc.Models.Aluno", b =>
                 {
-                    b.Property<int>("Ra")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<int?>("CursoId");
@@ -34,14 +34,18 @@ namespace E_Conc.Migrations
                     b.Property<string>("Instituicao")
                         .IsRequired();
 
-                    b.Property<string>("InstituicaoSigla");
+                    b.Property<string>("Login")
+                        .IsRequired();
 
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<string>("Telefone");
+                    b.Property<int>("Ra");
 
-                    b.HasKey("Ra");
+                    b.Property<string>("Senha")
+                        .IsRequired();
+
+                    b.HasKey("Id");
 
                     b.HasIndex("CursoId");
 
@@ -72,9 +76,13 @@ namespace E_Conc.Migrations
 
                     b.Property<int?>("ProdutoId");
 
+                    b.Property<int?>("SolicitanteId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("ProdutoId");
+
+                    b.HasIndex("SolicitanteId");
 
                     b.ToTable("ItensPedido");
                 });
@@ -87,7 +95,16 @@ namespace E_Conc.Migrations
                     b.Property<string>("Email")
                         .IsRequired();
 
+                    b.Property<string>("Instituicao")
+                        .IsRequired();
+
+                    b.Property<string>("Login")
+                        .IsRequired();
+
                     b.Property<string>("Nome")
+                        .IsRequired();
+
+                    b.Property<string>("Senha")
                         .IsRequired();
 
                     b.HasKey("Id");
@@ -133,6 +150,10 @@ namespace E_Conc.Migrations
                     b.HasOne("E_Conc.Models.Produto", "Produto")
                         .WithMany()
                         .HasForeignKey("ProdutoId");
+
+                    b.HasOne("E_Conc.Models.Aluno", "Solicitante")
+                        .WithMany()
+                        .HasForeignKey("SolicitanteId");
                 });
 
             modelBuilder.Entity("E_Conc.Models.Produto", b =>
