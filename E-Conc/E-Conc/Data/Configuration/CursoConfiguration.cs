@@ -10,7 +10,7 @@ namespace E_Conc.Data.Configuration
         {
             builder
                 .Property(c => c.Nome)
-                .IsRequired();
+                .IsRequired();              
         }
     }
 }

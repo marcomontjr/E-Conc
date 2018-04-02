@@ -11,6 +11,10 @@ namespace E_Conc.Data.Configuration
             builder
                 .Property(o => o.Nome)
                 .IsRequired();
+
+            builder
+                .Property(o => o.Email)
+                .IsRequired();
         }
     }
 }

@@ -3,23 +3,21 @@
     public class ItemPedido
     {
         public int Id { get; private set; }
+        public bool Disponivel { get; private set; }
         public Produto Produto { get; private set; }
-        public Orientador Orientador { get; private set; }
-        public Curso Curso { get; private set; }
 
         public ItemPedido() { }
 
-        public ItemPedido(int id, Produto produto, Orientador orientador, Curso curso) 
-            : this(produto, orientador, curso)
+        public ItemPedido(int id, bool disponivel, Produto produto) 
+            : this(disponivel, produto)
         {
             Id = id;
         }
 
-        public ItemPedido(Produto produto, Orientador orientador, Curso curso)
+        public ItemPedido(bool disponivel, Produto produto)
         {
             Produto = produto;
-            Orientador = orientador;
-            Curso = curso;
+            Disponivel = disponivel;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace E_Conc.Models
+﻿using System.Collections.Generic;
+
+namespace E_Conc.Models
 {
     public class Curso
     {
