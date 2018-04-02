@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using E_Conc.Enum;
+using System.Collections.Generic;
 
 namespace E_Conc.Models
 {
@@ -9,11 +10,19 @@ namespace E_Conc.Models
         public string Telefone { get; private set; }
         public string Instituicao { get; private set; }
         public string InstituicaoSigla { get; private set; }
-        public List<Curso> Curso { get; private set; }
+        public Curso Curso { get; set; }
         public string Email { get; private set; }
+        public TipoUsuario tipoUsuario = TipoUsuario.Aluno;
+        public TipoUsuario TipoUsuario
+        {
+            get
+            {
+                return tipoUsuario;
+            }
+        }
 
         public Aluno(int ra, string nome, string telefone, string instituicao, string instituicaoSigla, 
-            List<Curso> curso, string email)
+            Curso curso, string email)
         {
             Ra = ra;
             Nome = nome;

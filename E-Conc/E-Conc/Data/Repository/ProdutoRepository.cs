@@ -9,6 +9,7 @@ namespace E_Conc.Data.Repository
     public class ProdutoRepository : Repository<Produto>, IProdutoRepository
     {
         public ProdutoRepository(Contexto context) : base(context) { }
+
         public List<Produto> GetProdutos()
         {
             return _context.Produtos.ToList();
