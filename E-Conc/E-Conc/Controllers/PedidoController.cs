@@ -1,4 +1,4 @@
-﻿using E_Conc.Data.Repository.Interfaces;
+﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
@@ -11,40 +11,32 @@ namespace E_Conc.Controllers
     public class PedidoController : Controller
     {
         private readonly IProdutoRepository _produtoRepo;
-        private List<CategoriaViewModel> _categoriaViewModel = new List<CategoriaViewModel>();
-        private CarrosselViewModel _carrosselViewModel;
+        private CategoriaViewModel _categoriaViewModel;
         public PedidoController(IProdutoRepository produtoRepo)
         {
             _produtoRepo = produtoRepo;
         }
         public IActionResult Carrossel()
         {
-            List<Produto> produtos = _produtoRepo.GetProdutos();
+            var produtosDesenvolvimento = _produtoRepo.GetProdutosPorCategoria(Categoria.Desenvolvimento);
+            var produtosEmpreendedorismo = _produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo);
+            var produtosIniciacaoCientifica = _produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica);
+            var produtosPesquisaAcademica = _produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica);
 
-            _categoriaViewModel.Add(new CategoriaViewModel(Categoria.Desenvolvimento, produtos));
+            _categoriaViewModel = new CategoriaViewModel(produtosDesenvolvimento, produtosEmpreendedorismo,
+                                                        produtosIniciacaoCientifica, produtosPesquisaAcademica);
 
-            _carrosselViewModel = new CarrosselViewModel(_categoriaViewModel);
 
-            return View(_carrosselViewModel);
+            return View(_categoriaViewModel);
         }
 
         public IActionResult Carrinho()
-        {
-            List<Produto> produtos = _produtoRepo.GetProdutos();
-            var produto = produtos.First();
-            var orientador = new Orientador();
-            produto.Orientador = orientador;
-
+        {     
             return View();
         }
 
         public IActionResult Resumo()
-        {
-            List<Produto> produtos = _produtoRepo.GetProdutos();
-            var produto = produtos.First();
-            var orientador = new Orientador();
-            produto.Orientador = orientador;
-            
+        {            
             return View();
         }
     }
