@@ -22,15 +22,6 @@
                 </div>
             </div>
 
-            <div class="item">
-                <div class="row">
-                    @foreach (var categoriaViewModel in Model.CategoriasViewModel.ToList())
-                    {
-                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", categoriaViewModel.Produtos)
-                    }
-                </div>
-            </div>
-
             <!--Controls-->
             <a class="left carousel-control" href="#my-carousel@(i)" role="button" data-slide="prev">
                 <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
