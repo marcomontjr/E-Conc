@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using E_Conc.Data.Repository.Interfaces;
+using E_Conc.Data.Interfaces;
 using E_Conc.Models;
 
 namespace E_Conc.Data.Repository

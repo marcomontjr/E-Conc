@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace E_Conc.Data.Interfaces
 {
-    public interface IProdutoRepository : IRepository<Produto>
+    public interface IItemPedidoRespository : IRepository<ItemPedido>
     {
-        List<Produto> GetProdutos();
+        List<ItemPedido> GetItensPedidos();
     }
 }
