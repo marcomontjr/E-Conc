@@ -9,8 +9,8 @@ namespace E_Conc.Data.Configuration
         public void Configure(EntityTypeBuilder<Curso> builder)
         {
             builder
-                .Property(c => c.Nome)
-                .IsRequired();              
+                 .Property(c => c.Nome)
+                 .IsRequired();
         }
     }
 }

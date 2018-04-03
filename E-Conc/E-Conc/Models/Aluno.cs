@@ -4,8 +4,9 @@ namespace E_Conc.Models
 {
     public class Aluno : Usuario
     {
-        public int Ra { get; private set; }
+        public string Ra { get; private set; }
         public Curso Curso { get; set; }
+        public ItemPedido ItemPedido { get; private set; }
         public TipoUsuario tipoUsuario = TipoUsuario.Aluno;
         public TipoUsuario TipoUsuario
         {
@@ -15,7 +16,7 @@ namespace E_Conc.Models
             }
         }
 
-        public Aluno(int ra, Curso curso)
+        public Aluno(string ra, Curso curso)
         {
             Ra = ra;
             Curso = curso;

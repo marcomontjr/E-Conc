@@ -11,6 +11,12 @@ namespace E_Conc.Data.Configuration
 
             builder
                 .Property(a => a.Ra)
+                .HasMaxLength(25)
+                .IsRequired();
+            
+            builder
+                .HasOne(a => a.Curso)
+                .WithMany(c => c.Alunos)
                 .IsRequired();
         }
     }

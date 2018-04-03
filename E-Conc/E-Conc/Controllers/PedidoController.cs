@@ -13,7 +13,6 @@ namespace E_Conc.Controllers
         private readonly IProdutoRepository _produtoRepo;
         private List<CategoriaViewModel> _categoriaViewModel = new List<CategoriaViewModel>();
         private CarrosselViewModel _carrosselViewModel;
-        private ItemPedido _itemPedido;
         public PedidoController(IProdutoRepository produtoRepo)
         {
             _produtoRepo = produtoRepo;
@@ -34,10 +33,9 @@ namespace E_Conc.Controllers
             List<Produto> produtos = _produtoRepo.GetProdutos();
             var produto = produtos.First();
             var orientador = new Orientador();
-            var curso = new Curso(1, "Análise de Sistemas", "ADS");
             produto.Orientador = orientador;
-            produto.Curso = curso;
-            return View(_itemPedido);
+
+            return View();
         }
 
         public IActionResult Resumo()
@@ -45,9 +43,7 @@ namespace E_Conc.Controllers
             List<Produto> produtos = _produtoRepo.GetProdutos();
             var produto = produtos.First();
             var orientador = new Orientador();
-            var curso = new Curso(1, "Análise de Sistemas", "ADS");
             produto.Orientador = orientador;
-            produto.Curso = curso;
             
             return View();
         }
