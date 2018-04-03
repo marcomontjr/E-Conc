@@ -1,10 +1,8 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
-using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace E_Conc.Controllers
 {
@@ -12,22 +10,36 @@ namespace E_Conc.Controllers
     {
         private readonly IProdutoRepository _produtoRepo;
         private CategoriaViewModel _categoriaViewModel;
+        private CarrosselViewModel _carrosselViewModel;
         public PedidoController(IProdutoRepository produtoRepo)
         {
             _produtoRepo = produtoRepo;
         }
         public IActionResult Carrossel()
         {
-            var produtosDesenvolvimento = _produtoRepo.GetProdutosPorCategoria(Categoria.Desenvolvimento);
-            var produtosEmpreendedorismo = _produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo);
-            var produtosIniciacaoCientifica = _produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica);
-            var produtosPesquisaAcademica = _produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica);
+            var produtosDesenvolvimento = new CategoriaViewModel(Categoria.Desenvolvimento, 
+                _produtoRepo.GetProdutosPorCategoria(Categoria.Desenvolvimento));
 
-            _categoriaViewModel = new CategoriaViewModel(produtosDesenvolvimento, produtosEmpreendedorismo,
-                                                        produtosIniciacaoCientifica, produtosPesquisaAcademica);
+            var produtosEmpreendedorismo = new CategoriaViewModel(Categoria.Empreendedorismo,
+                _produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo));
 
+            var produtosIniciacaoCientifica = new CategoriaViewModel(Categoria.IniciacaoCientifica, 
+                _produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica));
 
-            return View(_categoriaViewModel);
+            var produtosPesquisaAcademica = new CategoriaViewModel(Categoria.PesquisaAcademica, 
+                _produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica));
+
+            IList<CategoriaViewModel> categoriasCarrossel = new List<CategoriaViewModel>()
+            {
+                produtosDesenvolvimento,
+                produtosEmpreendedorismo,
+                produtosIniciacaoCientifica,
+                produtosPesquisaAcademica
+            };
+            
+            _carrosselViewModel = new CarrosselViewModel(categoriasCarrossel);
+
+            return View(_carrosselViewModel);
         }
 
         public IActionResult Carrinho()
