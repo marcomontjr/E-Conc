@@ -1,6 +1,6 @@
 ﻿using E_Conc.Data;
+using E_Conc.Data.Interfaces;
 using E_Conc.Data.Repository;
-using E_Conc.Data.Repository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +29,10 @@ namespace E_Conc
                .UseSqlServer(connectionString));
 
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IAlunoRepository, AlunoRespository>();
+            services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();
+            services.AddTransient<IOrientadorRepository, OrientadorRepository>();
+            services.AddTransient<ICursoRepository, CursoRepository>();
             services.AddMvc();
         }
 

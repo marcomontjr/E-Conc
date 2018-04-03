@@ -2,7 +2,6 @@
 {
     public enum TipoUsuario
     {
-        Administrador,
         Orientador,
         Aluno
     }

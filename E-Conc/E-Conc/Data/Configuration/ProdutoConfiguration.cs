@@ -18,7 +18,13 @@ namespace E_Conc.Data.Configuration
 
             builder
                 .HasOne(p => p.Orientador)
-                .WithMany(o => o.Produtos);
+                .WithMany(o => o.Produtos)
+                .IsRequired();
+
+            builder
+                .HasOne(p => p.Curso)
+                .WithMany(c => c.Produtos)
+                .IsRequired();
         }
     }
 }

@@ -29,36 +29,17 @@ namespace E_Conc.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Email = table.Column<string>(nullable: false),
-                    Nome = table.Column<string>(nullable: false)
+                    Email = table.Column<string>(maxLength: 45, nullable: false),
+                    Instituicao = table.Column<string>(nullable: false),
+                    InstituicaoSigla = table.Column<string>(nullable: true),
+                    Login = table.Column<string>(maxLength: 45, nullable: false),
+                    Nome = table.Column<string>(maxLength: 45, nullable: false),
+                    Senha = table.Column<string>(nullable: false),
+                    Telefone = table.Column<string>(maxLength: 35, nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orientadores", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Alunos",
-                columns: table => new
-                {
-                    Ra = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    CursoId = table.Column<int>(nullable: true),
-                    Email = table.Column<string>(nullable: false),
-                    Instituicao = table.Column<string>(nullable: false),
-                    InstituicaoSigla = table.Column<string>(nullable: true),
-                    Nome = table.Column<string>(nullable: false),
-                    Telefone = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Alunos", x => x.Ra);
-                    table.ForeignKey(
-                        name: "FK_Alunos_Cursos_CursoId",
-                        column: x => x.CursoId,
-                        principalTable: "Cursos",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -69,9 +50,10 @@ namespace E_Conc.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Arquivo = table.Column<string>(nullable: false),
                     Categoria = table.Column<int>(nullable: false),
-                    CursoId = table.Column<int>(nullable: true),
+                    CursoId = table.Column<int>(nullable: false),
+                    Disponivel = table.Column<bool>(nullable: false),
                     Nome = table.Column<string>(nullable: false),
-                    OrientadorId = table.Column<int>(nullable: true)
+                    OrientadorId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -81,13 +63,13 @@ namespace E_Conc.Migrations
                         column: x => x.CursoId,
                         principalTable: "Cursos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Produtos_Orientadores_OrientadorId",
                         column: x => x.OrientadorId,
                         principalTable: "Orientadores",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -96,8 +78,7 @@ namespace E_Conc.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Disponivel = table.Column<bool>(nullable: false),
-                    ProdutoId = table.Column<int>(nullable: true)
+                    ProdutoId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -107,6 +88,40 @@ namespace E_Conc.Migrations
                         column: x => x.ProdutoId,
                         principalTable: "Produtos",
                         principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Alunos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    CursoId = table.Column<int>(nullable: false),
+                    Email = table.Column<string>(maxLength: 45, nullable: false),
+                    Instituicao = table.Column<string>(nullable: false),
+                    InstituicaoSigla = table.Column<string>(nullable: true),
+                    ItemPedidoId = table.Column<int>(nullable: true),
+                    Login = table.Column<string>(maxLength: 45, nullable: false),
+                    Nome = table.Column<string>(maxLength: 45, nullable: false),
+                    Ra = table.Column<string>(maxLength: 25, nullable: false),
+                    Senha = table.Column<string>(nullable: false),
+                    Telefone = table.Column<string>(maxLength: 35, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Alunos", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Alunos_Cursos_CursoId",
+                        column: x => x.CursoId,
+                        principalTable: "Cursos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Alunos_ItensPedido_ItemPedidoId",
+                        column: x => x.ItemPedidoId,
+                        principalTable: "ItensPedido",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -114,6 +129,13 @@ namespace E_Conc.Migrations
                 name: "IX_Alunos_CursoId",
                 table: "Alunos",
                 column: "CursoId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Alunos_ItemPedidoId",
+                table: "Alunos",
+                column: "ItemPedidoId",
+                unique: true,
+                filter: "[ItemPedidoId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ItensPedido_ProdutoId",

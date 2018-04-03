@@ -4,17 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace E_Conc.Data.Configuration
 {
-    internal class OrientadorConfiguration : IEntityTypeConfiguration<Orientador>
+    internal class OrientadorConfiguration : UsuarioConfiguration<Orientador>
     {
-        public void Configure(EntityTypeBuilder<Orientador> builder)
+        public override void Configure(EntityTypeBuilder<Orientador> builder)
         {
-            builder
-                .Property(o => o.Nome)
-                .IsRequired();
-
-            builder
-                .Property(o => o.Email)
-                .IsRequired();
+            base.Configure(builder);
         }
     }
 }

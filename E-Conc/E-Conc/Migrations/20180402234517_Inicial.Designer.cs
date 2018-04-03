@@ -12,7 +12,7 @@ using System;
 namespace E_Conc.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20180401013534_Inicial")]
+    [Migration("20180402234517_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,27 +24,48 @@ namespace E_Conc.Migrations
 
             modelBuilder.Entity("E_Conc.Models.Aluno", b =>
                 {
-                    b.Property<int>("Ra")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CursoId");
+                    b.Property<int?>("CursoId")
+                        .IsRequired();
 
                     b.Property<string>("Email")
-                        .IsRequired();
+                        .IsRequired()
+                        .HasMaxLength(45);
 
                     b.Property<string>("Instituicao")
                         .IsRequired();
 
                     b.Property<string>("InstituicaoSigla");
 
+                    b.Property<int?>("ItemPedidoId");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(45);
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(45);
+
+                    b.Property<string>("Ra")
+                        .IsRequired()
+                        .HasMaxLength(25);
+
+                    b.Property<string>("Senha")
                         .IsRequired();
 
-                    b.Property<string>("Telefone");
+                    b.Property<string>("Telefone")
+                        .HasMaxLength(35);
 
-                    b.HasKey("Ra");
+                    b.HasKey("Id");
 
                     b.HasIndex("CursoId");
+
+                    b.HasIndex("ItemPedidoId")
+                        .IsUnique()
+                        .HasFilter("[ItemPedidoId] IS NOT NULL");
 
                     b.ToTable("Alunos");
                 });
@@ -69,9 +90,7 @@ namespace E_Conc.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<bool>("Disponivel");
-
-                    b.Property<int?>("ProdutoId");
+                    b.Property<int>("ProdutoId");
 
                     b.HasKey("Id");
 
@@ -86,10 +105,27 @@ namespace E_Conc.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(45);
+
+                    b.Property<string>("Instituicao")
                         .IsRequired();
 
+                    b.Property<string>("InstituicaoSigla");
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(45);
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(45);
+
+                    b.Property<string>("Senha")
                         .IsRequired();
+
+                    b.Property<string>("Telefone")
+                        .HasMaxLength(35);
 
                     b.HasKey("Id");
 
@@ -106,12 +142,15 @@ namespace E_Conc.Migrations
 
                     b.Property<int>("Categoria");
 
-                    b.Property<int?>("CursoId");
+                    b.Property<int?>("CursoId")
+                        .IsRequired();
+
+                    b.Property<bool>("Disponivel");
 
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<int?>("OrientadorId");
+                    b.Property<int>("OrientadorId");
 
                     b.HasKey("Id");
 
@@ -125,26 +164,34 @@ namespace E_Conc.Migrations
             modelBuilder.Entity("E_Conc.Models.Aluno", b =>
                 {
                     b.HasOne("E_Conc.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId");
+                        .WithMany("Alunos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("E_Conc.Models.ItemPedido", "ItemPedido")
+                        .WithOne("Solicitante")
+                        .HasForeignKey("E_Conc.Models.Aluno", "ItemPedidoId");
                 });
 
             modelBuilder.Entity("E_Conc.Models.ItemPedido", b =>
                 {
                     b.HasOne("E_Conc.Models.Produto", "Produto")
                         .WithMany()
-                        .HasForeignKey("ProdutoId");
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("E_Conc.Models.Produto", b =>
                 {
                     b.HasOne("E_Conc.Models.Curso", "Curso")
-                        .WithMany()
-                        .HasForeignKey("CursoId");
+                        .WithMany("Produtos")
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("E_Conc.Models.Orientador", "Orientador")
                         .WithMany("Produtos")
-                        .HasForeignKey("OrientadorId");
+                        .HasForeignKey("OrientadorId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

@@ -1,23 +1,27 @@
-﻿namespace E_Conc.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace E_Conc.Models
 {
     public class ItemPedido
     {
-        public int Id { get; private set; }
-        public bool Disponivel { get; private set; }
+        public int Id { get; private set; }      
+        [Required]
         public Produto Produto { get; private set; }
+        [Required]
+        public Aluno Solicitante { get; private set; }
 
         public ItemPedido() { }
 
-        public ItemPedido(int id, bool disponivel, Produto produto) 
-            : this(disponivel, produto)
+        public ItemPedido(int id, bool disponivel, Produto produto, Aluno aluno) 
+            : this(disponivel, produto, aluno)
         {
             Id = id;
         }
 
-        public ItemPedido(bool disponivel, Produto produto)
+        public ItemPedido(bool disponivel, Produto produto, Aluno aluno)
         {
             Produto = produto;
-            Disponivel = disponivel;
+            Solicitante = aluno;
         }
     }
 }
