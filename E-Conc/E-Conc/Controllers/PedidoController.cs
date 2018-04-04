@@ -9,7 +9,6 @@ namespace E_Conc.Controllers
     public class PedidoController : Controller
     {
         private readonly IProdutoRepository _produtoRepo;
-        private CategoriaViewModel _categoriaViewModel;
         private CarrosselViewModel _carrosselViewModel;
         public PedidoController(IProdutoRepository produtoRepo)
         {
@@ -17,19 +16,19 @@ namespace E_Conc.Controllers
         }
         public IActionResult Carrossel()
         {
-            var produtosDesenvolvimento = new CategoriaViewModel(Categoria.Desenvolvimento, 
-                _produtoRepo.GetProdutosPorCategoria(Categoria.Desenvolvimento));
+            var produtosDesenvolvimento = new CategoriaViewModel
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.Desenvolvimento));
 
-            var produtosEmpreendedorismo = new CategoriaViewModel(Categoria.Empreendedorismo,
-                _produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo));
+            var produtosEmpreendedorismo = new CategoriaViewModel
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo));
 
-            var produtosIniciacaoCientifica = new CategoriaViewModel(Categoria.IniciacaoCientifica, 
-                _produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica));
+            var produtosIniciacaoCientifica = new CategoriaViewModel
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica));
 
-            var produtosPesquisaAcademica = new CategoriaViewModel(Categoria.PesquisaAcademica, 
-                _produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica));
+            var produtosPesquisaAcademica = new CategoriaViewModel
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica));
 
-            IList<CategoriaViewModel> categoriasCarrossel = new List<CategoriaViewModel>()
+            CategoriaViewModel[] _categoriaViewModel = new CategoriaViewModel[]
             {
                 produtosDesenvolvimento,
                 produtosEmpreendedorismo,
@@ -37,7 +36,7 @@ namespace E_Conc.Controllers
                 produtosPesquisaAcademica
             };
             
-            _carrosselViewModel = new CarrosselViewModel(categoriasCarrossel);
+            _carrosselViewModel = new CarrosselViewModel(_categoriaViewModel);
 
             return View(_carrosselViewModel);
         }
