@@ -15,10 +15,13 @@
         <div class="carousel-inner" role="listbox">
             <div class="item active">
                 <div class="row">
-                    @foreach (var categoriaViewModel in Model.CategoriasViewModel.ToList())
-                    {
-                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", categoriaViewModel.Produtos)
-                    }
+                    @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Take(4))
+                </div>
+            </div>
+
+            <div class="item">
+                <div class="row">
+                    @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Skip(4))
                 </div>
             </div>
 
