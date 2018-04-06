@@ -4,11 +4,11 @@ namespace E_Conc.Models
 {
     public class Produto
     {
-        public int Id { get; private set; }
-        public string Nome { get; private set; }
-        public string Arquivo { get; private set; }
-        public bool Disponivel { get; private set; }
-        public Categoria Categoria { get; private set; }
+        public int Id { get; set; }
+        public string Nome { get; set; }
+        public string Arquivo { get; set; }
+        public bool Disponivel { get; set; }
+        public Categoria Categoria { get; set; }
         public Orientador Orientador { get; set; }
         public Curso Curso { get; set; }
 
