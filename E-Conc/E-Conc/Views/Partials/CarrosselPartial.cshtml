@@ -8,7 +8,8 @@
             <div class="panel-footer text-center">
                 <div>@(produto.Nome.ToString())</div>
                 <div>
-                    <a asp-action="carrinho">Adicionar ao Carrinho</a>
+                    <a asp-action="carrinho"
+                       asp-route-produtoId="@(produto.Id)">Adicionar ao Carrinho</a>
                 </div>
             </div>
         </div>
