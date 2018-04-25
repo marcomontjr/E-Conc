@@ -1,19 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace E_Conc.Models
+﻿namespace E_Conc.Models
 {
-    public class ItemPedido
+    public class ItemPedido : BaseModel
     {
-        public int Id { get; private set; }      
-        [Required]
-        public Produto Produto { get; private set; }
-        //[Required]
-        //public Aluno Solicitante { get; private set; }
+        public Pedido Pedido { get; private set; }
+        public Produto Produto { get; set; }
 
-        public ItemPedido(Produto produto/*, Aluno aluno*/)
+        public ItemPedido(int id, Pedido pedido, Produto produto) : this(pedido, produto)
+        {
+            Id = id;
+        }
+
+        public ItemPedido(Pedido pedido, Produto produto)
         {
             Produto = produto;
-            //Solicitante = aluno;
+            Pedido = pedido;
         }
     }
 }

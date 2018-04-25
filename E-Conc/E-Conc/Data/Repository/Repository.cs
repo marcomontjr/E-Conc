@@ -1,4 +1,5 @@
 ﻿using E_Conc.Data.Repository.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,9 +10,11 @@ namespace E_Conc.Data.Repository
     public class Repository<T> : IRepository<T> where T : class
     {
         protected readonly Contexto _context;
-        public Repository(Contexto context)
+        protected readonly IHttpContextAccessor _contextAccessor;
+        public Repository(Contexto context, IHttpContextAccessor contextAccessor)
         {
             _context = context;
+            _contextAccessor = contextAccessor;
         }
         protected void Save() => _context.SaveChanges();
 

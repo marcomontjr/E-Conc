@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace E_Conc.Models
 {
-    public class Curso
+    public class Curso : BaseModel
     {
-        public int Id { get; private set; }
         public string Nome { get; private set; }
         public string Sigla { get; private set; }
         public List<Aluno> Alunos { get; private set; }

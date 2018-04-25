@@ -2,9 +2,8 @@
 
 namespace E_Conc.Models
 {
-    public class Produto
+    public class Produto : BaseModel
     {
-        public int Id { get; set; }
         public string Nome { get; set; }
         public string Arquivo { get; set; }
         public bool Disponivel { get; set; }
