@@ -7,6 +7,6 @@ namespace E_Conc.Data.Interfaces
     public interface IItemPedidoRespository : IRepository<ItemPedido>
     {
         List<ItemPedido> GetItensPedidos();
-        void AddItemPedido(int produtoId);
+        ItemPedido AddItemPedido(int produtoId);
     }
 }

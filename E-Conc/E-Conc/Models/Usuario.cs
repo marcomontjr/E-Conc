@@ -1,8 +1,10 @@
-﻿namespace E_Conc.Models
+﻿using System;
+
+namespace E_Conc.Models
 {
     public abstract class Usuario
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Login { get; private set; }
         public string Senha { get; private set; }
         public string Nome { get; private set; }
