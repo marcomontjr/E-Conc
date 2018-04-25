@@ -1,11 +1,9 @@
 ﻿using E_Conc.Enum;
-using System;
 
 namespace E_Conc.Models
 {
-    public class Produto
+    public class Produto : BaseModel
     {
-        public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Arquivo { get; set; }
         public bool Disponivel { get; set; }
@@ -15,7 +13,7 @@ namespace E_Conc.Models
 
         public Produto() { }
 
-        public Produto(Guid id, string nome, string arquivo, bool disponivel, Categoria categoria) 
+        public Produto(int id, string nome, string arquivo, bool disponivel, Categoria categoria) 
             : this(nome, arquivo, disponivel, categoria)
         {
             Id = id;            

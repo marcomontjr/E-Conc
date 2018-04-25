@@ -34,6 +34,9 @@ namespace E_Conc
             services.AddTransient<IOrientadorRepository, OrientadorRepository>();
             services.AddTransient<ICursoRepository, CursoRepository>();
             services.AddMvc();
+
+            services.AddDistributedMemoryCache();
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +55,7 @@ namespace E_Conc
 
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

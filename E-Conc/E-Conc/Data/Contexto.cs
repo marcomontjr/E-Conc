@@ -10,7 +10,8 @@ namespace E_Conc.Data
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Orientador> Orientadores { get; set; }
-        public DbSet<Curso> Cursos { get; set; }        
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Pedido> Pedidos { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
 
