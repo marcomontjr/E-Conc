@@ -14,7 +14,18 @@ namespace E_Conc.Data.Configuration
 
             builder
                 .Property(p => p.Nome)
-                .IsRequired();     
+                .IsRequired();
+
+
+            builder
+                .HasOne(p => p.Curso)
+                .WithMany(p => p.Produtos)
+                .IsRequired();
+
+            builder
+                .HasOne(p => p.Usuario)
+                .WithMany()
+                .IsRequired();
         }
     }
 }

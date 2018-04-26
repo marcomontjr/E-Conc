@@ -64,14 +64,16 @@ namespace E_Conc.Migrations
 
                     b.Property<int>("Categoria");
 
-                    b.Property<int?>("CursoId");
+                    b.Property<int?>("CursoId")
+                        .IsRequired();
 
                     b.Property<bool>("Disponivel");
 
                     b.Property<string>("Nome")
                         .IsRequired();
 
-                    b.Property<int?>("UsuarioId");
+                    b.Property<int?>("UsuarioId")
+                        .IsRequired();
 
                     b.HasKey("Id");
 
@@ -97,10 +99,6 @@ namespace E_Conc.Migrations
                         .IsRequired();
 
                     b.Property<string>("InstituicaoSigla");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasMaxLength(45);
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -137,13 +135,15 @@ namespace E_Conc.Migrations
 
             modelBuilder.Entity("E_Conc.Models.Produto", b =>
                 {
-                    b.HasOne("E_Conc.Models.Curso")
+                    b.HasOne("E_Conc.Models.Curso", "Curso")
                         .WithMany("Produtos")
-                        .HasForeignKey("CursoId");
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("E_Conc.Models.Usuario", "Usuario")
                         .WithMany()
-                        .HasForeignKey("UsuarioId");
+                        .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("E_Conc.Models.Usuario", b =>

@@ -33,7 +33,6 @@ namespace E_Conc.Migrations
                     Email = table.Column<string>(maxLength: 45, nullable: false),
                     Instituicao = table.Column<string>(nullable: false),
                     InstituicaoSigla = table.Column<string>(nullable: true),
-                    Login = table.Column<string>(maxLength: 45, nullable: false),
                     Nome = table.Column<string>(maxLength: 45, nullable: false),
                     Ra = table.Column<string>(maxLength: 25, nullable: true),
                     Senha = table.Column<string>(nullable: false),
@@ -59,10 +58,10 @@ namespace E_Conc.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Arquivo = table.Column<string>(nullable: false),
                     Categoria = table.Column<int>(nullable: false),
-                    CursoId = table.Column<int>(nullable: true),
+                    CursoId = table.Column<int>(nullable: false),
                     Disponivel = table.Column<bool>(nullable: false),
                     Nome = table.Column<string>(nullable: false),
-                    UsuarioId = table.Column<int>(nullable: true)
+                    UsuarioId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -72,13 +71,13 @@ namespace E_Conc.Migrations
                         column: x => x.CursoId,
                         principalTable: "Cursos",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Produtos_Usuarios_UsuarioId",
                         column: x => x.UsuarioId,
                         principalTable: "Usuarios",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

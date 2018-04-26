@@ -9,22 +9,26 @@ namespace E_Conc.Models
         public bool Disponivel { get; set; }
         public Categoria Categoria { get; set; }
         public Usuario Usuario { get; set; }
+        public Curso Curso { get; private set; }
 
         public Produto() { }
 
-        public Produto(int id, string nome, string arquivo, bool disponivel, Categoria categoria, Usuario usuario) 
-            : this(nome, arquivo, disponivel, categoria, usuario)
+        public Produto
+            (int id, string nome, string arquivo, bool disponivel, Categoria categoria, Usuario usuario, Curso curso) 
+            : this(nome, arquivo, disponivel, categoria, usuario, curso)
         {
             Id = id;            
         }
 
-        public Produto(string nome, string arquivo, bool disponivel, Categoria categoria, Usuario usuario)
+        public Produto
+            (string nome, string arquivo, bool disponivel, Categoria categoria, Usuario usuario, Curso curso)
         {
             Nome = nome;
             Arquivo = arquivo;
             Disponivel = disponivel;
             Categoria = categoria;
             Usuario = usuario;
+            Curso = curso;
         }        
     }
 }

@@ -9,11 +9,6 @@ namespace E_Conc.Data
         public virtual void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder
-                .Property(u => u.Login)
-                .HasMaxLength(45)
-                .IsRequired();
-
-            builder
                 .Property(u => u.Senha)
                 .IsRequired();
 
