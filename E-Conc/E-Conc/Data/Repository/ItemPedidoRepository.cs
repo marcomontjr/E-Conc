@@ -12,52 +12,51 @@ namespace E_Conc.Data.Repository
         public ItemPedidoRepository(Contexto context, IHttpContextAccessor contextAccessor) 
             : base(context, contextAccessor) { }
 
-        public ItemPedido AddItemPedido(int produtoId)
-        {           
-            var produto = (from p in _context.Produtos
-                        .Include(o => o.Orientador)
-                        .Include(c => c.Curso)
-                         where p.Id.Equals(produtoId)
-                         select p).Single();
+        //public ItemPedido AddItemPedido(int produtoId)
+        //{           
+        //    var produto = (from p in _context.Produtos
+        //                .Include(o => o.Orientador)
+        //                .Include(c => c.Curso)
+        //                 where p.Id.Equals(produtoId)
+        //                 select p).Single();
 
-            //TODO: Implementar a Busca do Aluno para a realização da compra.
+        //    //TODO: Implementar a Busca do Aluno para a realização da compra.
 
-            if (produto != null)
-            {
-                int? pedidoId = GetSessionPedidoId();
+        //    if (produto != null)
+        //    {
+        //        //int? pedidoId = GetSessionPedidoId();
 
-                var pedido = _context.Pedidos
-                    .Where(p => p.Id == pedidoId)
-                    .SingleOrDefault();
+        //        //var pedido = _context.Pedidos
+        //        //    .Where(p => p.Id == pedidoId)
+        //        //    .SingleOrDefault();
 
-                if (pedido == null)
-                    pedido = new Pedido();
+        //        //if (pedido == null)
+        //        //    pedido = new Pedido();
 
-                if (!_context.ItensPedido
-                    .Where(i => i.Pedido.Id == pedido.Id
-                        && i.Produto.Id.Equals(produtoId))
-                    .Any())
-                {
-                    var itemPedido = new ItemPedido(pedido, produto);
-                    _context.ItensPedido.Add(itemPedido);
+        //        //if (!_context.ItensPedido
+        //        //    .Where(i => i.Pedido.Id == pedido.Id
+        //        //        && i.Produto.Id.Equals(produtoId))
+        //        //    .Any())
+        //        //{
+        //        //    var itemPedido = new ItemPedido(pedido, produto);
+        //        //    _context.ItensPedido.Add(itemPedido);
 
-                    _context.SaveChanges();
+        //        //    _context.SaveChanges();
 
-                    SetSessionPedidoId(pedido);
+        //        //    SetSessionPedidoId(pedido);
 
-                    return itemPedido;
-                }
-                else
-                    throw new ArgumentNullException("Já Existe um Pedido para este Item");
-            }
-            else
-                throw new ArgumentNullException("Produto Não Encontrado");
-        }
+        //        //    return itemPedido;
+        //        }
+        //        else
+        //            throw new ArgumentNullException("Já Existe um Pedido para este Item");
+        //    }
+        //    else
+        //        throw new ArgumentNullException("Produto Não Encontrado");
+        //}
 
-        private void SetSessionPedidoId(Pedido pedido)
+        private void SetSessionPedidoId()
         {
-            _contextAccessor.HttpContext
-                .Session.SetInt32("pedidoId", pedido.Id);
+            
         }
 
         private int? GetSessionPedidoId()
@@ -66,15 +65,15 @@ namespace E_Conc.Data.Repository
             .Session.GetInt32("pedidoId");
         }
 
-        public ItemPedido GetItensPedidos()
-        {
-            var pedidoId = GetSessionPedidoId();
-            var pedido = _context.Pedidos
-                .Where(p => p.Id == pedidoId)
-                .Single();
+        //public ItemPedido GetItensPedidos()
+        //{
+        //    var pedidoId = GetSessionPedidoId();
+        //    var pedido = _context.Pedidos
+        //        .Where(p => p.Id == pedidoId)
+        //        .Single();
 
-            return _context.ItensPedido
-                   .Where(i => i.Pedido.Id == pedido.Id).First();
-        }
+        //    return _context.ItensPedido
+        //           .Where(i => i.Pedido.Id == pedido.Id).First();
+        //}
     }
 }

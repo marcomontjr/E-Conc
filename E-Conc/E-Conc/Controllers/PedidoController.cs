@@ -47,12 +47,13 @@ namespace E_Conc.Controllers
 
         public IActionResult Carrinho(int? produtoId)
         {
-            if (produtoId.HasValue)
-                return View(_itemPedidoRepo.AddItemPedido(produtoId.Value));
+            //if (produtoId.HasValue)
+            //    return View(_itemPedidoRepo.AddItemPedido(produtoId.Value));
 
             return View();
         }
 
+        [HttpPost]
         public IActionResult Resumo()
         {            
             return View();

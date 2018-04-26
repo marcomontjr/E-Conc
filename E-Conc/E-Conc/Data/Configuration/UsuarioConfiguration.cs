@@ -1,13 +1,12 @@
-﻿using E_Conc.Enum;
-using E_Conc.Models;
+﻿using E_Conc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace E_Conc.Data
 {
-    internal class UsuarioConfiguration<T> : IEntityTypeConfiguration<T> where T : Usuario
+    internal class UsuarioConfiguration : IEntityTypeConfiguration<Usuario>
     {
-        public virtual void Configure(EntityTypeBuilder<T> builder)
+        public virtual void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder
                 .Property(u => u.Login)
@@ -37,7 +36,11 @@ namespace E_Conc.Data
 
             builder
                 .Property(u => u.Telefone)
-                .HasMaxLength(35);            
+                .HasMaxLength(35);
+
+            builder
+                .Property(u => u.Ra)
+                .HasMaxLength(25);
         }
     }
 }

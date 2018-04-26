@@ -1,8 +1,6 @@
-﻿using System;
-
-namespace E_Conc.Models
+﻿namespace E_Conc.Models
 {
-    public class BaseModel
+    public abstract class BaseModel
     {
         public int Id { get; set; }
     }

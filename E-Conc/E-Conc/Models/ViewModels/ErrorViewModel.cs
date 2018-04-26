@@ -1,6 +1,4 @@
-using System;
-
-namespace E_Conc.Models
+namespace E_Conc.Models.ViewModels
 {
     public class ErrorViewModel
     {
