@@ -2,7 +2,7 @@
     ViewData["Title"] = "Resumo";
 }
 
-@model ResumoViewModel
+@model ItemPedido
 
 <br />
 
@@ -12,7 +12,7 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <h3>Nº Do Pedido: @(Model.ItemPedido.Id)</h3>
+                <h3>Nº Do Pedido: @(Model.Id)</h3>
             </div>
         </div>
         <hr/>
@@ -24,8 +24,8 @@
                 <div>RA: @(Model.Aluno.Ra)</div>
                 <div>Instituição: @(Model.Aluno.Instituicao)</div>
                 <div>Sigla: @(Model.Aluno.InstituicaoSigla)</div>
-                <div>Curso: @(Model.ItemPedido.Produto.Curso.Nome)</div>
-                <div>Sigla: @(Model.ItemPedido.Produto.Curso.Sigla)</div>
+                <div>Curso: @(Model.Produto.Curso.Nome)</div>
+                <div>Sigla: @(Model.Produto.Curso.Sigla)</div>
             </div>
             <div class="col-md-4">
                 <h3>Endereco de Entrega</h3>
@@ -36,11 +36,11 @@
         <div class="row">
             <div class="col-md-8">
                 <h3>Item</h3>
-                <div>@(Model.ItemPedido.Produto.Nome)</div>
+                <div>@(Model.Produto.Nome)</div>
             </div>
             <div class="col-md-4">
                 <h3>Categoria</h3>
-                <div>@(Model.ItemPedido.Produto.Categoria)</div>
+                <div>@(Model.Produto.Categoria)</div>
             </div>
         </div>
     </div>

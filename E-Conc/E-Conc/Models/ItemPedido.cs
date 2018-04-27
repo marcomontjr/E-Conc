@@ -2,18 +2,18 @@
 {
     public class ItemPedido : BaseModel
     {
-        public Pedido Pedido { get; private set; }
+        public Usuario Usuario { get; private set; }
         public Produto Produto { get; set; }
 
-        public ItemPedido(int id, Pedido pedido, Produto produto) : this(pedido, produto)
+        public ItemPedido(int id, Produto produto, Usuario usuario) : this(produto, usuario)
         {
             Id = id;
         }
 
-        public ItemPedido(Pedido pedido, Produto produto)
+        public ItemPedido(Produto produto, Usuario usuario)
         {
             Produto = produto;
-            Pedido = pedido;
+            Usuario = usuario;
         }
     }
 }

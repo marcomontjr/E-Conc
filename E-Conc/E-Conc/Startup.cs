@@ -29,10 +29,9 @@ namespace E_Conc
                .UseSqlServer(connectionString));
 
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
-            services.AddTransient<IAlunoRepository, AlunoRespository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();
-            services.AddTransient<IOrientadorRepository, OrientadorRepository>();
             services.AddTransient<ICursoRepository, CursoRepository>();
+            services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddMvc();
 
             services.AddDistributedMemoryCache();
