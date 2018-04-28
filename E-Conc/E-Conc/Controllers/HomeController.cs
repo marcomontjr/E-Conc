@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
+﻿using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using E_Conc.Models.ViewModels;
+using System.Diagnostics;
 
 namespace E_Conc.Controllers
 {
@@ -20,8 +20,11 @@ namespace E_Conc.Controllers
 
         public IActionResult Contato()
         {
-            ViewData["Message"] = "Your contact page.";
+            return View();
+        }
 
+        public IActionResult Login()
+        {
             return View();
         }
 
@@ -29,5 +32,7 @@ namespace E_Conc.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
