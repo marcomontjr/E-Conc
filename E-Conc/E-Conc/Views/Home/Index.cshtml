@@ -1,7 +1,8 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Home";
 }
+
+<link href="~/css/index.css" rel="stylesheet" />
 
 <div id="my-carousel" class="carousel slide" data-ride="carousel">
     <!-- Indicators -->
@@ -9,29 +10,33 @@
         <li data-target="#my-carousel" data-slide-to="0" class="active"></li>
         <li data-target="#my-carousel" data-slide-to="1"></li>
         <li data-target="#my-carousel" data-slide-to="2"></li>
+        <li data-target="#my-carousel" data-slide-to="3"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
         <div class="item active">
-            <img alt="First slide" src="http://placehold.it/1200x675&text=First+slide">
-            <div class="carousel-caption">
-                <h3>Caption heading 1</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            <img class="img-responsive" src="~/images/Promocional/FlatPesquisa.jpg">
+            <div class="carousel-caption Sombreado">
+                <h3>Bem Vindo!</h3>
+                <p>Seja Bem-Vindo a loja que ajudará na escolha do seu futuro!</p>
             </div>
         </div>
         <div class="item">
-            <img alt="Second slide" src="http://placehold.it/1200x675&text=Second+slide">
-            <div class="carousel-caption">
-                <h3>Caption heading 2</h3>
-                <p>Morbi eget libero quis metus consectetur semper.</p>
+            <img class="img-responsive" src="~/images/Promocional/FlatEcommerce.jpg">
+            <div class="carousel-caption Sombreado">
+                <p>Utilizando o melhor sistema de escolha da atualidade.</p>
             </div>
         </div>
         <div class="item">
-            <img alt="Third slide" src="http://placehold.it/1200x675&text=Third+slide">
+            <img class="img-responsive" src="~/images/Promocional/AlunaFundoDesfocado.jpg">
+            <div class="carousel-caption Sombreado">
+                <h3>Mais Facilidade para Orientadores e Orientandos!</h3>
+            </div>
+        </div>
+        <div class="item">
+            <img class="img-responsive" src="~/images/Promocional/FlatResponsivo.jpg">
             <div class="carousel-caption">
-                <h3>Caption heading 3</h3>
-                <p>Suspendisse ullamcorper massa eget eleifend iaculis.</p>
             </div>
         </div>
     </div>
@@ -45,5 +50,4 @@
         <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>>
-
+</div>
