@@ -1,22 +1,24 @@
-﻿@model Usuario
+﻿@model LoginViewModel
 
 @{
-    ViewData["Title"] = "Home";
+    ViewData["Title"] = "Login";
 }
 
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <section class="login-form">
-            <form method="post" asp-controller="Login" asp-action="Login">
+            <form role="form" method="post" asp-controller="Login" asp-action="Login">
                 <br />
                 <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
                 <br />
-                <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+                <input type="email" name="email" placeholder="Email" required class="form-control input-lg" 
+                       asp-for="Email"/>
                 <br />
-                <input type="password" class="form-control input-lg" id="password" placeholder="Password" required="" />             
+                <input type="text" placeholder="Password" required class="form-control input-lg"
+                       asp-for="Senha"/>             
                 <br />
-                <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Entrar</button>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
                 <br/>
                 <div align="center">
                     <a href="#">Esqueci Minha Senha</a>
