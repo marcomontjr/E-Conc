@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace E_Conc.Models.ViewModels
+﻿namespace E_Conc.Models.ViewModels
 {
     public class CarrosselViewModel
     {

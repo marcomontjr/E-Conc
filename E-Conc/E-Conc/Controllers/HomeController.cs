@@ -25,7 +25,8 @@ namespace E_Conc.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            var login = new LoginViewModel();
+            return View(login);
         }
 
         public IActionResult Error()

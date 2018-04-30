@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using E_Conc.Models.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
 {
     public class LoginController : Controller
     {  
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Login(string login, string senha)
+        public IActionResult Login(LoginViewModel login)
         {
             return View();
         }        
