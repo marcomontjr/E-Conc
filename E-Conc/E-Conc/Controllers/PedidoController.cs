@@ -1,6 +1,5 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
-using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,10 +52,10 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult Resumo(ItemPedido itemPedido)
+        public IActionResult Resumo(int? itemPedido)
         {
-            if (itemPedido != null)
-                return View(itemPedido);
+            if (itemPedido.HasValue)
+                return View(_itemPedidoRepo.GetItemPedidoById(itemPedido.Value));
             
             return View();
         }
