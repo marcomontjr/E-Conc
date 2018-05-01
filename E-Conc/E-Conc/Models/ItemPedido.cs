@@ -5,6 +5,8 @@
         public Usuario Usuario { get; private set; }
         public Produto Produto { get; set; }
 
+        public ItemPedido() { }
+
         public ItemPedido(int id, Produto produto, Usuario usuario) 
             : this(produto, usuario)
         {

@@ -40,25 +40,24 @@
     </div>
 </div>
 
+@*TODO: Ancora 'Remover Item do Carrinho' deve redirecionar para action de cancelarPedido e depois redirecionar
+    para Carrossel*@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a asp-action="Carrossel"
+            <a asp-action="Carrossel" 
                class="btn btn-danger">
                 Remover Item do Carrinho
             </a>
-            <a asp-action="Resumo"
-               asp-route-itemPedido="@(Model)"
-               class="btn btn-success">
+            <button class="btn btn-success" id="resumoButton">
                 Finalizar Pedido
-            </a>            
+            </button>
         </div>
     </div>
 </div>
 
 @Html.Partial("~/Views/Modals/CarrinhoAlerta.cshtml")
-@Html.Partial("~/Views/Modals/FinalizarPedido.cshtml")
-@Html.Partial("~/Views/Modals/RemoverItemCarrinho.cshtml")
+@Html.Partial("~/Views/Modals/FinalizarPedido.cshtml", Model)
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="~/js/Carrinho.js"></script>

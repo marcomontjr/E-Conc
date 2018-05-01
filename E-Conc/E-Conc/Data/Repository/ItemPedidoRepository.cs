@@ -42,5 +42,20 @@ namespace E_Conc.Data.Repository
             else
                 throw new ArgumentNullException("Produto Não Encontrado");
         }
+
+        public ItemPedido GetItemPedidoById(int itemPedidoId)
+        {
+            var itemPedido = (from ip in _context.ItensPedido
+                              .Include(u => u.Usuario)
+                              .Include(p => p.Produto)
+                              .ThenInclude(c => c.Curso)
+                              where ip.Id == itemPedidoId
+                              select ip).Single();
+
+            if (itemPedido != null)
+                return itemPedido;
+            
+                throw new ArgumentNullException("Pedido Não Encontrado");
+        }
     }
 }
