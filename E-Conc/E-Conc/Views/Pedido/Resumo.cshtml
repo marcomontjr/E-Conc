@@ -18,18 +18,18 @@
         <hr/>
         <div class="row">
             <div class="col-md-8">
-                <h3>Seus Dados</h3>
-                <div>Nome: @(Model.Aluno.Nome)</div>
-                <div>Tel: @(Model.Aluno.Telefone)</div>
-                <div>RA: @(Model.Aluno.Ra)</div>
-                <div>Instituição: @(Model.Aluno.Instituicao)</div>
-                <div>Sigla: @(Model.Aluno.InstituicaoSigla)</div>
+                <h3>Seus Dados</h3> @*TODO: Verificar como Trazer os dados do aluno pelo identity*@
+                <div>Nome: @(Model.Usuario.Nome)</div>
+                <div>Tel: @(Model.Usuario.Telefone)</div>
+                <div>RA: @(Model.Usuario.Ra)</div>
+                <div>Instituição: @(Model.Usuario.Instituicao)</div>
+                <div>Sigla: @(Model.Usuario.InstituicaoSigla)</div>
                 <div>Curso: @(Model.Produto.Curso.Nome)</div>
                 <div>Sigla: @(Model.Produto.Curso.Sigla)</div>
             </div>
             <div class="col-md-4">
                 <h3>Endereco de Entrega</h3>
-                <div>@(Model.Aluno.Nome)</div>
+                <div>@(Model.Usuario.Email)</div>
             </div>
         </div>
         <hr/>
