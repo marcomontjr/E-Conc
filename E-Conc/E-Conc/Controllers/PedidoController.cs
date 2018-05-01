@@ -1,5 +1,6 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
+using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,16 +47,17 @@ namespace E_Conc.Controllers
 
         public IActionResult Carrinho(int? produtoId)
         {
-            //if (produtoId.HasValue)
-            //    return View(_itemPedidoRepo.AddItemPedido(produtoId.Value));
+            if (produtoId.HasValue)
+                return View(_itemPedidoRepo.AddItemPedido(produtoId.Value));
 
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Resumo()
-        {   
+        public IActionResult Resumo(ItemPedido itemPedido)
+        {
+            if (itemPedido != null)
+                return View(itemPedido);
+            
             return View();
         }
     }
