@@ -7,5 +7,6 @@ namespace E_Conc.Data.Interfaces
     {
         ItemPedido AddItemPedido(int produtoId);
         ItemPedido GetItemPedidoById(int itemPedidoId);
+        void RemoveItemPedido(int itemPedidoId);
     }
 }

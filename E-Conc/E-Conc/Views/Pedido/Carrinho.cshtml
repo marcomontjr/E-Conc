@@ -40,12 +40,11 @@
     </div>
 </div>
 
-@*TODO: Ancora 'Remover Item do Carrinho' deve redirecionar para action de cancelarPedido e depois redirecionar
-    para Carrossel*@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a asp-action="Carrossel" 
+            <a asp-action="RemoverItemDoCarrinho" 
+               asp-route-itemPedido="@(Model.Id)"
                class="btn btn-danger">
                 Remover Item do Carrinho
             </a>
