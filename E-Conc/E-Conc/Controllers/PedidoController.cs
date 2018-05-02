@@ -10,13 +10,14 @@ namespace E_Conc.Controllers
         private readonly IProdutoRepository _produtoRepo;
         private readonly IItemPedidoRespository _itemPedidoRepo;
         private CarrosselViewModel _carrosselViewModel;
+
         public PedidoController(IProdutoRepository produtoRepo,
                                 IItemPedidoRespository itemPedidoRepo)
         {
             _produtoRepo = produtoRepo;
             _itemPedidoRepo = itemPedidoRepo;
-
         }
+
         public IActionResult Carrossel()
         {
             var produtosDesenvolvimento = new CategoriaViewModel
