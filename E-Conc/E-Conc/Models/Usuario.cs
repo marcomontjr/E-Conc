@@ -12,5 +12,5 @@ namespace E_Conc.Models
         public string Instituicao { get; private set; }
         public string InstituicaoSigla { get; private set; }
         public TipoUsuario TipoUsuario { get; private set; }
-}
+    }
 }
