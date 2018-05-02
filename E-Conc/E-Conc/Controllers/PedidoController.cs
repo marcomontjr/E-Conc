@@ -52,12 +52,20 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult Resumo(int? itemPedido)
+        public IActionResult Resumo(int? itemPedidoId)
         {
-            if (itemPedido.HasValue)
-                return View(_itemPedidoRepo.GetItemPedidoById(itemPedido.Value));
+            if (itemPedidoId.HasValue)
+                return View(_itemPedidoRepo.GetItemPedidoById(itemPedidoId.Value));
             
             return View();
+        }
+
+        public IActionResult RemoverItemDoCarrinho(int? itemPedido)
+        {
+            if (itemPedido.HasValue)
+                _itemPedidoRepo.RemoveItemPedido(itemPedido.Value);
+
+            return RedirectToAction("Carrossel");
         }
     }
 }

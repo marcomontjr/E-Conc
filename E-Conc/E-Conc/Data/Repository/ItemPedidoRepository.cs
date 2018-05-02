@@ -57,5 +57,15 @@ namespace E_Conc.Data.Repository
             
                 throw new ArgumentNullException("Pedido Não Encontrado");
         }
+
+        public void RemoveItemPedido(int itemPedidoId)
+        {
+            var itemPedido = _context.ItensPedido
+                .Where(ip => ip.Id.Equals(itemPedidoId))
+                .First();
+
+            _context.ItensPedido.Remove(itemPedido);
+            _context.SaveChanges();
+        }
     }
 }

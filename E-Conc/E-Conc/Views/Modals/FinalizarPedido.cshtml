@@ -11,9 +11,8 @@
             <div class="modal-footer">
                 <a asp-controller="Pedido" 
                    asp-action="Resumo" 
-                   asp-route-itemPedido="@(Model.Id)"
-                   class="btn btn-primary"
-                   data-dismiss="modal">Sim</a>
+                   asp-route-itemPedidoId="@(Model.Id)"
+                   class="btn btn-primary">Sim</a>
                 <button type="button" class="btn btn-primary" data-dismiss="modal">Não</button>
             </div>
         </div>
