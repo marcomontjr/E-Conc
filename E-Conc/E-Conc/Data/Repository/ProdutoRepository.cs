@@ -12,6 +12,18 @@ namespace E_Conc.Data.Repository
         public ProdutoRepository(Contexto context, IHttpContextAccessor contextAccessor)
             : base(context, contextAccessor) { }
 
+        public Produto GetProdutoById(int produtoId)
+        {
+            var produto =  _context.Produtos
+                            .Where(p => p.Id == produtoId)
+                            .Single();
+
+            if (produto != null)
+                return produto;
+
+            throw new System.Exception("Produto não Encontrado");            
+        }
+
         public List<Produto> GetProdutos()
         {
             return _context.Produtos.ToList();

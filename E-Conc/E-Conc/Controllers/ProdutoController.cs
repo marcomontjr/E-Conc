@@ -1,17 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using E_Conc.Data.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
 {
     public class ProdutoController : Controller
     {
-        public IActionResult Index()
+        private readonly IProdutoRepository _produtoRepo;
+        public IActionResult Detalhes(int? produtoId)
         {
-            return View();
-        }
+            if (produtoId != null)                
+                return View(_produtoRepo.GetProdutoById(produtoId));
 
-        public IActionResult Detalhes()
-        {
-            return View();
+            return RedirectToAction("");
         }
     }
 }
