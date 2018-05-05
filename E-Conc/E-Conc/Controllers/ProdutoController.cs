@@ -8,10 +8,11 @@ namespace E_Conc.Controllers
         private readonly IProdutoRepository _produtoRepo;
         public IActionResult Detalhes(int? produtoId)
         {
-            if (produtoId != null)                
-                return View(_produtoRepo.GetProdutoById(produtoId));
+            //if (produtoId != null)                
+            //    return View(_produtoRepo.GetProdutoById(produtoId));
 
-            return RedirectToAction("");
+            //return RedirectToAction("");
+            return View();
         }
     }
 }

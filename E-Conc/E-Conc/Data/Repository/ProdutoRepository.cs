@@ -12,8 +12,8 @@ namespace E_Conc.Data.Repository
         public ProdutoRepository(Contexto context, IHttpContextAccessor contextAccessor)
             : base(context, contextAccessor) { }
 
-        public Produto GetProdutoById(int produtoId)
-        {
+        public Produto GetProdutoById(int? produtoId)
+        {            
             var produto =  _context.Produtos
                             .Where(p => p.Id == produtoId)
                             .Single();
