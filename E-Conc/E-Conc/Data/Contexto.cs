@@ -1,10 +1,11 @@
 ﻿using E_Conc.Data.Configuration;
 using E_Conc.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_Conc.Data
 {
-    public class Contexto : DbContext
+    public class Contexto : IdentityDbContext<Usuario>
     {
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Produto> Produtos { get; set; }

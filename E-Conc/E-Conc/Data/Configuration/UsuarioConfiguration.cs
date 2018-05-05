@@ -13,25 +13,16 @@ namespace E_Conc.Data
                 .IsRequired();
 
             builder
-                .Property(u => u.Nome)
-                .HasMaxLength(45)
-                .IsRequired();
-            
-            builder
                 .Property(u => u.Email)
                 .HasMaxLength(45)
                 .IsRequired();
-            
+
             builder
                 .Property(u => u.Instituicao)
                 .IsRequired();
 
             builder
                .Property(u => u.InstituicaoSigla);
-
-            builder
-                .Property(u => u.Telefone)
-                .HasMaxLength(35);
 
             builder
                 .Property(u => u.Ra)

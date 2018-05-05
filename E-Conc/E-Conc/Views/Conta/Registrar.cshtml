@@ -1,0 +1,41 @@
+﻿@model RegistroContaViewModel
+
+@{
+    ViewData["Title"] = "Registrar";
+}
+
+<section class="login-form">
+    <form role="form" method="post" asp-controller="Conta" asp-action="Registrar">
+        <br /><br />
+        <br /><br />
+        <label>Tipo do Usuário</label>
+        <select asp-for="TipoUsuario" asp-items="@Html.GetEnumSelectList<TipoUsuario>()"></select>
+        <br />
+        <input type="email" placeholder="Email" required class="form-control input-lg"
+               asp-for="Email" />
+        <br />
+        <input type="text" placeholder="Registro Acadêmico(RA)" required class="form-control input-lg"
+               asp-for="Ra" />
+        <br />
+        <input type="password" placeholder="Senha" required class="form-control input-lg"
+               asp-for="Senha" />
+        <br />
+        <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
+               asp-for="UserName" />
+        <br />
+        <input type="text" placeholder="Telefone" required class="form-control input-lg"
+               asp-for="PhoneNumber" />
+        <br />
+        <input type="text" placeholder="Instituição" required class="form-control input-lg"
+               asp-for="Instituicao" />
+        <br />
+        <input type="text" placeholder="Sigla da Instituição" required class="form-control input-lg"
+               asp-for="InstituicaoSigla" />
+        <br />
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+        <br />
+        <div align="center">
+            <a href="#">Esqueci Minha Senha</a>
+        </div>
+    </form>
+</section>
