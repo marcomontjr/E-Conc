@@ -1,37 +1,33 @@
-﻿<div class="container">
+﻿@model Produto
+<div class="container">
     <div class="row">
         <div class="col-md-6">
-            <img src="~/images/Produtos/DesenvolvimentoDetalhes.jpg" />
+            <img src="~/images/Produtos/@Model.Arquivo.ToString()" />
         </div>
         <div class="col-md-offset-6">
             <br /><br /><br />
-
-            <h3>Aprendizado e Linguagem de Máquina</h3>
-            <h5>Orientador:<a href="#"> Marco Monteiro Junior</a> · <small>(5054 Visualizções)</small></h5>
-
+            <h3>@Model.Nome</h3>
+            <h5>Orientador:<a href="#">@Model.Usuario</a></h5>
             <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span> Adicionar ao Carrinho</button>
-            <h6><a href="#"><span class="glyphicon glyphicon-heart-empty"></span> Adicionar aos Favoritos</a></h6>
-
         </div>
 
         <div class="col-md-12">
             <div style="width:100%;border-top:1px solid silver">
                 <p style="padding:15px;">
-                    Desenvolvimento de Pesquisa a cerca da linguagem utilizada pelas máquinas e como elas aprendem aquilos que as ensinamos
-                    Quais os meios para se ensinar um computador, qual as características ele deve ter e quais os testes necessários para
-                    a máquina efetivamente aprender.
+                    @Model.Descricao
                 </p>
+                <h4>Conhecimentos Desejados</h4>
                 <ul>
-                    <li>Ter sólido conhecimento em Binário</li>
-                    <li>Sólido Conhecimento em ao menos uma linguagem de programação.</li>
-                    <li>Disponibilidade para pesquisa de Campo</li>
+                    <li>@Model.Conhecimentos</li>
                 </ul>
             </div>
             <br /><br />
-            <h4>Deixe seu Comentário ou Dúvida</h4>
-            <textarea></textarea>
-            <br />
-            <button>Comentar</button>
+            <div style="width:100%;border-top:1px solid silver">
+                <h4>Deixe seu Comentário ou Dúvida</h4>
+                <textarea></textarea>
+                <br />
+                <button>Comentar</button>
+            </div>
         </div>
     </div>
 </div>
