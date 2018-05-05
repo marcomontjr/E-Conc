@@ -18,7 +18,6 @@ namespace E_Conc.Data
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
             modelBuilder.ApplyConfiguration(new CursoConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
-
         }
     }
 }
