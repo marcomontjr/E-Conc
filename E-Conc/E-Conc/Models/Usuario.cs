@@ -1,4 +1,5 @@
 ﻿using E_Conc.Enum;
+using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 
 namespace E_Conc.Models
@@ -12,5 +13,18 @@ namespace E_Conc.Models
         public string Instituicao { get; private set; }
         public string InstituicaoSigla { get; private set; }
         public TipoUsuario TipoUsuario { get; private set; }
+
+        public Usuario() { }
+
+        public Usuario(RegistroContaViewModel modelo)
+        {
+            Ra = modelo.Ra;
+            Senha = modelo.Senha;
+            Nome = modelo.Nome;
+            Telefone = modelo.Telefone;
+            Instituicao = modelo.Instituicao;
+            InstituicaoSigla = modelo.InstituicaoSigla;
+            TipoUsuario = modelo.TipoUsuario;
+        }
     }
 }

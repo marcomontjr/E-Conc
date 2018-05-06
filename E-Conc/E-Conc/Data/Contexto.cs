@@ -16,6 +16,8 @@ namespace E_Conc.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
             modelBuilder.ApplyConfiguration(new CursoConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());

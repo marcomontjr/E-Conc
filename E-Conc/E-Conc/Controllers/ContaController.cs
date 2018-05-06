@@ -1,8 +1,6 @@
-﻿using E_Conc.Data;
-using E_Conc.Data.Interfaces;
+﻿using E_Conc.Data.Interfaces;
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
@@ -19,13 +17,16 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        //[HttpPost]
-        //public IActionResult Registrar(RegistroContaViewModel registro)
-        //{
-        //    var novoUsuario = new Usuario(registro);
-        //    var criarUsuario = _usuarioRepo.RegistrarNovoUsuario(novoUsuario);
+        [HttpPost]
+        public IActionResult Registrar(RegistroContaViewModel registro)
+        {
+            var novoUsuario = new Usuario(registro);
+            var criarUsuario = _usuarioRepo.RegistrarNovoUsuario(novoUsuario);
 
-        //    return RedirectToAction("Index", "Home");
-        //}
+            if (criarUsuario != null)
+                return RedirectToAction("Index", "Home");
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
