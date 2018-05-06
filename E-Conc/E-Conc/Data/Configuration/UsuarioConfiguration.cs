@@ -13,6 +13,11 @@ namespace E_Conc.Data
                 .IsRequired();
 
             builder
+                .Property(u => u.NomeCompleto)
+                .HasMaxLength(50)
+                .IsRequired();            
+
+            builder
                 .Property(u => u.Email)
                 .HasMaxLength(45)
                 .IsRequired();
