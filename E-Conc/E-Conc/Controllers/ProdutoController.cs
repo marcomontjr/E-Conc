@@ -18,5 +18,25 @@ namespace E_Conc.Controllers
         {
             return View();
         }
+
+        public IActionResult Comprados()
+        {
+            return View();
+        }
+
+        public IActionResult PorCategoria()
+        {
+            return View();
+        }
+
+        public IActionResult PorOrientador()
+        {
+            return View();
+        }
+
+        public IActionResult Todos()
+        {
+            return View();
+        }
     }
 }
