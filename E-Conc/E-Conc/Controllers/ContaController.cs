@@ -29,18 +29,26 @@ namespace E_Conc.Controllers
         [HttpPost]
         public async Task<IActionResult> Registrar(RegistroContaViewModel registro)
         {
-            if (!ModelState.IsValid)
-                return View(registro);
+            if (ModelState.IsValid)
+            {
+                var novoUsuario = new Usuario(registro);
+                var result = await _userManager.CreateAsync(novoUsuario, registro.Password);
 
-            var novoUsuario = new Usuario(registro);
-            var result = _usuarioRepo.RegistrarNovoUsuario(novoUsuario, _userManager);
-
-            if (result.IsCompletedSuccessfully)
-                await _signInManager.SignInAsync(novoUsuario, false);
-            else
-                return View();
-
-            return View();
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignInAsync(novoUsuario, false);
+                    return RedirectToAction("Index", "Home");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View();
+                }
+            }
+            return View(registro);
         }
     }
 }

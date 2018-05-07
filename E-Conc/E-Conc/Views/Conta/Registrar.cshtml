@@ -6,6 +6,7 @@
 
 <section class="login-form">
     <form role="form" method="post" asp-controller="Conta" asp-action="Registrar">
+        <div asp-validation-summary="All"></div>
         <br /><br />
         <br /><br />
         <label>Tipo do Usuário</label>
@@ -18,13 +19,16 @@
                asp-for="Ra" />
         <br />
         <input type="password" placeholder="Senha" required class="form-control input-lg"
-               asp-for="Senha" />
+               asp-for="Password" />
+        <br />
+        <input type="password" placeholder="Confirme a Senha" required class="form-control input-lg"
+               asp-for="ConfirmPassword" />
         <br />
         <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
                asp-for="NomeCompleto" />
         <br />
         <input type="text" placeholder="Telefone" required class="form-control input-lg"
-               asp-for="PhoneNumber" />
+               asp-for="Telefone" />
         <br />
         <input type="text" placeholder="Instituição" required class="form-control input-lg"
                asp-for="Instituicao" />
