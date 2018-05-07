@@ -5,14 +5,13 @@ using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace E_Conc.Data.Repository
 {
     public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(Contexto context, IHttpContextAccessor contextAccessor)
-            : base(context, contextAccessor) { }
+            : base(context, contextAccessor) { }        
 
         public Usuario GetUsuarioPorEmail(LoginViewModel login)
         {
@@ -22,14 +21,12 @@ namespace E_Conc.Data.Repository
                 .Single();
         }
 
-        public async Task<Usuario> RegistrarNovoUsuario(Usuario novoUsuario)
+        public async Task<IdentityResult> RegistrarNovoUsuario(Usuario novoUsuario, 
+            UserManager<Usuario> userManager)
         {
-            var userStore = new UserStore<Usuario>(_context);
-            var userManager = new UserManager<Usuario>(userStore, null, null, null, null, null, null, null, null);
+            var result = await userManager.CreateAsync(novoUsuario, novoUsuario.Senha);
 
-            await userManager.CreateAsync(novoUsuario, novoUsuario.Senha);
-
-            return novoUsuario;
+            return result;
         }
     }
 }
