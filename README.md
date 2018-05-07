@@ -10,7 +10,7 @@ A Plataforma Segue um mecanismo consagrado na UX (User Experience) que são os E
 
 O problema que a plataforma visa confrontar é a dificuldade dos alunos em escolherem temas para seus trabalhos de conclusão, uma pesquisa realizada por uma rede social famosa inidicou com uma certa precisão da necessidade deste confronto com alguns dados mostrados abaixo.
 
-As Entrevistas realizadas de maneira digital tiveram um resultado esperado, as perguntas realiziadas foram as seguintes:
+As Entrevistas realizadas de maneira digital tiveram um resultado esperado, as perguntas realizadas foram as seguintes:
 
 <p align="center">
   <img src="http://i63.tinypic.com/14udcw2.jpg"/>
@@ -34,3 +34,44 @@ Com o último dado temos um número preocupante, quase metade dos entrevistados 
 
 Esta é a proposta do E-Conc, nãoinvestigar o porque das dificuldades de escolha dos alunos, mas tentar reduzir este número de dificuldades de escolha, trazendo o banco de ideias de TCC's no formato de E-Commerce para garantir acessibilidade para os futuros formandos.
 
+Tecnologias Utilizadas:
+
+<p align="center">
+  <img src="https://pgroene.files.wordpress.com/2018/02/asp-net-core-logo-1.png"/>
+</p>
+
+<p align="center">
+  <img src="https://cdn-images-1.medium.com/max/1600/1*19hDux91qpoShfe7tXE5xg.png"/>
+</p>
+
+<p align="center">
+  <img src="https://www.softprodigy.com/wp-content/uploads/2016/05/bootstrap-responsive-front-end-framework.jpg"/>
+</p>
+
+<p align="center">
+  <img src="http://www.luiztools.com.br/wp-content/uploads/2013/05/SQL-Server-Logo-768x194.png"/>
+</p>
+
+<p align="center">
+  <img src="https://cdn-images-1.medium.com/max/1600/1*NyA3FguFskYZu1lrdMHGDw.png"/>
+</p>
+
+<p align="center">
+  <img src="https://marceloprogramador.files.wordpress.com/2016/10/commitando-sobre-git.jpg?w=900&h=300&crop=1"/>
+</p>
+
+<p align="center">
+  <img src="http://cdn.sejalivre.org/uploads/2015/05/sql.png"/>
+</p>
+
+<p align="center">
+  <img src="http://s2.glbimg.com/4ya6FIrXzaY_qnOdyj4XJFJx58w=/0x0:1191x670/695x391/s.glbimg.com/po/tt2/f/original/2014/07/15/photoshop-cs6-logo.png"/>
+</p>
+
+<p align="center">
+  <img src="https://www.codercv.com/files/c4ca4238a0b923820dcc509a6f75849b_1.jpg"/>
+</p>
+
+<p align="center">
+  <img src="https://http2.mlstatic.com/visual-studio-2017-enterprise-serial-original-oficial-D_NQ_NP_728140-MLB26381529662_112017-O.webp"/>
+</p>
