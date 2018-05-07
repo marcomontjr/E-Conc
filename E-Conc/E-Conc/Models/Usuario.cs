@@ -18,9 +18,9 @@ namespace E_Conc.Models
         public Usuario(RegistroContaViewModel modelo)
         {
             Ra = modelo.Ra;
-            Senha = modelo.Senha;
+            Senha = modelo.Password;
             NomeCompleto = modelo.NomeCompleto;
-            PhoneNumber = modelo.PhoneNumber;
+            PhoneNumber = modelo.Telefone;
             Instituicao = modelo.Instituicao;
             InstituicaoSigla = modelo.InstituicaoSigla;
             TipoUsuario = modelo.TipoUsuario;
