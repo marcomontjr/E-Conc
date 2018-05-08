@@ -75,15 +75,14 @@ namespace E_Conc.Migrations
                     NomeCompleto = table.Column<string>(maxLength: 50, nullable: false),
                     NormalizedEmail = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(maxLength: 256, nullable: true),
-                    PasswordHash = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<string>(nullable: false),
                     PhoneNumber = table.Column<string>(nullable: true),
                     PhoneNumberConfirmed = table.Column<bool>(nullable: false),
                     Ra = table.Column<string>(maxLength: 25, nullable: true),
                     SecurityStamp = table.Column<string>(nullable: true),
-                    Senha = table.Column<string>(nullable: false),
                     TipoUsuario = table.Column<int>(nullable: false),
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
-                    UserName = table.Column<string>(maxLength: 256, nullable: true)
+                    UserName = table.Column<string>(maxLength: 256, nullable: false)
                 },
                 constraints: table =>
                 {

@@ -9,7 +9,11 @@ namespace E_Conc.Data
         public virtual void Configure(EntityTypeBuilder<Usuario> builder)
         {
             builder
-                .Property(u => u.Senha)
+                .Property(u => u.PasswordHash)
+                .IsRequired();
+
+            builder
+                .Property(u => u.UserName)
                 .IsRequired();
 
             builder
