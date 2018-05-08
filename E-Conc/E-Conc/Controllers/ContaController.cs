@@ -32,7 +32,7 @@ namespace E_Conc.Controllers
             if (ModelState.IsValid)
             {
                 var novoUsuario = new Usuario(registro);
-                var result = await _userManager.CreateAsync(novoUsuario, registro.Password);
+                var result = await _userManager.CreateAsync(novoUsuario, registro.Senha);
 
                 if (result.Succeeded)
                 {

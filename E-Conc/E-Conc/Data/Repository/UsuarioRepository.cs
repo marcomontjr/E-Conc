@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using System.Threading.Tasks;
 using E_Conc.Data.Interfaces;
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
@@ -16,7 +15,6 @@ namespace E_Conc.Data.Repository
         {
             return _context.Usuarios
                 .Where(u => u.Email == login.Email)
-                .Where(u => u.Senha == login.Senha)
                 .Single();
         }
     }

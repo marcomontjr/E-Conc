@@ -125,7 +125,8 @@ namespace E_Conc.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash")
+                        .IsRequired();
 
                     b.Property<string>("PhoneNumber");
 
@@ -136,14 +137,12 @@ namespace E_Conc.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("Senha")
-                        .IsRequired();
-
                     b.Property<int>("TipoUsuario");
 
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
+                        .IsRequired()
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
