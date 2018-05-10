@@ -2,6 +2,8 @@
 using E_Conc.Data.Interfaces;
 using E_Conc.Data.Repository;
 using E_Conc.Models;
+using E_Conc.Services;
+using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -32,7 +34,9 @@ namespace E_Conc
 
             services.AddIdentity<Usuario, IdentityRole>()
                .AddEntityFrameworkStores<Contexto>()
-               .AddDefaultTokenProviders();            
+               .AddDefaultTokenProviders();
+
+            services.AddSingleton<IEmailService, EmailService>();    
 
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();

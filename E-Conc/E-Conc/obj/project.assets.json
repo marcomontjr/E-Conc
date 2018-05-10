@@ -13141,11 +13141,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E-Conc\\E_Conc.csproj",
+      "projectUniqueName": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E_Conc.csproj",
       "projectName": "E_Conc",
-      "projectPath": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E-Conc\\E_Conc.csproj",
+      "projectPath": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E_Conc.csproj",
       "packagesPath": "C:\\Users\\Marco Jr\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E-Conc\\obj\\",
+      "outputPath": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\Microsoft SDKs\\NuGetPackagesFallback\\",
