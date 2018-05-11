@@ -36,7 +36,8 @@ namespace E_Conc
                .AddEntityFrameworkStores<Contexto>()
                .AddDefaultTokenProviders();
 
-            services.AddSingleton<IEmailService, EmailService>();    
+            services.AddTransient<IEmailService, EmailService>();
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();

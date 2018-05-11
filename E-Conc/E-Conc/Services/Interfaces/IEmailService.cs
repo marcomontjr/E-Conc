@@ -4,6 +4,6 @@ namespace E_Conc.Services.Interfaces
 {
     public interface IEmailService
     {
-        Task SendAsync(string to, string subject, string body);
+        Task SendEmailAsync(string email, string subject, string message);
     }
 }

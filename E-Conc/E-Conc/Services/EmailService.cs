@@ -1,38 +1,55 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
+using E_Conc.Models;
 using E_Conc.Services.Interfaces;
+using Microsoft.Extensions.Options;
 
 namespace E_Conc.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly string EMAIL_ORIGEM = "monteirojr.marco@gmail.com";
-        private readonly string EMAIL_SENHA = "senha";
-        public async Task SendAsync(string to, string subject, string body)
+        public EmailSettings _emailSettings { get; }
+        public EmailService(IOptions<EmailSettings> emailSettings)
         {
-            using (var mensagemDeEmail = new MailMessage())
+            _emailSettings = emailSettings.Value;
+        }
+
+        public Task SendEmailAsync(string email, string subject, string message)
+        {
+            Execute(email, subject, message).Wait();
+            return Task.FromResult(0);
+        }
+
+        public async Task Execute(string email, string subject, string message)
+        {
+            try
             {
-                mensagemDeEmail.From = new MailAddress(EMAIL_ORIGEM);
-
-                mensagemDeEmail.Subject = subject;
-                mensagemDeEmail.To.Add(to);
-                mensagemDeEmail.Body = body;
-
-                using (var smtpClient = new SmtpClient())
+                string toEmail = string.IsNullOrEmpty(email)
+                                 ? _emailSettings.ToEmail
+                                 : email;
+                MailMessage mail = new MailMessage()
                 {
-                    smtpClient.UseDefaultCredentials = true;
-                    smtpClient.Credentials = new NetworkCredential(EMAIL_ORIGEM, EMAIL_SENHA);
+                    From = new MailAddress(_emailSettings.UsernameEmail, "Marco Monteiro Jr. (CEO)")
+                };
+                mail.To.Add(new MailAddress(toEmail));
 
-                    smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
-                    smtpClient.Host = "smtp.gmail.com";
-                    smtpClient.Port = 587;
-                    smtpClient.EnableSsl = true;
+                mail.Subject = "E-Conc Relacionamento - " + subject;
+                mail.Body = message;
+                mail.IsBodyHtml = true;
+                mail.Priority = MailPriority.High;
 
-                    smtpClient.Timeout = 20_000;
-
-                    await smtpClient.SendMailAsync(mensagemDeEmail);
+                using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, _emailSettings.SecondaryPort))
+                {
+                    smtp.Credentials = new NetworkCredential(_emailSettings.UsernameEmail, _emailSettings.UsernamePassword);
+                    smtp.EnableSsl = true;
+                    await smtp.SendMailAsync(mail);
                 }
+            }
+            catch (Exception ex)
+            {
+                //do something here
             }
         }
     }
