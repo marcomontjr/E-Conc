@@ -36,12 +36,12 @@ namespace E_Conc.Controllers
             if (ModelState.IsValid)
             {
                 var novoUsuario = new Usuario(registro);
-                var result = await _userManager.CreateAsync(novoUsuario, registro.Senha);
+                var result = await _userManager.CreateAsync(novoUsuario, registro.Senha);  
 
                 if (result.Succeeded)
                 {
                     await EnviaEmailConfirmacaoAsync(novoUsuario);
-                    return RedirectToAction("Index", "Home");
+                    return View("AguardandoConfirmacao");
                 }
                 else
                     AdicionaErros(result);
@@ -51,8 +51,28 @@ namespace E_Conc.Controllers
 
         private async Task EnviaEmailConfirmacaoAsync(Usuario usuario)
         {
-            await _emailService.SendEmailAsync(usuario.Email, "Confirmação de Cadastro",
-                       $"Parabéns, você se Cadastrou no E-Conc");         
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
+            var linkDeCallback = Url.Action(
+                                    "ConfirmaEmailAsync", 
+                                    "Conta", 
+                                    new { user = usuario, codToken = token }, 
+                                    Request.HttpContext.Request.Scheme);
+
+            await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Confirmação de Cadastro",
+                       $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");         
+        }
+
+        public async Task<IActionResult> ConfirmaEmailAsync(Usuario user, string codToken)
+        {
+            if (user == null || codToken == null)
+                return View("Error");
+
+            var result = await _userManager.ConfirmEmailAsync(user, codToken);
+
+            if (result.Succeeded)
+                return RedirectToAction("Index", "Home");
+            else
+                return View("Error");
         }
 
         private void AdicionaErros(IdentityResult result)
