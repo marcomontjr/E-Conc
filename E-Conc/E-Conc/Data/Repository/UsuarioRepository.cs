@@ -9,7 +9,14 @@ namespace E_Conc.Data.Repository
     public class UsuarioRepository : Repository<Usuario>, IUsuarioRepository
     {
         public UsuarioRepository(Contexto context, IHttpContextAccessor contextAccessor)
-            : base(context, contextAccessor) { }        
+            : base(context, contextAccessor) { }
+
+        public Usuario GetUsuarioById(string usuarioId)
+        {
+            return _context.Usuarios
+                    .Where(u => u.Id == usuarioId)
+                    .Single();
+        }
 
         public Usuario GetUsuarioPorEmail(LoginViewModel login)
         {

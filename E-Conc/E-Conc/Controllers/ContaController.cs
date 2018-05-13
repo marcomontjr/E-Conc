@@ -4,7 +4,6 @@ using E_Conc.Models.ViewModels;
 using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace E_Conc.Controllers
@@ -55,19 +54,21 @@ namespace E_Conc.Controllers
             var linkDeCallback = Url.Action(
                                     "ConfirmaEmailAsync", 
                                     "Conta", 
-                                    new { user = usuario, codToken = token }, 
+                                    new {  usuarioId = usuario.Id,  token }, 
                                     Request.HttpContext.Request.Scheme);
 
             await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Confirmação de Cadastro",
                        $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");         
         }
 
-        public async Task<IActionResult> ConfirmaEmailAsync(Usuario user, string codToken)
+        public async Task<IActionResult> ConfirmaEmailAsync(string usuarioId, string token)
         {
-            if (user == null || codToken == null)
+            if (usuarioId == null || token == null)
                 return View("Error");
 
-            var result = await _userManager.ConfirmEmailAsync(user, codToken);
+            var usuario = _usuarioRepo.GetUsuarioById(usuarioId);
+
+            var result = await _userManager.ConfirmEmailAsync(usuario, token);
 
             if (result.Succeeded)
                 return RedirectToAction("Index", "Home");
