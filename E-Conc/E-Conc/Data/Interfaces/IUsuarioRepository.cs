@@ -6,6 +6,7 @@ namespace E_Conc.Data.Interfaces
 {
     public interface IUsuarioRepository : IRepository<Usuario>
     {
-        Usuario GetUsuarioPorEmail(LoginViewModel login);        
+        Usuario GetUsuarioPorEmail(LoginViewModel login);
+        Usuario GetUsuarioById(string usuarioId);
     }
 }
