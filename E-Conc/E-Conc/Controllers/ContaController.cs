@@ -86,10 +86,29 @@ namespace E_Conc.Controllers
         {
             if (ModelState.IsValid)
             {
+                var usuario = await _userManager.FindByEmailAsync(modelo.Email);
 
-            }
+                if (usuario == null)
+                    SenhaOuUsuarioInvalidos();
 
+                var signInResult = await _signInManager.PasswordSignInAsync(
+                                    usuario, 
+                                    modelo.Senha, 
+                                    isPersistent: false, 
+                                    lockoutOnFailure: false);
+
+                if (signInResult.Succeeded)
+                    return RedirectToAction("Home", "Index");
+                else
+                    SenhaOuUsuarioInvalidos();
+            }            
             return View(modelo);
+        }
+
+        private IActionResult SenhaOuUsuarioInvalidos()
+        {
+            ModelState.AddModelError("", "Credenciais Inválidas");
+            return View("Login");
         }
 
         private void AdicionaErros(IdentityResult result)
