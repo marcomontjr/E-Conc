@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using E_Conc.Data.Interfaces;
 using E_Conc.Models;
-using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Http;
 
 namespace E_Conc.Data.Repository
@@ -18,10 +17,10 @@ namespace E_Conc.Data.Repository
                     .Single();
         }
 
-        public Usuario GetUsuarioPorEmail(LoginViewModel login)
+        public Usuario GetUsuarioByEmail(string email)
         {
             return _context.Usuarios
-                .Where(u => u.Email == login.Email)
+                .Where(u => u.Email == email)
                 .Single();
         }
     }
