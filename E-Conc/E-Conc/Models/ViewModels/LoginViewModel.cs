@@ -9,13 +9,5 @@ namespace E_Conc.Models.ViewModels
 
         [DataType(DataType.Password)]
         public string Senha { get; set; }
-
-        public LoginViewModel() { }
-
-        public LoginViewModel(string email, string senha)
-        {
-            Email = email;
-            Senha = senha;
-        }
     }
 }
