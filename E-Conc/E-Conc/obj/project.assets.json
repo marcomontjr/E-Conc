@@ -13132,14 +13132,10 @@
   },
   "packageFolders": {
     "C:\\Users\\Marco Jr\\.nuget\\packages\\": {},
-    "C:\\Program Files\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
-    "restoreSettings": {
-      "hideWarningsAndErrors": true
-    },
     "restore": {
       "projectUniqueName": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\E_Conc.csproj",
       "projectName": "E_Conc",
@@ -13148,13 +13144,11 @@
       "outputPath": "C:\\Users\\Marco Jr\\Desktop\\E-Conc\\E-Conc\\E-Conc\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\Marco Jr\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"

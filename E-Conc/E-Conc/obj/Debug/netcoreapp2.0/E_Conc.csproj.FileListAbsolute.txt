@@ -8,7 +8,6 @@ C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.As
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.AssemblyInfo.cs
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.dll
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.pdb
-C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.csprojResolveAssemblyReference.cache
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E_Conc.deps.json
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E_Conc.runtimeconfig.json
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E_Conc.runtimeconfig.dev.json
@@ -20,3 +19,4 @@ C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\bin\Debug\netcoreapp2.0\E_Conc.pdb
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.dll
 C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.pdb
+C:\Users\Marco Jr\Desktop\E-Conc\E-Conc\E-Conc\obj\Debug\netcoreapp2.0\E_Conc.csprojAssemblyReference.cache

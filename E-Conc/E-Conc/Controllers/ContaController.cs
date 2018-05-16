@@ -35,7 +35,7 @@ namespace E_Conc.Controllers
             if (ModelState.IsValid)
             {
                 var novoUsuario = new Usuario(registro);
-                var result = await _userManager.CreateAsync(novoUsuario, registro.Senha);  
+                var result = await _userManager.CreateAsync(novoUsuario, registro.Senha);
 
                 if (result.Succeeded)
                 {
@@ -52,13 +52,13 @@ namespace E_Conc.Controllers
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
             var linkDeCallback = Url.Action(
-                                    "ConfirmaEmailAsync", 
-                                    "Conta", 
-                                    new {  usuarioId = usuario.Id,  token }, 
+                                    "ConfirmaEmailAsync",
+                                    "Conta",
+                                    new { usuarioId = usuario.Id, token },
                                     Request.HttpContext.Request.Scheme);
 
             await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Confirmação de Cadastro",
-                       $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");         
+                       $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");
         }
 
         public async Task<IActionResult> ConfirmaEmailAsync(string usuarioId, string token)
@@ -74,6 +74,22 @@ namespace E_Conc.Controllers
                 return RedirectToAction("Index", "Home");
             else
                 return View("Error");
+        }
+
+        public async Task<IActionResult> Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+
+            }
+
+            return View(modelo);
         }
 
         private void AdicionaErros(IdentityResult result)
