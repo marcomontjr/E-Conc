@@ -4,6 +4,7 @@ using E_Conc.Data.Repository;
 using E_Conc.Models;
 using E_Conc.Services;
 using E_Conc.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -20,9 +21,8 @@ namespace E_Conc
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-        }       
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+        }   
+        
         public void ConfigureServices(IServiceCollection services)
         {
             string connectionString = Configuration
@@ -35,6 +35,16 @@ namespace E_Conc
             services.AddIdentity<Usuario, IdentityRole>()
                .AddEntityFrameworkStores<Contexto>()
                .AddDefaultTokenProviders();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = "ContinuarLogado";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromDays(7);
+                options.LoginPath = "/Conta/Login";
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
 
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));

@@ -1,6 +1,7 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
 using E_Conc.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
@@ -18,6 +19,7 @@ namespace E_Conc.Controllers
             _itemPedidoRepo = itemPedidoRepo;
         }
 
+        [Authorize]
         public IActionResult Carrossel()
         {
             var produtosDesenvolvimento = new CategoriaViewModel
@@ -45,6 +47,7 @@ namespace E_Conc.Controllers
             return View(_carrosselViewModel);
         }
 
+        [Authorize]
         public IActionResult Carrinho(int? produtoId)
         {
             if (produtoId.HasValue)
@@ -53,6 +56,7 @@ namespace E_Conc.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult Resumo(int? itemPedidoId)
         {
             if (itemPedidoId.HasValue)
@@ -61,6 +65,7 @@ namespace E_Conc.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult RemoverItemDoCarrinho(int? itemPedido)
         {
             if (itemPedido.HasValue)

@@ -9,5 +9,6 @@ namespace E_Conc.Models.ViewModels
 
         [DataType(DataType.Password)]
         public string Senha { get; set; }
+        public bool ContinuarLogado { get; set; }
     }
 }

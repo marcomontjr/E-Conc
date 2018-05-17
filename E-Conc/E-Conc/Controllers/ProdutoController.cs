@@ -1,4 +1,5 @@
 ﻿using E_Conc.Data.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
@@ -6,6 +7,8 @@ namespace E_Conc.Controllers
     public class ProdutoController : Controller
     {
         private readonly IProdutoRepository _produtoRepo;
+
+        [Authorize]
         public IActionResult Detalhes(int? produtoId)
         {
             if (produtoId != null)
@@ -14,27 +17,26 @@ namespace E_Conc.Controllers
             return RedirectToAction("Pedido", "Carrossel");
         }
 
+        [Authorize]
         public IActionResult VerTudo()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult Comprados()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult PorCategoria()
         {
             return View();
         }
 
+        [Authorize]
         public IActionResult PorOrientador()
-        {
-            return View();
-        }
-
-        public IActionResult Todos()
         {
             return View();
         }
