@@ -14,6 +14,7 @@ namespace E_Conc.Controllers
         private readonly IEmailService _emailService;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
+        private SignOutResult _signOutResult;
 
         public ContaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
             IUsuarioRepository usuarioRepo, IEmailService emailService)
@@ -103,6 +104,13 @@ namespace E_Conc.Controllers
                     SenhaOuUsuarioInvalidos();
             }            
             return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logoff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
 
         private IActionResult SenhaOuUsuarioInvalidos()
