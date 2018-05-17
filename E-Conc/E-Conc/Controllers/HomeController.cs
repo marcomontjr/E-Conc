@@ -23,17 +23,9 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult Login()
-        {
-            var login = new LoginViewModel();
-            return View(login);
-        }
-
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-
-
     }
 }

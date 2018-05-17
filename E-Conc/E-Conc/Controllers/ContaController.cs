@@ -94,11 +94,11 @@ namespace E_Conc.Controllers
                 var signInResult = await _signInManager.PasswordSignInAsync(
                                     usuario, 
                                     modelo.Senha, 
-                                    isPersistent: false, 
+                                    isPersistent: modelo.ContinuarLogado, 
                                     lockoutOnFailure: false);
 
                 if (signInResult.Succeeded)
-                    return RedirectToAction("Home", "Index");
+                    return RedirectToAction("Index", "Home");
                 else
                     SenhaOuUsuarioInvalidos();
             }            
