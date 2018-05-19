@@ -32,9 +32,14 @@ namespace E_Conc
                .AddDbContext<Contexto>(options => options
                .UseSqlServer(connectionString));
 
-            services.AddIdentity<Usuario, IdentityRole>()
-               .AddEntityFrameworkStores<Contexto>()
-               .AddDefaultTokenProviders();
+            services.AddIdentity<Usuario, IdentityRole>(options => 
+            {
+                options.Lockout.AllowedForNewUsers = true;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 3;
+            })
+            .AddEntityFrameworkStores<Contexto>()
+            .AddDefaultTokenProviders();
 
             services.ConfigureApplicationCookie(options =>
             {

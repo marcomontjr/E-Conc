@@ -96,10 +96,18 @@ namespace E_Conc.Controllers
                                     usuario, 
                                     modelo.Senha, 
                                     isPersistent: modelo.ContinuarLogado, 
-                                    lockoutOnFailure: false);
+                                    lockoutOnFailure: true);
 
                 if (signInResult.Succeeded)
                     return RedirectToAction("Index", "Home");
+                else if (signInResult.IsLockedOut)
+                {
+                    var senhaCorreta = await _userManager.CheckPasswordAsync(usuario, modelo.Senha);
+                    if (senhaCorreta)
+                        ModelState.AddModelError("", "A conta está bloqueada");
+                    else
+                        SenhaOuUsuarioInvalidos();
+                }                    
                 else
                     SenhaOuUsuarioInvalidos();
             }            
