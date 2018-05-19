@@ -1,0 +1,11 @@
+﻿<h2>Esqueci Minha Senha</h2>
+<p>Preencha o campo de email com seu endereço de email cadastrado no fórum e enviaremos a ele as intruções para você recuperar sua senha</p>
+
+<form role="form" method="post" asp-controller="Conta" asp-action="EsqueciSenha">
+    <br />
+    <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
+    <br />
+    <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+    <br />
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Enviar E-Mail</button>
+</form>
