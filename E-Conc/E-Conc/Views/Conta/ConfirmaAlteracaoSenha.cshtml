@@ -1,0 +1,22 @@
+﻿@model ConfirmacaoAlteracaoSenhaViewModel
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <section class="login-form">
+            <form role="form" method="post" asp-controller="Conta" asp-action="ConfirmaAlteracaoSenha">
+                <br />
+                <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
+                <br />
+                <input type="text" asp-for="@(Model.UsuarioId)" class="form-control input-lg" />
+                <br />
+                <input type="text" asp-for="@(Model.Token)" class="form-control input-lg" />
+                <br />
+                <input type="password" placeholder="Senha" required class="form-control input-lg"
+                       asp-for="NovaSenha" />
+                <br />
+                <button type="submit" class="btn btn-lg btn-primary btn-block">Alterar Senha</button>
+            </form>
+        </section>
+    </div>
+</div>

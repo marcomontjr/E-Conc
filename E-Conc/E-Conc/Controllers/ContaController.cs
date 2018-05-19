@@ -14,7 +14,6 @@ namespace E_Conc.Controllers
         private readonly IEmailService _emailService;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
-        private SignOutResult _signOutResult;
 
         public ContaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
             IUsuarioRepository usuarioRepo, IEmailService emailService)
@@ -93,13 +92,21 @@ namespace E_Conc.Controllers
                     SenhaOuUsuarioInvalidos();
 
                 var signInResult = await _signInManager.PasswordSignInAsync(
-                                    usuario, 
-                                    modelo.Senha, 
-                                    isPersistent: modelo.ContinuarLogado, 
+                                    usuario,
+                                    modelo.Senha,
+                                    isPersistent: modelo.ContinuarLogado,
                                     lockoutOnFailure: true);
 
                 if (signInResult.Succeeded)
+                {
+                    if (!usuario.EmailConfirmed)
+                    {
+                        await _signInManager.SignOutAsync();
+                        return View("AguardandoConfirmacao");
+                    }
                     return RedirectToAction("Index", "Home");
+                }
+
                 else if (signInResult.IsLockedOut)
                 {
                     var senhaCorreta = await _userManager.CheckPasswordAsync(usuario, modelo.Senha);
@@ -107,11 +114,67 @@ namespace E_Conc.Controllers
                         ModelState.AddModelError("", "A conta está bloqueada");
                     else
                         SenhaOuUsuarioInvalidos();
-                }                    
+                }
                 else
                     SenhaOuUsuarioInvalidos();
-            }            
+            }
             return View(modelo);
+        }
+
+        public IActionResult EsqueciSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EsqueciSenha(string email)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = await _userManager.FindByEmailAsync(email);
+
+                if (usuario != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(usuario);
+
+                    var linkDeCallback = Url.Action(
+                                    "ConfirmaAlteracaoSenha",
+                                    "Conta",
+                                    new { usuarioId = usuario.Id, token },
+                                    Request.HttpContext.Request.Scheme);
+
+                    await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Alteração de Senha",
+                               $"Clique aqui {linkDeCallback} para alterar sua senha!");
+                }
+                return View("EmailAlteracaoSenhaEnviado");
+            }
+            return View();
+        }
+
+        public IActionResult ConfirmaAlteracaoSenha(string usuarioId, string token)
+        {            
+            var modelo = new ConfirmacaoAlteracaoSenhaViewModel(usuarioId, token);
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmaAlteracaoSenha(ConfirmacaoAlteracaoSenhaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = _usuarioRepo.GetUsuarioById(modelo.UsuarioId);
+                var result = 
+                    await _userManager.ResetPasswordAsync(
+                    usuario, 
+                    modelo.Token, 
+                    modelo.NovaSenha);
+
+                if (result.Succeeded)                
+                    return RedirectToAction("Index", "Home");                
+
+                AdicionaErros(result);
+            }
+            return View();
         }
 
         [HttpPost]
