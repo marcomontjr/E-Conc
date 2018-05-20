@@ -6,10 +6,7 @@
         public string Token { get; set; }
         public string NovaSenha { get; set; }
 
-        public ConfirmacaoAlteracaoSenhaViewModel()
-        {
-
-        }
+        public ConfirmacaoAlteracaoSenhaViewModel() { }
 
         public ConfirmacaoAlteracaoSenhaViewModel(string usuarioId, string token, string novaSenha) 
             : this(usuarioId, token)
