@@ -51,6 +51,13 @@ namespace E_Conc
                 options.SlidingExpiration = true;
             });
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("RequireAdministratorRole", policy => policy.RequireRole("Administrador"));
+                options.AddPolicy("RequireOrientadorRole", policy => policy.RequireRole("Orientador"));
+                options.AddPolicy("RequireAlunoRole", policy => policy.RequireRole("Aluno"));
+            });
+
             services.AddTransient<IEmailService, EmailService>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
 
