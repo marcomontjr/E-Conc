@@ -18,8 +18,7 @@ namespace E_Conc.Data
 
             builder
                 .Property(u => u.NomeCompleto)
-                .HasMaxLength(50)
-                .IsRequired();            
+                .HasMaxLength(50);            
 
             builder
                 .Property(u => u.Email)
@@ -27,8 +26,7 @@ namespace E_Conc.Data
                 .IsRequired();
 
             builder
-                .Property(u => u.Instituicao)
-                .IsRequired();
+                .Property(u => u.Instituicao);
 
             builder
                .Property(u => u.InstituicaoSigla);
