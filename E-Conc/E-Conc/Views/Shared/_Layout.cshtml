@@ -33,7 +33,7 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
                     <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-                    @if (User.Identity.IsAuthenticated)
+                    @*@if (User.Identity.IsAuthenticated)
                     {
                         <li><p class="navbar-text">Olá, @User.Identity.Name</p></li>
                         <li>
@@ -45,7 +45,7 @@
                     else
                     {
                         <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
-                    }
+                    }*@
                 </ul>
             </div>
         </div>

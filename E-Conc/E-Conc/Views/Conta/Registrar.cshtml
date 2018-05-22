@@ -9,9 +9,6 @@
         <div asp-validation-summary="All"></div>
         <br /><br />
         <br /><br />
-        <label>Tipo do Usuário</label>
-        <select asp-for="TipoUsuario" asp-items="@Html.GetEnumSelectList<TipoUsuario>()"></select>
-        <br />
         <input type="email" placeholder="Email" required class="form-control input-lg"
                asp-for="Email" />
         <br />
