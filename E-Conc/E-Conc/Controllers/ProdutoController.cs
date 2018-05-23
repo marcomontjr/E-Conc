@@ -8,13 +8,26 @@ namespace E_Conc.Controllers
     {
         private readonly IProdutoRepository _produtoRepo;
 
+        public ProdutoController(IProdutoRepository produtoRepo)
+        {
+            _produtoRepo = produtoRepo;
+        }
+
         [Authorize]
         public IActionResult Detalhes(int? produtoId)
         {
             if (produtoId != null)
-                return View(_produtoRepo.GetProdutoById(produtoId));
+            {
+                var teste = _produtoRepo.GetProdutoById(produtoId);
+                return View(teste);
+            }
+            else
+            {
+                return RedirectToAction("Pedido", "Carrossel");
+            }
+                
 
-            return RedirectToAction("Pedido", "Carrossel");
+            
         }
 
         [Authorize]

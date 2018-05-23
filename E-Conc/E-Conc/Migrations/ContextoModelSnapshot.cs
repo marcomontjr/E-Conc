@@ -106,8 +106,7 @@ namespace E_Conc.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("Instituicao")
-                        .IsRequired();
+                    b.Property<string>("Instituicao");
 
                     b.Property<string>("InstituicaoSigla");
 
@@ -116,7 +115,6 @@ namespace E_Conc.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NomeCompleto")
-                        .IsRequired()
                         .HasMaxLength(50);
 
                     b.Property<string>("NormalizedEmail")
@@ -136,8 +134,6 @@ namespace E_Conc.Migrations
                         .HasMaxLength(25);
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<int>("TipoUsuario");
 
                     b.Property<bool>("TwoFactorEnabled");
 

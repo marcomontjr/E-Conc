@@ -22,6 +22,21 @@ namespace E_Conc.Roles
                 if (!roleExist)                
                     roleResult = await RoleManager.CreateAsync(new IdentityRole(roleName));                
             }
+
+            var admin = new Usuario
+            {
+                UserName = Configuration.GetSection("UserSettings")["UserEmail"],
+                Email = Configuration.GetSection("UserSettings")["UserEmail"]                 
+            };
+
+            string adminPassword = Configuration.GetSection("UserSettings")["UserPassword"];
+
+            if (admin != null)
+            {
+                var createAdmin = await UserManager.CreateAsync(admin, adminPassword);
+                if (createAdmin.Succeeded)                                    
+                    await UserManager.AddToRoleAsync(admin, "Admin");                
+            }
         }
     }
 }
