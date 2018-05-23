@@ -33,19 +33,18 @@
                     <li><a asp-controller="Home" asp-action="Index">Home</a></li>
                     <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
                     <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-                    @*@if (User.Identity.IsAuthenticated)
+                    @if (User.Identity.IsAuthenticated)
                     {
-                        <li><p class="navbar-text">Olá, @User.Identity.Name</p></li>
-                        <li>
-                            <form method="post" asp-controller="Conta" asp-action="Logoff">
-                                <input type="submit" value="Logoff">
-                            </form>
-                        </li>
+                        var username = @User.Identity.Name;
+                    <li>
+                        <a asp-controller="Conta" asp-action="Logoff">Logoff</a>                        
+                    </li>
+                        <li><p class="navbar-text">Olá, @(username.Split('@')[0])</p></li>
                     }
                     else
                     {
                         <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
-                    }*@
+                    }
                 </ul>
             </div>
         </div>
