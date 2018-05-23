@@ -176,8 +176,7 @@ namespace E_Conc.Controllers
             }
             return View();
         }
-
-        [HttpPost]
+        
         public async Task<IActionResult> Logoff()
         {
             await _signInManager.SignOutAsync();

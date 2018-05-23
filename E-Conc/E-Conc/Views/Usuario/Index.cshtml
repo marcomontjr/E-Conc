@@ -1,0 +1,41 @@
+﻿@model IEnumerable<E_Conc.Models.ViewModels.UsuarioViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<br/>
+<h2>Usuários</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+           <th>
+               @Html.DisplayNameFor(model => model.NomeCompleto)
+           </th>
+           <th>
+               @Html.DisplayNameFor(model => model.Email)
+           </th>
+           <th>
+               @Html.DisplayNameFor(model => model.UserName)
+           </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Editar Funções", "EditarFuncoes", new { id=item.Id })
+            </td>
+        </tr>}
+    </tbody>
+</table>
