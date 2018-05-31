@@ -76,7 +76,7 @@ namespace E_Conc.Controllers
                 return View("Error");
         }
 
-        public async Task<IActionResult> Login()
+        public IActionResult Login()
         {
             return View();
         }
