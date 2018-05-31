@@ -1,0 +1,30 @@
+﻿@model ContaMinhaContaViewModel
+
+@{
+    ViewData["Title"] = "MinhaConta";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Minha Conta</h2>
+
+<form method="post" asp-controller="Conta" asp-action="MinhaConta">
+    <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
+           asp-for="NomeCompleto" />
+    <br />
+    <input type="text" placeholder="Número de Celular" required class="form-control input-lg"
+           asp-for="NumeroDeCelular" />
+    <br />
+    @if (Model.NumeroCelularConfirmado)
+    {
+        <input type="checkbox" placeholder="Habilitar Autenticação de Dois Fatoes" required class="form-control input-lg"
+               asp-for="HabilitarAutenticacaoDeDoisFatores" />
+    }
+    else
+    {
+        <p>
+            Informe e Confirme seu número de Celular para habilitar a autenticação
+            com 2 fatores!.
+        </p>
+    }
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar</button>
+</form>

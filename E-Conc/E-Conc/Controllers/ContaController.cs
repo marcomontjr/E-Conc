@@ -189,6 +189,29 @@ namespace E_Conc.Controllers
             return View("Login");
         }
 
+        public async Task<IActionResult> MinhaConta()
+        {            
+            var user =  GetCurrentUserAsync();
+            var usuario = await _userManager.FindByIdAsync(user?.Id.ToString());
+
+            var modelo = new ContaMinhaContaViewModel(
+                    usuario.NomeCompleto, 
+                    usuario.PhoneNumber, 
+                    usuario.TwoFactorEnabled,
+                    usuario.PhoneNumberConfirmed
+                );
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
+        {
+            return View();
+        }
+
+        private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
         private void AdicionaErros(IdentityResult result)
         {
             foreach (var error in result.Errors)            

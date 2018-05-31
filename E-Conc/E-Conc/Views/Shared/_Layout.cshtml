@@ -39,7 +39,11 @@
                     <li>
                         <a asp-controller="Conta" asp-action="Logoff">Logoff</a>                        
                     </li>
-                        <li><p class="navbar-text">Olá, @(username.Split('@')[0])</p></li>
+                        <li>
+                            <p class="navbar-text">
+                                Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
+                            </p>
+                        </li>
                     }
                     else
                     {
