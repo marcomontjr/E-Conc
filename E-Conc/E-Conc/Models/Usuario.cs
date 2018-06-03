@@ -23,5 +23,13 @@ namespace E_Conc.Models
             UserName = modelo.Email;
             Email = modelo.Email;
         }
+
+        public Usuario(ContaMinhaContaViewModel modelo)
+        {
+            NomeCompleto = modelo.NomeCompleto;
+            PhoneNumber = modelo.NumeroDeCelular;
+            TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
+            PhoneNumberConfirmed = modelo.NumeroCelularConfirmado;
+        }
     }
 }

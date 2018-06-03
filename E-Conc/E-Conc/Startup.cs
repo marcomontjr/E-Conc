@@ -52,8 +52,10 @@ namespace E_Conc
             });
 
             services.AddTransient<IEmailService, EmailService>();
+            services.AddTransient<ISmsService, SmsService>();
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
-
+            services.Configure<SmsSettings>(Configuration.GetSection("SmsSettings"));
+       
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();
             services.AddTransient<ICursoRepository, CursoRepository>();

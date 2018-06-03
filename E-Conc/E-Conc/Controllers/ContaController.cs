@@ -12,16 +12,18 @@ namespace E_Conc.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepo;
         private readonly IEmailService _emailService;
+        private readonly ISmsService _smsService;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
 
         public ContaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
-            IUsuarioRepository usuarioRepo, IEmailService emailService)
+            IUsuarioRepository usuarioRepo, IEmailService emailService, ISmsService smsService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _usuarioRepo = usuarioRepo;
             _emailService = emailService;
+            _smsService = smsService;
         }
 
         public IActionResult Registrar()
@@ -207,6 +209,56 @@ namespace E_Conc.Controllers
         [HttpPost]
         public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
         {
+            if (ModelState.IsValid)
+            {
+                var usuario = await GetCurrentUserAsync();
+
+                var usuarioAtualizado = new Usuario(modelo);
+
+                if (!usuarioAtualizado.PhoneNumberConfirmed)                
+                    await EnviarSmsConfirmacaoAsync(usuarioAtualizado);
+
+                var resultadoUpdate = await _userManager.UpdateAsync(usuarioAtualizado);
+
+                if (resultadoUpdate.Succeeded)
+                    return RedirectToAction("Index", "Home");
+
+                AdicionaErros(resultadoUpdate);                
+            }
+            return View();
+        }
+
+        public async Task EnviarSmsConfirmacaoAsync(Usuario usuario)
+        {
+            var token = 
+                await _userManager.GenerateChangePhoneNumberTokenAsync(
+                    usuario, usuario.PhoneNumber);
+
+            await _smsService.SendSmsAsync
+                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
+        }
+
+        public IActionResult VerificacaoCodigoCelular()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerificacaoCodigoCelular(string token)
+        {
+            var usuario = await GetCurrentUserAsync();
+
+            var resultado = 
+                await _userManager.ChangePhoneNumberAsync(
+                    usuario, 
+                    usuario.PhoneNumber, 
+                    token);
+
+            if (resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            AdicionaErros(resultado);
+
             return View();
         }
 
