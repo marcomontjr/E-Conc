@@ -16,8 +16,8 @@
     <br />
     @if (Model.NumeroCelularConfirmado)
     {
-        <input type="checkbox" placeholder="Habilitar Autenticação de Dois Fatoes" required class="form-control input-lg"
-               asp-for="HabilitarAutenticacaoDeDoisFatores" />
+        <input type="checkbox" class="form-check-input" asp-for="HabilitarAutenticacaoDeDoisFatores" />
+        <label class="form-check-label">Habilitar Autenticação de Dois Fatores</label>
     }
     else
     {
@@ -25,6 +25,8 @@
             Informe e Confirme seu número de Celular para habilitar a autenticação
             com 2 fatores!.
         </p>
+
+        <a asp-action="VerificacaoCodigoCelular">Clique Aqui para verificar o token recebido!</a>
     }
     <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar</button>
 </form>
