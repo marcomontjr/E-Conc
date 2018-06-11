@@ -225,6 +225,7 @@ namespace E_Conc.Controllers
 
                 usuario.NomeCompleto = modelo.NomeCompleto;
                 usuario.PhoneNumber = modelo.NumeroDeCelular;
+                usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
 
                 if (!usuario.PhoneNumberConfirmed)                
                     await EnviarSmsConfirmacaoAsync(usuario);
