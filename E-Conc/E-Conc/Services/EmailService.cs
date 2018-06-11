@@ -40,9 +40,12 @@ namespace E_Conc.Services
                 mail.IsBodyHtml = true;
                 mail.Priority = MailPriority.High;
 
-                using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, _emailSettings.PrimaryPort))
+                using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain, 
+                    _emailSettings.PrimaryPort))
                 {
-                    smtp.Credentials = new NetworkCredential(_emailSettings.UsernameEmail, _emailSettings.UsernamePassword);
+                    smtp.Credentials = new NetworkCredential(_emailSettings.UsernameEmail, 
+                        _emailSettings.UsernamePassword);
+
                     smtp.EnableSsl = true;
                     await smtp.SendMailAsync(mail);
                 }
