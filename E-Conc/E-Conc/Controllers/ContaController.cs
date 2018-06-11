@@ -2,8 +2,10 @@
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using E_Conc.Services.Interfaces;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace E_Conc.Controllers
@@ -12,16 +14,21 @@ namespace E_Conc.Controllers
     {
         private readonly IUsuarioRepository _usuarioRepo;
         private readonly IEmailService _emailService;
+        private readonly ISmsService _smsService;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
+        private IHttpContextAccessor _httpContextAccessor;
 
         public ContaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
-            IUsuarioRepository usuarioRepo, IEmailService emailService)
+            IUsuarioRepository usuarioRepo, IEmailService emailService, ISmsService smsService,
+            IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _usuarioRepo = usuarioRepo;
             _emailService = emailService;
+            _smsService = smsService;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public IActionResult Registrar()
@@ -190,9 +197,11 @@ namespace E_Conc.Controllers
         }
 
         public async Task<IActionResult> MinhaConta()
-        {            
-            var user =  GetCurrentUserAsync();
-            var usuario = await _userManager.FindByIdAsync(user?.Id.ToString());
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                ClaimTypes.NameIdentifier).Value;
+
+            var usuario = await _userManager.FindByIdAsync(userId);
 
             var modelo = new ContaMinhaContaViewModel(
                     usuario.NomeCompleto, 
@@ -207,10 +216,64 @@ namespace E_Conc.Controllers
         [HttpPost]
         public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
         {
+            if (ModelState.IsValid)
+            {
+                var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                ClaimTypes.NameIdentifier).Value;
+
+                var usuario = await _userManager.FindByIdAsync(userId);
+
+                usuario.NomeCompleto = modelo.NomeCompleto;
+                usuario.PhoneNumber = modelo.NumeroDeCelular;
+
+                if (!usuario.PhoneNumberConfirmed)                
+                    await EnviarSmsConfirmacaoAsync(usuario);
+
+                var resultadoUpdate = await _userManager.UpdateAsync(usuario);
+
+                if (resultadoUpdate.Succeeded)
+                    return RedirectToAction("Index", "Home");
+
+                AdicionaErros(resultadoUpdate);                
+            }
             return View();
         }
 
-        private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+        public async Task EnviarSmsConfirmacaoAsync(Usuario usuario)
+        {
+            var token = 
+                await _userManager.GenerateChangePhoneNumberTokenAsync(
+                    usuario, usuario.PhoneNumber);
+
+            await _smsService.SendSmsAsync
+                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
+        }
+
+        public IActionResult VerificacaoCodigoCelular()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerificacaoCodigoCelular(string token)
+        {
+            var usuario = await GetCurrentUserAsync();
+
+            var resultado = 
+                await _userManager.ChangePhoneNumberAsync(
+                    usuario, 
+                    usuario.PhoneNumber, 
+                    token);
+
+            if (resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            AdicionaErros(resultado);
+
+            return View();
+        }
+
+        private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
         private void AdicionaErros(IdentityResult result)
         {

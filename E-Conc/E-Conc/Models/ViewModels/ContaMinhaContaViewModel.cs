@@ -7,6 +7,8 @@
         public bool HabilitarAutenticacaoDeDoisFatores { get; set; }
         public bool NumeroCelularConfirmado { get; set; }
 
+        public ContaMinhaContaViewModel() { }
+
         public ContaMinhaContaViewModel(string nomeCompleto, string numeroDeCelular, 
             bool habilitarAutenticacaoDeDoisFatores, bool numeroCelularConfirmado)
         {
