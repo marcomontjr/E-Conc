@@ -5,10 +5,10 @@ namespace E_Conc.Models
 {
     public class Usuario : IdentityUser
     {
-        public string Ra { get; private set; }
-        public string NomeCompleto { get; private set; }
-        public string Instituicao { get; private set; }
-        public string InstituicaoSigla { get; private set; }
+        public string Ra { get; set; }
+        public string NomeCompleto { get; set; }
+        public string Instituicao { get; set; }
+        public string InstituicaoSigla { get; set; }
 
         public Usuario() { }
 
@@ -22,14 +22,6 @@ namespace E_Conc.Models
             InstituicaoSigla = modelo.InstituicaoSigla;
             UserName = modelo.Email;
             Email = modelo.Email;
-        }
-
-        public Usuario(ContaMinhaContaViewModel modelo)
-        {
-            NomeCompleto = modelo.NomeCompleto;
-            PhoneNumber = modelo.NumeroDeCelular;
-            TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
-            PhoneNumberConfirmed = modelo.NumeroCelularConfirmado;
         }
     }
 }

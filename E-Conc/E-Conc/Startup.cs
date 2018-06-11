@@ -7,6 +7,7 @@ using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -51,8 +52,11 @@ namespace E_Conc
                 options.SlidingExpiration = true;
             });
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             services.AddTransient<IEmailService, EmailService>();
             services.AddTransient<ISmsService, SmsService>();
+
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.Configure<SmsSettings>(Configuration.GetSection("SmsSettings"));
        

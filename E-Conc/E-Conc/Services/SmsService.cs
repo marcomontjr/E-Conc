@@ -22,7 +22,7 @@ namespace E_Conc.Services
             TwilioClient.Init(_smsSettings.SID, _smsSettings.auth_token);
 
             await MessageResource.CreateAsync(
-                new PhoneNumber(number),
+                to: new PhoneNumber(number),
                 from: _smsSettings.from_number,
                 body: message
                 );
