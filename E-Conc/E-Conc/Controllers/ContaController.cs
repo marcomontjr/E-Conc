@@ -109,10 +109,13 @@ namespace E_Conc.Controllers
                     if (!usuario.EmailConfirmed)
                     {
                         await _signInManager.SignOutAsync();
-                        return View("AguardandoConfirmacao");
+                            return View("AguardandoConfirmacao");
                     }
                     return RedirectToAction("Index", "Home");
                 }
+
+                if (signInResult.RequiresTwoFactor)
+                    return RedirectToAction("VerificacaoDoisFatores");
 
                 else if (signInResult.IsLockedOut)
                 {
@@ -126,6 +129,11 @@ namespace E_Conc.Controllers
                     SenhaOuUsuarioInvalidos();
             }
             return View(modelo);
+        }
+
+        public IActionResult VerificacaoDoisFatores()
+        {
+            return View();
         }
 
         public IActionResult EsqueciSenha()
@@ -224,11 +232,12 @@ namespace E_Conc.Controllers
                 var usuario = await _userManager.FindByIdAsync(userId);
 
                 usuario.NomeCompleto = modelo.NomeCompleto;
-                usuario.PhoneNumber = modelo.NumeroDeCelular;
-                usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
+                usuario.PhoneNumber = modelo.NumeroDeCelular;               
 
                 if (!usuario.PhoneNumberConfirmed)                
                     await EnviarSmsConfirmacaoAsync(usuario);
+                else
+                    usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
 
                 var resultadoUpdate = await _userManager.UpdateAsync(usuario);
 
