@@ -40,7 +40,8 @@ namespace E_Conc
                 options.Lockout.MaxFailedAccessAttempts = 3;
             })
             .AddEntityFrameworkStores<Contexto>()
-            .AddDefaultTokenProviders();
+            .AddDefaultTokenProviders()
+            .AddTokenProvider<DataProtectorTokenProvider<Usuario>>("SMS");
 
             services.ConfigureApplicationCookie(options =>
             {

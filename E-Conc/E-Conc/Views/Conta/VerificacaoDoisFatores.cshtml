@@ -1,0 +1,15 @@
+﻿@model Usuario
+@{
+    ViewData["Title"] = "VerificacaoDoisFatores";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Informe o Código Recebido</h2>
+
+<form method="post" asp-controller="Conta" asp-action="VerificacaoDoisFatores">
+    <label>Código de Sms:</label>
+    <input type="text" name="token">
+    @Html.HiddenFor(u => u.Email)
+
+    <input type="submit" value="Enviar!" class="btn btn-default">
+</form>
