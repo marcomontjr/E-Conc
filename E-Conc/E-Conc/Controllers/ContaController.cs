@@ -115,7 +115,7 @@ namespace E_Conc.Controllers
                 }
 
                 if (signInResult.RequiresTwoFactor)
-                    return RedirectToAction("VerificacaoDoisFatores");
+                    return RedirectToAction("VerificacaoDoisFatores", usuario);
 
                 else if (signInResult.IsLockedOut)
                 {
@@ -131,9 +131,31 @@ namespace E_Conc.Controllers
             return View(modelo);
         }
 
-        public IActionResult VerificacaoDoisFatores()
+        public async Task<IActionResult> VerificacaoDoisFatores(Usuario usuario)
         {
+            var token = 
+                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");            
+            
+            await _smsService.SendSmsAsync
+                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
+
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> VerificacaoDoisFatores(ContaVerificacaoDoisFatoresViewModel modelo)
+        {
+            var resultado = 
+                await _signInManager.TwoFactorSignInAsync(
+                        "SMS",
+                        modelo.Token, 
+                        isPersistent: modelo.ContinuarLogado, 
+                        rememberClient: modelo.LembrarDesteComputador);              
+
+            if(resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            return View("Error");
         }
 
         public IActionResult EsqueciSenha()
