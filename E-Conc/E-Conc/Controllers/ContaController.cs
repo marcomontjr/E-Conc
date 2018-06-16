@@ -109,7 +109,7 @@ namespace E_Conc.Controllers
                     if (!usuario.EmailConfirmed)
                     {
                         await _signInManager.SignOutAsync();
-                            return View("AguardandoConfirmacao");
+                        return View("AguardandoConfirmacao");
                     }
                     return RedirectToAction("Index", "Home");
                 }
@@ -133,9 +133,9 @@ namespace E_Conc.Controllers
 
         public async Task<IActionResult> VerificacaoDoisFatores(Usuario usuario)
         {
-            var token = 
-                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");            
-            
+            var token =
+                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");
+
             await _smsService.SendSmsAsync
                 (usuario.PhoneNumber, $"Token de Confirmação: {token}");
 
@@ -145,14 +145,14 @@ namespace E_Conc.Controllers
         [HttpPost]
         public async Task<IActionResult> VerificacaoDoisFatores(ContaVerificacaoDoisFatoresViewModel modelo)
         {
-            var resultado = 
+            var resultado =
                 await _signInManager.TwoFactorSignInAsync(
                         "SMS",
-                        modelo.Token, 
-                        isPersistent: modelo.ContinuarLogado, 
-                        rememberClient: modelo.LembrarDesteComputador);              
+                        modelo.Token,
+                        isPersistent: modelo.ContinuarLogado,
+                        rememberClient: modelo.LembrarDesteComputador);
 
-            if(resultado.Succeeded)
+            if (resultado.Succeeded)
                 return RedirectToAction("Index", "Home");
 
             return View("Error");
@@ -189,7 +189,7 @@ namespace E_Conc.Controllers
         }
 
         public IActionResult ConfirmaAlteracaoSenha(string usuarioId, string token)
-        {            
+        {
             var modelo = new ConfirmacaoAlteracaoSenhaViewModel(usuarioId, token);
             return View(modelo);
         }
@@ -200,20 +200,20 @@ namespace E_Conc.Controllers
             if (ModelState.IsValid)
             {
                 var usuario = _usuarioRepo.GetUsuarioById(modelo.UsuarioId);
-                var result = 
+                var result =
                     await _userManager.ResetPasswordAsync(
-                    usuario, 
-                    modelo.Token, 
+                    usuario,
+                    modelo.Token,
                     modelo.NovaSenha);
 
-                if (result.Succeeded)                
-                    return RedirectToAction("Index", "Home");                
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
 
                 AdicionaErros(result);
             }
             return View();
         }
-        
+
         public async Task<IActionResult> Logoff()
         {
             await _signInManager.SignOutAsync();
@@ -227,9 +227,22 @@ namespace E_Conc.Controllers
             {
                 if (!cookie.Equals("ContinuarLogado"))
                     Response.Cookies.Delete(cookie);
-            }     
+            }
 
-            return RedirectToAction("MinhaConta");            
+            return RedirectToAction("MinhaConta");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeslogarDeTodosOsLocais()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                 ClaimTypes.NameIdentifier).Value;
+
+            var usuario = await _userManager.FindByIdAsync(userId);
+
+            await _userManager.UpdateSecurityStampAsync(usuario);
+
+            return RedirectToAction("Index", "Home");
         }
 
         private IActionResult SenhaOuUsuarioInvalidos()

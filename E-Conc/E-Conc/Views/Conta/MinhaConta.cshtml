@@ -10,6 +10,11 @@
 <form method="post" asp-controller="Conta" asp-action="EsquecerNavegador">
     <button type="submit" class="btn btn-lg btn-primary btn-block">Esquecer Este Navegador</button>
 </form>
+
+<form method="post" asp-controller="Conta" asp-action="DeslogarDeTodosOsLocais">
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Deslogar de Todos os Locais</button>
+</form>
+
 <form method="post" asp-controller="Conta" asp-action="MinhaConta">
     <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
            asp-for="NomeCompleto" />
