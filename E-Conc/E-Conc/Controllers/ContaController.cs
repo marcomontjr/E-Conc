@@ -220,6 +220,18 @@ namespace E_Conc.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        [HttpPost]
+        public IActionResult EsquecerNavegador()
+        {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                if (!cookie.Equals("ContinuarLogado"))
+                    Response.Cookies.Delete(cookie);
+            }     
+
+            return RedirectToAction("MinhaConta");            
+        }
+
         private IActionResult SenhaOuUsuarioInvalidos()
         {
             ModelState.AddModelError("", "Credenciais Inválidas");

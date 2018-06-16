@@ -7,6 +7,9 @@
 
 <h2>Minha Conta</h2>
 
+<form method="post" asp-controller="Conta" asp-action="EsquecerNavegador">
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Esquecer Este Navegador</button>
+</form>
 <form method="post" asp-controller="Conta" asp-action="MinhaConta">
     <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
            asp-for="NomeCompleto" />
