@@ -6,6 +6,7 @@ using E_Conc.Services;
 using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -37,21 +38,25 @@ namespace E_Conc
             {
                 options.Lockout.AllowedForNewUsers = true;
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
-                options.Lockout.MaxFailedAccessAttempts = 3;
+                options.Lockout.MaxFailedAccessAttempts = 3;                
             })
             .AddEntityFrameworkStores<Contexto>()
             .AddDefaultTokenProviders()
             .AddTokenProvider<PhoneNumberTokenProvider<Usuario>>("SMS");
-           
+            
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "ContinuarLogado";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromDays(7);
                 options.LoginPath = "/Conta/Login";
-                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-                options.SlidingExpiration = true;
-            });            
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;                
+                options.SlidingExpiration = true;                
+            });
+
+            services.Configure<SecurityStampValidatorOptions>(options =>
+                options.ValidationInterval = TimeSpan.FromSeconds(0)
+            );            
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
