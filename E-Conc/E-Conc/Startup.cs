@@ -41,8 +41,8 @@ namespace E_Conc
             })
             .AddEntityFrameworkStores<Contexto>()
             .AddDefaultTokenProviders()
-            .AddTokenProvider<DataProtectorTokenProvider<Usuario>>("SMS");
-
+            .AddTokenProvider<PhoneNumberTokenProvider<Usuario>>("SMS");
+           
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "ContinuarLogado";
@@ -51,7 +51,7 @@ namespace E_Conc
                 options.LoginPath = "/Conta/Login";
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
-            });
+            });            
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

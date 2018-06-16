@@ -132,10 +132,10 @@ namespace E_Conc.Controllers
         }
 
         public async Task<IActionResult> VerificacaoDoisFatores(Usuario usuario)
-        {            
+        {
             var token = 
-                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");
-
+                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");            
+            
             await _smsService.SendSmsAsync
                 (usuario.PhoneNumber, $"Token de Confirmação: {token}");
 
@@ -143,17 +143,19 @@ namespace E_Conc.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> VerificacaoDoisFatores(string token, string email)
+        public async Task<IActionResult> VerificacaoDoisFatores(ContaVerificacaoDoisFatoresViewModel modelo)
         {
-            var usuario = await _userManager.FindByEmailAsync(email);
+            var resultado = 
+                await _signInManager.TwoFactorSignInAsync(
+                        "SMS",
+                        modelo.Token, 
+                        isPersistent: modelo.ContinuarLogado, 
+                        rememberClient: modelo.LembrarDesteComputador);              
 
-            var resultado = _userManager.RedeemTwoFactorRecoveryCodeAsync(usuario, token);
+            if(resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
 
-            if(resultado.IsCompletedSuccessfully)
-
-            return RedirectToAction("Index", "Home");
-
-            return View();
+            return View("Error");
         }
 
         public IActionResult EsqueciSenha()

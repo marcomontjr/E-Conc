@@ -1,4 +1,4 @@
-﻿@model Usuario
+﻿@model ContaVerificacaoDoisFatoresViewModel
 @{
     ViewData["Title"] = "VerificacaoDoisFatores";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,8 +8,13 @@
 
 <form method="post" asp-controller="Conta" asp-action="VerificacaoDoisFatores">
     <label>Código de Sms:</label>
-    <input type="text" name="token">
-    @Html.HiddenFor(u => u.Email)
+    <input type="text" name="token" required asp-for="Token">
+
+    <input type="checkbox" class="form-check-input" asp-for="ContinuarLogado">
+    <label class="form-check-label">Continuar Logado</label>
+
+    <input type="checkbox" class="form-check-input" asp-for="LembrarDesteComputador">
+    <label class="form-check-label">Lembrar Deste Computador</label>
 
     <input type="submit" value="Enviar!" class="btn btn-default">
 </form>
