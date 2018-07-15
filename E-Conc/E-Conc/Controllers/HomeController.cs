@@ -1,11 +1,19 @@
 ﻿using E_Conc.Models.ViewModels;
+using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace E_Conc.Controllers
 {
     public class HomeController : Controller
     {
+
+        private readonly IEmailService _emailService;
+
+        public HomeController(IEmailService emailService) => _emailService = emailService;
+
         public IActionResult Index()
         {
             return View();
@@ -16,11 +24,28 @@ namespace E_Conc.Controllers
             ViewData["Message"] = "E-Conc";
 
             return View();
-        }
+        }        
 
         public IActionResult Contato()
         {
             return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Contato(ContatoViewModel userData)
+        {
+            if (ModelState.IsValid)
+                await EnviarEmailSuporte(userData);
+            else
+                Error();
+
+            return null;
+        }
+
+        private async Task EnviarEmailSuporte(ContatoViewModel userData)
+        {
+            await _emailService.SendEmailSuporte(userData.Name, userData.Email,
+                userData.Subject, userData.Message);
         }
 
         public IActionResult Error()
