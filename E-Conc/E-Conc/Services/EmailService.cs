@@ -18,17 +18,11 @@ namespace E_Conc.Services
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
-            ExecuteEmailToUser(email, subject, message).Wait();
+            ExecuteEmail(email, subject, message).Wait();
             return Task.FromResult(0);
         }
 
-        public Task SendEmailSuporte(string name, string email, string subject, string message)
-        {
-            ExecuteEmailSuporte(name, email, subject, message).Wait();
-            return Task.FromResult(0);
-        }
-
-        public async Task ExecuteEmailToUser(string email, string subject, string message)
+        public async Task ExecuteEmail(string email, string subject, string message)
         {
             try
             {
@@ -60,36 +54,6 @@ namespace E_Conc.Services
             {
                 throw new Exception(ex.ToString());
             }  
-        }
-
-        public async Task ExecuteEmailSuporte(string name, string email, string subject, string message)
-        {
-            try
-            {
-                string toEmail = "econcrelacionamento@gmail.com";
-
-                MailMessage mail = new MailMessage()
-                {
-                    From = new MailAddress(email)
-                };
-                mail.To.Add(new MailAddress(toEmail));
-
-                mail.Subject = "Suporte - " + subject;
-                mail.Body = message;
-                mail.IsBodyHtml = true;
-                mail.Priority = MailPriority.High;
-
-                using (SmtpClient smtp = new SmtpClient(_emailSettings.PrimaryDomain,
-                    _emailSettings.PrimaryPort))
-                {
-                    smtp.EnableSsl = true;
-                    await smtp.SendMailAsync(mail);
-                }
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.ToString());
-            }
         }
     }
 }   

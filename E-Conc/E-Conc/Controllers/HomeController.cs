@@ -35,17 +35,11 @@ namespace E_Conc.Controllers
         public async Task<IActionResult> Contato(ContatoViewModel userData)
         {
             if (ModelState.IsValid)
-                await EnviarEmailSuporte(userData);
+                //await EnviarEmailSuporte(userData);
             else
                 Error();
 
             return null;
-        }
-
-        private async Task EnviarEmailSuporte(ContatoViewModel userData)
-        {
-            await _emailService.SendEmailSuporte(userData.Name, userData.Email,
-                userData.Subject, userData.Message);
         }
 
         public IActionResult Error()
