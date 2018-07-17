@@ -3,7 +3,6 @@ using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace E_Conc.Controllers
@@ -40,7 +39,7 @@ namespace E_Conc.Controllers
             else
                 Error();
 
-            return RedirectToAction("ContatoSucesso");
+            return RedirectToAction("ContatoSucesso", "Home");
         }
 
         public IActionResult Error()
