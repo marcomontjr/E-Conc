@@ -3,6 +3,7 @@ using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Diagnostics;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace E_Conc.Controllers
@@ -35,16 +36,21 @@ namespace E_Conc.Controllers
         public async Task<IActionResult> Contato(ContatoViewModel userData)
         {
             if (ModelState.IsValid)
-                //await EnviarEmailSuporte(userData);
+                await _emailService.SendEmailHelpDesk(userData);
             else
                 Error();
 
-            return null;
+            return RedirectToAction("ContatoSucesso");
         }
 
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        public IActionResult ContatoSucesso()
+        {
+            return View();
         }
     }
 }
