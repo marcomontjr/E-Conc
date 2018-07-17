@@ -62,13 +62,9 @@ namespace E_Conc.Services
         {
              try
              {
-                 string fromEmail = string.IsNullOrEmpty(contato.Email)
-                                 ? contato.Email
-                                 : _emailSettings.FromEmail;
-
                  MailMessage mail = new MailMessage()
                  {
-                     From = new MailAddress(fromEmail)
+                     From = new MailAddress(contato.Email)
                  };
                  mail.To.Add(new MailAddress("econcrelacionamento@gmail.com"));
 
@@ -88,10 +84,10 @@ namespace E_Conc.Services
                      await smtp.SendMailAsync(mail);
                  }
              }
-             catch
-             {
-
-             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.ToString());
+            }
         }
     }
 }
