@@ -18,39 +18,35 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"></a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav Cabecalho">
-                    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
-                    <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        var username = @User.Identity.Name;
-                        <li>
-                            <a asp-controller="Conta" asp-action="Logoff">Logoff</a>
-                        </li>
-                        <li>
-                            <p class="navbar-text">
-                                Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
-                            </p>
-                        </li>
-                    }
-                    else
-                    {
-                        <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
-                    }
-                </ul>
-            </div>
+        <div class="navbar-header">
+            <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav Cabecalho">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li><a asp-controller="Produto" asp-action="Carrossel">Produtos</a></li>
+                }
+                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
+                <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    var username = @User.Identity.Name;
+                    <li>
+                        <a asp-controller="Conta" asp-action="Logoff">Logoff</a>
+                    </li>
+                    <li>
+                        <p class="navbar-text">
+                            Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
+                        </p>
+                    </li>
+                }
+                else
+                {
+                    <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
+                }
+            </ul>
         </div>
     </nav>
     <div class="container body-content">

@@ -33,6 +33,6 @@ namespace E_Conc.Models
             Categoria = categoria;
             Usuario = usuario;
             Curso = curso;
-        }        
+        }     
     }
 }
