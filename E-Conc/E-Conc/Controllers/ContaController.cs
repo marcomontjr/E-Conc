@@ -111,7 +111,7 @@ namespace E_Conc.Controllers
                         await _signInManager.SignOutAsync();
                         return View("AguardandoConfirmacao");
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Carrossel", "Home");
                 }
 
                 if (signInResult.RequiresTwoFactor)
