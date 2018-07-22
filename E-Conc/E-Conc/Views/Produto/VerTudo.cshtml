@@ -1,12 +1,23 @@
 ﻿@model IEnumerable<Produto>
 
+<br />
+
+<div class="container">
+    <h2>Produtos Disponíveis</h2>
+    <p>Selecione uma das categorias abaixo para visualizar os projetos</p>
+    @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
+          "Ver Todas as Categorias",  new { @class = "form-control", @id = "Categorias"}
+    );
+</div>
+
 @foreach (var produto in Model)
 {
+    <div class="@produto.Categoria">
         <div class="item  col-xs-4 col-lg-4">
-            <br/><br /><br />
+            <br /><br /><br />
             <div class="thumbnail">
                 <img width="220" height="220" class="group list-group-image" src="~/images/Produtos/@produto.Arquivo" />
-                <div class="caption" id="@produto.Categoria">
+                <div class="caption">
                     <h4 class="group inner list-group-item-heading">
                         @produto.Nome
                     </h4>
@@ -22,4 +33,65 @@
                 </div>
             </div>
         </div>
+    </div>
+
 }
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $('#Categorias').change(function () {
+        debugger;
+        var categoriaEscolhida = $(this).val();
+        if (categoriaEscolhida == "Desenvolvimento") {
+            MostraDesenvolvimento();
+            return;
+        } else if (categoriaEscolhida == "Empreendedorismo") {
+            MostraEmpreendedorismo();
+            return;
+        } else if (categoriaEscolhida == "IniciacaoCientifica") {
+            MostraIniciacaoCientifica();
+            return;
+        } else if (categoriaEscolhida == "PesquisaAcademica") {
+            MostraPesquisaAcademica();
+            return;
+        }
+
+        MostraTudo();
+    });
+
+    function MostraDesenvolvimento() {
+        $('.Desenvolvimento').show();
+        $(".Empreendedorismo").hide();
+        $(".IniciacaoCientifica").hide();
+        $(".PesquisaAcademica").hide();
+    }
+
+    function MostraEmpreendedorismo() {
+        $(".Empreendedorismo").show();
+        $('.Desenvolvimento').hide();        
+        $(".IniciacaoCientifica").hide();
+        $(".PesquisaAcademica").hide();
+    }
+
+    function MostraIniciacaoCientifica() {
+        $(".IniciacaoCientifica").show();
+        $(".Empreendedorismo").hide();
+        $('.Desenvolvimento').hide();        
+        $(".PesquisaAcademica").hide();
+    }
+
+    function MostraPesquisaAcademica() {
+        $(".PesquisaAcademica").show();
+        $(".IniciacaoCientifica").hide();
+        $(".Empreendedorismo").hide();
+        $('.Desenvolvimento').hide();        
+    }
+
+    function MostraTudo() {
+        $(".PesquisaAcademica").show();
+        $(".IniciacaoCientifica").show();
+        $(".Empreendedorismo").show();
+        $('.Desenvolvimento').show();        
+    }
+
+</script>
