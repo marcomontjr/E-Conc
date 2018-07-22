@@ -35,5 +35,10 @@ namespace E_Conc.Data.Repository
                            .Where(c => c.Categoria == categoria)
                            .ToList();
         }
+
+        public new IEnumerable<Produto> GetAll()
+        {
+            return _context.Produtos.ToList();
+        }
     }
 }
