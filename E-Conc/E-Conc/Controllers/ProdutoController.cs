@@ -1,8 +1,11 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
+using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace E_Conc.Controllers
 {
@@ -61,7 +64,9 @@ namespace E_Conc.Controllers
         [Authorize]
         public IActionResult VerTudo()
         {
-            return View();
+            List<Produto> Produtos = _produtoRepo.GetAll().ToList();
+
+            return View(Produtos);
         }
 
         [Authorize]
