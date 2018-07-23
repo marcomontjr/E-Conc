@@ -23,41 +23,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav Cabecalho">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown"
-                           asp-controller="Produto" asp-action="Carrossel">
-                              Produtos 
-                              <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
-                            <li><a asp-controller="Produto" asp-action="VerTudo">Todos os Produtos</a></li>
-                            <li><a asp-controller="Produto" asp-action="PorCategoria">Por Categoria</a></li>
-                            <li><a asp-controller="Produto" asp-action="PorOrientador">Por Orientador</a></li>
-                        </ul>
-                    </li>
-                }
-                <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
-                <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    var username = @User.Identity.Name;
-                    <li>
-                        <a asp-controller="Conta" asp-action="Logoff">Logoff</a>
-                    </li>
-                    <li>
-                        <p class="navbar-text">
-                            Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
-                        </p>
-                    </li>
-                }
-                else
-                {
-                    <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
-                }
+                @Html.Partial("~/Views/Partials/MenuPartial.cshtml")
             </ul>
         </div>
     </nav>
