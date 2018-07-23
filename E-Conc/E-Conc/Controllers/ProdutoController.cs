@@ -74,17 +74,5 @@ namespace E_Conc.Controllers
         {
             return View();
         }
-
-        [Authorize]
-        public IActionResult PorCategoria()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult PorOrientador()
-        {
-            return View();
-        }
     }
 }
