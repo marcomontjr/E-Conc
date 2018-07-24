@@ -36,7 +36,7 @@ namespace E_Conc.Data.Repository
 
         public IEnumerable<T> GetAll() => _context.Set<T>();
 
-        public T GetById(int id) => _context.Set<T>().Find(id);
+        public T GetById(int? id) => _context.Set<T>().Find(id);
 
         public void Update(T entity)
         {

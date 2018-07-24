@@ -52,8 +52,8 @@ namespace E_Conc.Controllers
         {
             if (produtoId != null)
             {
-                var teste = _produtoRepo.GetProdutoById(produtoId);
-                return View(teste);
+                var produto = _produtoRepo.GetById(produtoId);
+                return View(produto);
             }
             else
             {

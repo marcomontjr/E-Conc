@@ -1,8 +1,6 @@
 ﻿using E_Conc.Data.Interfaces;
 using E_Conc.Models;
 using Microsoft.AspNetCore.Http;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace E_Conc.Data.Repository
 {
@@ -11,9 +9,9 @@ namespace E_Conc.Data.Repository
         public CursoRepository(Contexto context, IHttpContextAccessor contextAccessor) 
             : base(context, contextAccessor) { }
 
-        public List<Curso> GetCursos()
+        public new Curso GetById(int? produtoId)
         {
-            return _context.Cursos.ToList();
+            return null;
         }
     }
 }

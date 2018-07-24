@@ -17,22 +17,18 @@
     <div class="@produto.Categoria bloco">
         <div class="item  col-xs-4 col-lg-4">
             <br /><br /><br />
-            <div class="thumbnail">
+            <div class="thumbnail panel panel-default">
                 <img width="220" height="220" class="group list-group-image" src="~/images/Produtos/@produto.Arquivo" />
-                <div class="caption">
+                <div class="caption panel-footer text-center">
                     <h4 class="group inner list-group-item-heading">
                         @produto.Nome
                     </h4>
-                    <p class="group inner list-group-item-text">
-                        @produto.Descricao
-                    </p>
-                    <br />
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6">
-                            <a class="btn btn-success" href="http://www.jquery2dotnet.com">Add to cart</a>
-                        </div>
+                    <div>
+                        <a asp-controller="Produto"
+                           asp-action="Detalhes"
+                           asp-route-produtoId="@(produto.Id)">Ver Produto</a>
                     </div>
-                </div>
+                 </div>
             </div>
         </div>
     </div>

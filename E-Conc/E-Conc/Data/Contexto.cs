@@ -11,6 +11,7 @@ namespace E_Conc.Data
         public DbSet<Produto> Produtos { get; set; }
         public DbSet<Curso> Cursos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Requisito> Requisitos { get; set; }
 
         public Contexto(DbContextOptions<Contexto> options) : base(options) { }
 
@@ -21,6 +22,7 @@ namespace E_Conc.Data
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
             modelBuilder.ApplyConfiguration(new CursoConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
+            modelBuilder.ApplyConfiguration(new RequisitoConfiguration());
         }
     }
 }

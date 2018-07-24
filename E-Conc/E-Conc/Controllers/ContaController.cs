@@ -5,6 +5,7 @@ using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -73,7 +74,8 @@ namespace E_Conc.Controllers
             if (usuarioId == null || token == null)
                 return View("Error");
 
-            var usuario = _usuarioRepo.GetUsuarioById(usuarioId);
+            //Após teste verificar se a conversão para inteiro vai funcionar, se não, voltar para string.
+            var usuario = _usuarioRepo.GetById(Convert.ToInt32(usuarioId));
 
             var result = await _userManager.ConfirmEmailAsync(usuario, token);
 
@@ -199,7 +201,7 @@ namespace E_Conc.Controllers
         {
             if (ModelState.IsValid)
             {
-                var usuario = _usuarioRepo.GetUsuarioById(modelo.UsuarioId);
+                var usuario = _usuarioRepo.GetById(Convert.ToInt32(modelo.UsuarioId));
                 var result =
                     await _userManager.ResetPasswordAsync(
                     usuario,
