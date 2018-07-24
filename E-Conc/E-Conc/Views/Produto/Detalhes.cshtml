@@ -8,7 +8,7 @@
         <div class="col-md-offset-6">
             <br /><br /><br />
             <h3>@Model.Nome</h3>
-            <h5>Orientador:@Model.Usuario</h5>
+            <h5>Orientador:@Model.Usuario.NomeCompleto</h5>
             <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>
                 Adicionar ao Carrinho
             </button>
@@ -21,9 +21,17 @@
                 </p>
                 <h4>Conhecimentos Desejados Para Elaboração do Projeto</h4>
                 <ul>
-                    @foreach (var requisito in Model.Requisitos)
+                    @if (Model.Requisitos != null)
                     {
-                        <li>@requisito</li>
+                        @foreach (var requisito in Model.Requisitos)
+                        {
+                            <li>
+                                @requisito.Nome
+                                <ul>
+                                    <li>@requisito.Descricao</li>
+                                </ul>
+                            </li>
+                        }
                     }
                 </ul>
             </div>

@@ -4,6 +4,7 @@ using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
 using E_Conc.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace E_Conc.Data.Repository
 {
@@ -14,9 +15,11 @@ namespace E_Conc.Data.Repository
 
         public new Produto GetById(int? produtoId)
         {
-            var produto = _context.Produtos
-                            .Where(p => p.Id == produtoId)
-                            .Single();
+            var produto = (from p in _context.Produtos
+                            .Include(u => u.Requisitos)
+                            .Include(c => c.Curso)
+                            where p.Id.Equals(produtoId)
+                            select p).Single();           
 
             if (produto != null)
                 return produto;
