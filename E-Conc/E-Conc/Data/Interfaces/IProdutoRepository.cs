@@ -7,8 +7,6 @@ namespace E_Conc.Data.Interfaces
 {
     public interface IProdutoRepository : IRepository<Produto>
     {
-        Produto GetProdutoById(int? produtoId);
-        List<Produto> GetProdutos();
         List<Produto> GetProdutosPorCategoria(Categoria categoria);
     }
 }

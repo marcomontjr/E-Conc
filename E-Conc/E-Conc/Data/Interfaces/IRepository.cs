@@ -10,7 +10,7 @@ namespace E_Conc.Data.Repository.Interfaces
         void Delete(T entity);
         IEnumerable<T> Find(Func<T, bool> predicate);
         IEnumerable<T> GetAll();
-        T GetById(int id);
+        T GetById(int? id);
         void Update(T entity);
     }
 }

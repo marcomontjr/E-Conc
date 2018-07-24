@@ -30,7 +30,7 @@ namespace E_Conc.Controllers
         public IActionResult Resumo(int? itemPedidoId)
         {
             if (itemPedidoId.HasValue)
-                return View(_itemPedidoRepo.GetItemPedidoById(itemPedidoId.Value));
+                return View(_itemPedidoRepo.GetById(itemPedidoId.Value));
             
             return View();
         }
