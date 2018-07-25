@@ -16,8 +16,9 @@ namespace E_Conc.Data.Repository
         public new Produto GetById(int? produtoId)
         {
             var produto = (from p in _context.Produtos
-                            .Include(u => u.Requisitos)
+                            .Include(r => r.Requisitos)
                             .Include(c => c.Curso)
+                            .Include(u => u.Usuario)
                             where p.Id.Equals(produtoId)
                             select p).Single();           
 
