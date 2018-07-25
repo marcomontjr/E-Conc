@@ -1,5 +1,4 @@
 ﻿using E_Conc.Data.Interfaces;
-using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,7 +40,7 @@ namespace E_Conc.Controllers
             if (itemPedido.HasValue)
                 _itemPedidoRepo.RemoveItemPedido(itemPedido.Value);
 
-            return RedirectToAction("Carrossel");
+            return RedirectToAction("Carrossel", "Produto");
         }
     }
 }
