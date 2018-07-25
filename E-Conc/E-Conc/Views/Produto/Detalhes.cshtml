@@ -9,9 +9,12 @@
             <br /><br /><br />
             <h3>@Model.Nome</h3>
             <h5>Orientador:@Model.Usuario.NomeCompleto</h5>
-            <button class="btn btn-success"><span class="glyphicon glyphicon-shopping-cart"></span>
+            <a class="btn btn-success" 
+               asp-controller="Pedido" 
+               asp-action="Carrinho"
+               asp-route-produtoId="@(Model.Id)"><span class="glyphicon glyphicon-shopping-cart"></span>
                 Adicionar ao Carrinho
-            </button>
+            </a>
         </div>
 
         <div class="col-md-12">
