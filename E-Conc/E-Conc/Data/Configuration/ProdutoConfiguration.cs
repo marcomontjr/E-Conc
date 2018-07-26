@@ -17,11 +17,6 @@ namespace E_Conc.Data.Configuration
                 .IsRequired();
 
             builder
-                .HasOne(p => p.Curso)
-                .WithMany(p => p.Produtos)
-                .IsRequired();
-
-            builder
                 .HasOne(p => p.Usuario)
                 .WithMany()
                 .IsRequired();

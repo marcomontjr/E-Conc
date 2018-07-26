@@ -8,5 +8,6 @@ namespace E_Conc.Data.Interfaces
     public interface IProdutoRepository : IRepository<Produto>
     {
         List<Produto> GetProdutosPorCategoria(Categoria categoria);
+        Produto AdicionaProduto(Produto produto);
     }
 }

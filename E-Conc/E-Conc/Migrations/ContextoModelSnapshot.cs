@@ -21,21 +21,6 @@ namespace E_Conc.Migrations
                 .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("E_Conc.Models.Curso", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<string>("Sigla");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Cursos");
-                });
-
             modelBuilder.Entity("E_Conc.Models.ItemPedido", b =>
                 {
                     b.Property<int>("Id")
@@ -64,8 +49,7 @@ namespace E_Conc.Migrations
 
                     b.Property<int>("Categoria");
 
-                    b.Property<int?>("CursoId")
-                        .IsRequired();
+                    b.Property<int>("Curso");
 
                     b.Property<string>("Descricao");
 
@@ -79,8 +63,6 @@ namespace E_Conc.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CursoId");
-
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Produtos");
@@ -90,8 +72,6 @@ namespace E_Conc.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("Categoria");
 
                     b.Property<string>("Descricao");
 
@@ -116,8 +96,6 @@ namespace E_Conc.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<int?>("CursoId");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -161,8 +139,6 @@ namespace E_Conc.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CursoId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -296,11 +272,6 @@ namespace E_Conc.Migrations
 
             modelBuilder.Entity("E_Conc.Models.Produto", b =>
                 {
-                    b.HasOne("E_Conc.Models.Curso", "Curso")
-                        .WithMany("Produtos")
-                        .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("E_Conc.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
@@ -312,13 +283,6 @@ namespace E_Conc.Migrations
                     b.HasOne("E_Conc.Models.Produto", "Produto")
                         .WithMany("Requisitos")
                         .HasForeignKey("ProdutoId");
-                });
-
-            modelBuilder.Entity("E_Conc.Models.Usuario", b =>
-                {
-                    b.HasOne("E_Conc.Models.Curso")
-                        .WithMany("Usuarios")
-                        .HasForeignKey("CursoId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
