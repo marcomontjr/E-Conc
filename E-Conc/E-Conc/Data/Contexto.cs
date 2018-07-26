@@ -9,7 +9,6 @@ namespace E_Conc.Data
     {
         public DbSet<ItemPedido> ItensPedido { get; set; }
         public DbSet<Produto> Produtos { get; set; }
-        public DbSet<Curso> Cursos { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<Requisito> Requisitos { get; set; }
 
@@ -20,7 +19,6 @@ namespace E_Conc.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.ApplyConfiguration(new ProdutoConfiguration());
-            modelBuilder.ApplyConfiguration(new CursoConfiguration());
             modelBuilder.ApplyConfiguration(new UsuarioConfiguration());
             modelBuilder.ApplyConfiguration(new RequisitoConfiguration());
         }

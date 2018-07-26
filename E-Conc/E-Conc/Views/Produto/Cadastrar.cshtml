@@ -1,0 +1,30 @@
+﻿@model Produto
+
+@{
+    ViewData["Title"] = "Cadastrar Produto";
+}
+
+<form role="form" method="post" asp-controller="Produto" asp-action="Cadastrar">
+    <div asp-validation-summary="All"></div>
+    <br /><br />
+    <br /><br />
+    <input type="text" placeholder="Nome" required class="form-control input-lg"
+           asp-for="Nome" />
+    <br />
+    <input type="text" placeholder="Descrição" required class="form-control input-lg"
+           asp-for="Descricao" />
+    <br />
+    @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
+          "Ver Todas as Categorias",  new { @class = "form-control"}
+    );
+    <br />
+    @Html.DropDownList("Curso", new SelectList(Enum.GetValues(typeof(Curso))),
+          "Cursos",  new { @class = "form-control"}
+    );
+    <br />
+    <input type="text" placeholder="Requisito" required class="form-control input-lg"
+           asp-for="@Model.Requisitos" />
+    <br />
+    <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
+    <br />
+</form>

@@ -3,6 +3,7 @@ using E_Conc.Enum;
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,17 @@ namespace E_Conc.Controllers
     public class ProdutoController : Controller
     {
         private readonly IProdutoRepository _produtoRepo;
+        private readonly IUsuarioRepository _usuarioRepo;
+        private UserManager<Usuario> _userManager;
         private CarrosselViewModel _carrosselViewModel;
 
-        public ProdutoController(IProdutoRepository produtoRepo)
+        public ProdutoController(IProdutoRepository produtoRepo,
+                                 IUsuarioRepository usuarioRepo,
+                                 UserManager<Usuario> userManager)
         {
             _produtoRepo = produtoRepo;
+            _userManager = userManager;
+            _usuarioRepo = usuarioRepo;
         }
 
         [Authorize]
@@ -67,6 +74,49 @@ namespace E_Conc.Controllers
             List<Produto> Produtos = _produtoRepo.GetAll().ToList();
 
             return View(Produtos);
+        }
+
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Cadastrar(Produto produto)
+        {
+            Produto novoProduto = new Produto
+            {
+                Nome = produto.Nome,
+                Arquivo = AtribuiNomeArquivo(produto.Categoria),
+                Descricao = produto.Descricao,
+                Disponivel = true,
+                Categoria = produto.Categoria,
+                Curso = produto.Curso,
+                Usuario = AtribuiUsuarioCorrente(),
+                Requisitos = produto.Requisitos
+            };
+
+            return View("ResumoCadastroProduto", _produtoRepo.AdicionaProduto(novoProduto));
+        }
+
+        private Usuario AtribuiUsuarioCorrente()
+        {
+            var usuarioEmail = _userManager.FindByEmailAsync(User.Identity.Name);
+            return _usuarioRepo.GetUsuarioByEmail(usuarioEmail.Result.Email);
+        }
+
+        private string AtribuiNomeArquivo(Categoria categoria)
+        {
+            if (categoria.Equals(Categoria.Desenvolvimento))
+                return "Desenvolvimento.jpg";
+            else if (categoria.Equals(Categoria.Empreendedorismo))
+                return "Empreendedorismo.jpg";
+            else if (categoria.Equals(Categoria.IniciacaoCientifica))
+                return "IniciacaoCientifica.jpg";
+            else if (categoria.Equals(Categoria.PesquisaAcademica))
+                return "PesquisaAcademica.jpg";
+
+            return string.Empty;
         }
 
         [Authorize]

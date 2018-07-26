@@ -68,7 +68,6 @@ namespace E_Conc
        
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();
-            services.AddTransient<ICursoRepository, CursoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddMvc();
 

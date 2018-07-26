@@ -39,5 +39,17 @@ namespace E_Conc.Data.Repository
         {
             return _context.Produtos.ToList();
         }
+
+        public Produto AdicionaProduto(Produto produto)
+        {
+            if (produto != null)
+            {
+                _context.Produtos.Add(produto);
+                _context.SaveChanges();
+                _context.Dispose();
+            }
+
+            return produto;
+        }
     }
 }
