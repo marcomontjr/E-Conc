@@ -20,9 +20,6 @@ namespace E_Conc.Data.Configuration
                 .HasOne(p => p.Usuario)
                 .WithMany()
                 .IsRequired();
-
-            builder
-                .HasMany(p => p.Requisitos);
         }
     }
 }

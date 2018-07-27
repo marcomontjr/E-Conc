@@ -9,7 +9,7 @@ namespace E_Conc.Models
         public string Arquivo { get; set; }
         public bool Disponivel { get; set; }
         public string Descricao { get; set; }
-        public List<Requisito> Requisitos { get; set; }
+        public string Requisitos { get; set; }
         public Categoria Categoria { get; set; }
         public Usuario Usuario { get; set; }
         public Curso Curso { get; set; }
@@ -17,14 +17,14 @@ namespace E_Conc.Models
         public Produto() { }
 
         public Produto
-            (int id, string nome, string arquivo, bool disponivel, string descricao, List<Requisito> requisitos, Categoria categoria, Usuario usuario, Curso curso) 
+            (int id, string nome, string arquivo, bool disponivel, string descricao, string requisitos, Categoria categoria, Usuario usuario, Curso curso) 
             : this(nome, arquivo, disponivel, descricao, requisitos, categoria, usuario, curso)
         {
             Id = id;            
         }
 
         public Produto
-            (string nome, string arquivo, bool disponivel, string descricao, List<Requisito> requisitos, Categoria categoria, Usuario usuario, Curso curso)
+            (string nome, string arquivo, bool disponivel, string descricao, string requisitos, Categoria categoria, Usuario usuario, Curso curso)
         {
             Nome = nome;
             Arquivo = arquivo;

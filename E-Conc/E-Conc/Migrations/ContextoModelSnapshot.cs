@@ -58,6 +58,8 @@ namespace E_Conc.Migrations
                     b.Property<string>("Nome")
                         .IsRequired();
 
+                    b.Property<string>("Requisitos");
+
                     b.Property<string>("UsuarioId")
                         .IsRequired();
 
@@ -66,25 +68,6 @@ namespace E_Conc.Migrations
                     b.HasIndex("UsuarioId");
 
                     b.ToTable("Produtos");
-                });
-
-            modelBuilder.Entity("E_Conc.Models.Requisito", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descricao");
-
-                    b.Property<string>("Nome")
-                        .IsRequired();
-
-                    b.Property<int?>("ProdutoId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.ToTable("Requisitos");
                 });
 
             modelBuilder.Entity("E_Conc.Models.Usuario", b =>
@@ -276,13 +259,6 @@ namespace E_Conc.Migrations
                         .WithMany()
                         .HasForeignKey("UsuarioId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("E_Conc.Models.Requisito", b =>
-                {
-                    b.HasOne("E_Conc.Models.Produto", "Produto")
-                        .WithMany("Requisitos")
-                        .HasForeignKey("ProdutoId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

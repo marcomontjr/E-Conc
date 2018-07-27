@@ -16,14 +16,16 @@
     <br />
     @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
           "Ver Todas as Categorias",  new { @class = "form-control"}
-    );
+    )
     <br />
     @Html.DropDownList("Curso", new SelectList(Enum.GetValues(typeof(Curso))),
           "Cursos",  new { @class = "form-control"}
-    );
-    <br />
-    <input type="text" placeholder="Requisito" required class="form-control input-lg"
-           asp-for="@Model.Requisitos" />
+    )
+    <br /> <br />
+    <label>Qual conhecimento o aluno deve ter para realizar este projeto? Cadastre um ou mais requisitosseparados por vírgula (exemplo: C#, Sql, etc.)</label>
+    <input type="text" placeholder="Requisitos" required class="form-control input-lg"
+           asp-for="Requisitos" />
+    <br /> <br />
     <br />
     <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>
     <br />
