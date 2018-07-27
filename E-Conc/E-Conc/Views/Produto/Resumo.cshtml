@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "Resumo";
+}
+
+@model Produto
+
+<br />
+
+<h3>Resumo do Cadastro</h3>
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Dados do Produto</h3>
+                <div>Nome: @(Model.Nome)</div>
+                <div>Descrição: @(Model.Descricao)</div>
+                <div>Categoria: @(Model.Categoria)</div>
+            </div>
+            <div class="col-md-4">
+                <h3>Curso</h3>
+                <div>@(Model.Curso)</div>
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <h3>Proprietário</h3>
+                <div>@(Model.Usuario.NomeCompleto)</div>
+            </div>
+            <div class="col-md-4">
+                <h3>Requisitos</h3>
+                <div>@(Model.Requisitos)</div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="pull-right">
+            <a asp-action="RemoverProduto"
+               asp-route-itemPedido="@(Model.Id)"
+               class="btn btn-danger">
+                Remover Produto
+            </a>
+            <button class="btn btn-success">
+                Confirmar
+            </button>
+        </div>
+    </div>
+</div>

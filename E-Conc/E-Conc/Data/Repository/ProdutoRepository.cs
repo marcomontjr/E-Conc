@@ -16,7 +16,6 @@ namespace E_Conc.Data.Repository
         public new Produto GetById(int? produtoId)
         {
             var produto = (from p in _context.Produtos
-                            .Include(r => r.Requisitos)
                             .Include(c => c.Curso)
                             .Include(u => u.Usuario)
                             where p.Id.Equals(produtoId)
@@ -50,6 +49,16 @@ namespace E_Conc.Data.Repository
             }
 
             return produto;
+        }
+
+        public void RemoveProduto(int produtoId)
+        {
+            var produto = _context.Produtos
+               .Where(ip => ip.Id.Equals(produtoId))
+               .First();
+
+            _context.Produtos.Remove(produto);
+            _context.SaveChanges();
         }
     }
 }

@@ -96,7 +96,7 @@ namespace E_Conc.Controllers
                 Requisitos = produto.Requisitos
             };
 
-            return View("ResumoCadastroProduto", _produtoRepo.AdicionaProduto(novoProduto));
+            return View("Resumo", _produtoRepo.AdicionaProduto(novoProduto));
         }
 
         private Usuario AtribuiUsuarioCorrente()
@@ -117,6 +117,15 @@ namespace E_Conc.Controllers
                 return "PesquisaAcademica.jpg";
 
             return string.Empty;
+        }
+
+        [Authorize]
+        public IActionResult RemoverProduto(int? produtoId)
+        {
+            if (produtoId.HasValue)
+                _produtoRepo.RemoveProduto(produtoId.Value);
+
+            return RedirectToAction("Carrossel", "Produto");
         }
 
         [Authorize]

@@ -9,5 +9,6 @@ namespace E_Conc.Data.Interfaces
     {
         List<Produto> GetProdutosPorCategoria(Categoria categoria);
         Produto AdicionaProduto(Produto produto);
+        void RemoveProduto(int produtoId);
     }
 }
