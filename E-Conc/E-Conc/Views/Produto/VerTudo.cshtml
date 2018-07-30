@@ -4,6 +4,7 @@
 
 <div class="container">
     <h2>Produtos Disponíveis</h2>
+
     <p>Selecione uma das categorias abaixo para visualizar os projetos</p>
     @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
           "Ver Todas as Categorias",  new { @class = "form-control", @id = "Categorias"}

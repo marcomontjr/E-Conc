@@ -8,6 +8,8 @@
 
 <h3>Resumo do Cadastro</h3>
 
+<h4>Confira os dados do produto cadastrado</h4>
+
 <div class="panel panel-default">
     <div class="panel-body">
         <hr />
@@ -39,14 +41,32 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a asp-action="RemoverProduto"
-               asp-route-itemPedido="@(Model.Id)"
+            <a asp-controller="Produto"
+               asp-action="RemoverProduto"
+               asp-route-produtoId="@(Model.Id)"
+               id="RemoveButton"
                class="btn btn-danger">
                 Remover Produto
             </a>
-            <button class="btn btn-success">
+            <a asp-controller="Produto"
+               asp-action="MeusProdutos"
+               class="btn btn-success"
+               id="ConfirmButton">                
                 Confirmar
-            </button>
+            </a>
         </div>
     </div>
 </div>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
+@Html.Partial("~/Views/Modals/CadastroProduto.cshtml")
+
+<script>
+    $("#ConfirmButton").click(function () {
+        $($('#ConfirmarProdutoCadastro').modal('show'))
+    });
+
+    $("#RemoveButton").click(function () {
+        $($('#RemoverProdutoCadastro').modal('show'))
+    });
+</script>
