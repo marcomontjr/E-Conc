@@ -123,15 +123,37 @@ namespace E_Conc.Controllers
         public IActionResult RemoverProduto(int? produtoId)
         {
             if (produtoId.HasValue)
-                _produtoRepo.RemoveProduto(produtoId.Value);
+                _produtoRepo.RemoveProduto(produtoId);
 
-            return RedirectToAction("Carrossel", "Produto");
+            return RedirectToAction("MeusProdutos");
+        }
+
+        [Authorize]
+        public IActionResult MeusProdutos()
+        {
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosPorUsuario(usuario);
+
+            return View(produtos);
         }
 
         [Authorize]
         public IActionResult Comprados()
         {
-            return View();
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosDisponiveis(usuario);
+
+            return View("MeusProdutos", produtos);
+        }
+
+        [Authorize]
+        public IActionResult TodosComprados()
+        {
+            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
+
+            return View("MeusProdutos", produtos);
         }
     }
 }

@@ -16,7 +16,6 @@ namespace E_Conc.Data.Repository
         public new Produto GetById(int? produtoId)
         {
             var produto = (from p in _context.Produtos
-                            .Include(c => c.Curso)
                             .Include(u => u.Usuario)
                             where p.Id.Equals(produtoId)
                             select p).Single();           
@@ -45,20 +44,43 @@ namespace E_Conc.Data.Repository
             {
                 _context.Produtos.Add(produto);
                 _context.SaveChanges();
-                _context.Dispose();
             }
 
             return produto;
         }
 
-        public void RemoveProduto(int produtoId)
+        public void RemoveProduto(int? produtoId)
         {
-            var produto = _context.Produtos
-               .Where(ip => ip.Id.Equals(produtoId))
-               .First();
+            if (produtoId.HasValue)
+            {
+                var produto = _context.Produtos
+                                .Where(p => p.Id.Equals(produtoId))
+                                .FirstOrDefault();
 
-            _context.Produtos.Remove(produto);
-            _context.SaveChanges();
+                _context.Produtos.Remove(produto);
+                _context.SaveChanges();
+                _context.Dispose();
+            }
+        }
+
+        public List<Produto> GetProdutosPorUsuario(Usuario usuario)
+        {
+            return _context.Produtos
+                        .Where(p => p.Usuario.Equals(usuario)).ToList();
+        }
+
+        public List<Produto> GetProdutosDisponiveis(Usuario usuario)
+        {
+            return _context.Produtos
+                        .Where(u => u.Usuario == usuario && !u.Disponivel)
+                        .ToList();
+        }
+
+        public List<Produto> GetProdutosComprados()
+        {
+            return _context.Produtos
+                        .Where(u => !u.Disponivel)
+                        .ToList();
         }
     }
 }
