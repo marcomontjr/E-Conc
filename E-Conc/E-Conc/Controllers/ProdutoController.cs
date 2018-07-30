@@ -147,5 +147,13 @@ namespace E_Conc.Controllers
 
             return View("MeusProdutos", produtos);
         }
+
+        [Authorize]
+        public IActionResult TodosComprados()
+        {
+            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
+
+            return View("MeusProdutos", produtos);
+        }
     }
 }

@@ -75,5 +75,12 @@ namespace E_Conc.Data.Repository
                         .Where(u => u.Usuario == usuario && !u.Disponivel)
                         .ToList();
         }
+
+        public List<Produto> GetProdutosComprados()
+        {
+            return _context.Produtos
+                        .Where(u => !u.Disponivel)
+                        .ToList();
+        }
     }
 }

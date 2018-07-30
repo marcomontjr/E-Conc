@@ -12,5 +12,6 @@ namespace E_Conc.Data.Interfaces
         void RemoveProduto(int? produtoId);
         List<Produto> GetProdutosPorUsuario(Usuario usuario);
         List<Produto> GetProdutosDisponiveis(Usuario usuario);
+        List<Produto> GetProdutosComprados();
     }
 }
