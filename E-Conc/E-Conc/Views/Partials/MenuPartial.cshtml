@@ -1,4 +1,6 @@
-﻿@if (User.Identity.IsAuthenticated)
+﻿<link href="~/css/Menu.css" rel="stylesheet" />
+
+@if (User.Identity.IsAuthenticated)
 {
     <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown"
@@ -16,22 +18,23 @@
         </ul>
     </li>
 }
-<li><a asp-controller="Home" asp-action="Index">Home</a></li>
-<li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
-<li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-@if (User.Identity.IsAuthenticated)
-{
-    var username = @User.Identity.Name;
-    <li>
-        <a asp-controller="Conta" asp-action="Logoff">Logoff</a>
-    </li>
-    <li>
+
+<div class="topnav">
+    <a asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-controller="Home" asp-action="Sobre">Sobre</a>
+    <a asp-controller="Home" asp-action="Contato">Contato</a>
+    
+    @if (User.Identity.IsAuthenticated)
+    {
+        var username = @User.Identity.Name;
+       
+        <a asp-controller="Conta" asp-action="Logoff">Logoff</a>        
         <p class="navbar-text">
             Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
         </p>
-    </li>
-}
-else
-{
-    <li><a asp-controller="Conta" asp-action="Login">Login</a></li>
-}
+    }
+    else
+    {
+        <a asp-controller="Conta" asp-action="Login">Login</a>
+    }
+</div>
