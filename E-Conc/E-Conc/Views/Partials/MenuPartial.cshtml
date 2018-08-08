@@ -1,4 +1,22 @@
-﻿<link href="~/css/Menu.css" rel="stylesheet" />
+﻿<style>
+    .topnav {
+        background-color: #F2F5F4;
+    }
+
+        .topnav a {
+            float: left;
+            color: #337ab7;
+            padding: .7em 1em 1em 1em;
+            text-decoration: none;
+            font-size: 1em;
+            margin-right: 3em;
+        }
+
+            .topnav a:hover {
+                background-color: #ddd;
+                color: white;
+            }
+</style>
 
 @if (User.Identity.IsAuthenticated)
 {
@@ -20,9 +38,9 @@
 }
 
 <div class="topnav">
-    <a asp-controller="Home" asp-action="Index">Home</a>
-    <a asp-controller="Home" asp-action="Sobre">Sobre</a>
-    <a asp-controller="Home" asp-action="Contato">Contato</a>
+    <a asp-controller="Home" asp-action="Index" class="menu-item">Home</a>
+    <a asp-controller="Home" asp-action="Sobre" class="menu-item">Sobre</a>
+    <a asp-controller="Home" asp-action="Contato" class="menu-item">Contato</a>
     
     @if (User.Identity.IsAuthenticated)
     {
