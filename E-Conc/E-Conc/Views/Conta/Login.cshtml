@@ -4,14 +4,23 @@
     ViewData["Title"] = "Login";
 }
 
+<style>
+    img {
+        float: left;
+    }
+    form {
+        margin-right: 5%;
+        margin-top: 15%;
+    }
+    .row {
+        margin-top: 10%;
+    }
+</style>
+
 <div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <section class="login-form">
+    <img src="~/images/Logo/ArteLogo.png" class="img-responsive"/>
+    <div class="col-md-6">         
             <form role="form" method="post" asp-controller="Conta" asp-action="Login">
-                <br />
-                <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
-                <br />
                 <input type="email" name="email" placeholder="Email" required class="form-control input-lg"
                        asp-for="Email" />
                 <br />
@@ -26,6 +35,5 @@
                     <a asp-action="EsqueciSenha">Esqueci Minha Senha</a>
                 </div>
             </form>
-        </section>
     </div>
 </div>
