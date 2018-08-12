@@ -9,11 +9,14 @@ namespace E_Conc.Controllers
 {
     public class PedidoController : Controller
     {
+        #region Propriedades
         private readonly IProdutoRepository _produtoRepo;
         private readonly IItemPedidoRespository _itemPedidoRepo;
         private readonly IEmailService _emailService;
         private readonly ISmsService _smsService;
+        #endregion
 
+        #region Construtor
         public PedidoController(IProdutoRepository produtoRepo,
                                 IItemPedidoRespository itemPedidoRepo,
                                 IEmailService emailService,
@@ -24,8 +27,10 @@ namespace E_Conc.Controllers
             _emailService = emailService;
             _smsService = smsService;
         }
-        
-        [Authorize]
+        #endregion
+
+        #region Acesso a Alunos
+        [Authorize(Roles = "Aluno")]
         public IActionResult Carrinho(int? produtoId)
         {
             if (produtoId.HasValue)
@@ -34,7 +39,7 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        [Authorize]
+        [Authorize(Roles = "Aluno")]
         public IActionResult Resumo(int? itemPedidoId)
         {
             if (itemPedidoId.HasValue)
@@ -53,6 +58,17 @@ namespace E_Conc.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Aluno")]
+        public IActionResult RemoverItemDoCarrinho(int? itemPedido)
+        {
+            if (itemPedido.HasValue)
+                _itemPedidoRepo.RemoveItemPedido(itemPedido.Value);
+
+            return RedirectToAction("Carrossel", "Produto");
+        }
+        #endregion
+
+        #region Métodos Auxiliares
         private void EnviarSmsParaOrientador(Usuario usuario)
         {
             _smsService.SendSmsAsync
@@ -77,14 +93,6 @@ namespace E_Conc.Controllers
                        "(Email: " + emailAluno + 
                        "), att Equipe E-Conc");
         }
-
-        [Authorize]
-        public IActionResult RemoverItemDoCarrinho(int? itemPedido)
-        {
-            if (itemPedido.HasValue)
-                _itemPedidoRepo.RemoveItemPedido(itemPedido.Value);
-
-            return RedirectToAction("Carrossel", "Produto");
-        }
+        #endregion
     }
 }

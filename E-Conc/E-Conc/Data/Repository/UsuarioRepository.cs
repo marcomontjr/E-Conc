@@ -10,18 +10,18 @@ namespace E_Conc.Data.Repository
         public UsuarioRepository(Contexto context, IHttpContextAccessor contextAccessor)
             : base(context, contextAccessor) { }
 
-        public new Usuario GetById(int? usuarioId)
-        {
-            return _context.Usuarios
-                    .Where(u => u.Id == usuarioId.ToString())
-                    .Single();
-        }
-
         public Usuario GetUsuarioByEmail(string email)
         {
             return _context.Usuarios
                 .Where(u => u.Email == email)
                 .Single();
+        }
+
+        public Usuario GetUsuarioById(string usuarioId)
+        {
+            return _context.Usuarios
+                    .Where(u => u.Id == usuarioId)
+                    .Single();
         }
     }
 }

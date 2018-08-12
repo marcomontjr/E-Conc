@@ -2,6 +2,7 @@
 using E_Conc.Models;
 using E_Conc.Models.ViewModels;
 using E_Conc.Services.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,13 +14,16 @@ namespace E_Conc.Controllers
 {
     public class ContaController : Controller
     {
+        #region Propriedades
         private readonly IUsuarioRepository _usuarioRepo;
         private readonly IEmailService _emailService;
         private readonly ISmsService _smsService;
         private UserManager<Usuario> _userManager;
         private SignInManager<Usuario> _signInManager;
         private IHttpContextAccessor _httpContextAccessor;
+        #endregion
 
+        #region Construtor
         public ContaController(UserManager<Usuario> userManager, SignInManager<Usuario> signInManager,
             IUsuarioRepository usuarioRepo, IEmailService emailService, ISmsService smsService,
             IHttpContextAccessor httpContextAccessor)
@@ -31,13 +35,194 @@ namespace E_Conc.Controllers
             _smsService = smsService;
             _httpContextAccessor = httpContextAccessor;
         }
+        #endregion
 
+        #region Acesso a Administradores, Orientadores e Alunos
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> VerificacaoDoisFatores(Usuario usuario)
+        {
+            var token =
+                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");
+
+            await _smsService.SendSmsAsync
+                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
+
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> VerificacaoDoisFatores(ContaVerificacaoDoisFatoresViewModel modelo)
+        {
+            var resultado =
+                await _signInManager.TwoFactorSignInAsync(
+                        "SMS",
+                        modelo.Token,
+                        isPersistent: modelo.ContinuarLogado,
+                        rememberClient: modelo.LembrarDesteComputador);
+
+            if (resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            return View("Error");
+        }
+
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public IActionResult ConfirmaAlteracaoSenha(string usuarioId, string token)
+        {
+            var modelo = new ConfirmacaoAlteracaoSenhaViewModel(usuarioId, token);
+            return View(modelo);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> ConfirmaAlteracaoSenha(ConfirmacaoAlteracaoSenhaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = _usuarioRepo.GetById(Convert.ToInt32(modelo.UsuarioId));
+                var result =
+                    await _userManager.ResetPasswordAsync(
+                    usuario,
+                    modelo.Token,
+                    modelo.NovaSenha);
+
+                if (result.Succeeded)
+                    return RedirectToAction("Index", "Home");
+
+                AdicionaErros(result);
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> Logoff()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public IActionResult EsquecerNavegador()
+        {
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                if (!cookie.Equals("ContinuarLogado"))
+                    Response.Cookies.Delete(cookie);
+            }
+
+            return RedirectToAction("MinhaConta");
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> DeslogarDeTodosOsLocais()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                 ClaimTypes.NameIdentifier).Value;
+
+            var usuario = await _userManager.FindByIdAsync(userId);
+
+            await _userManager.UpdateSecurityStampAsync(usuario);
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> MinhaConta()
+        {
+            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                ClaimTypes.NameIdentifier).Value;
+
+            var usuario = await _userManager.FindByIdAsync(userId);
+
+            var modelo = new ContaMinhaContaViewModel(
+                    usuario.NomeCompleto,
+                    usuario.PhoneNumber,
+                    usuario.TwoFactorEnabled,
+                    usuario.PhoneNumberConfirmed
+                );
+
+            return View(modelo);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
+        {
+            if (ModelState.IsValid)
+            {
+                var userId = _httpContextAccessor.HttpContext.User.FindFirst(
+                ClaimTypes.NameIdentifier).Value;
+
+                var usuario = await _userManager.FindByIdAsync(userId);
+
+                usuario.NomeCompleto = modelo.NomeCompleto;
+                usuario.PhoneNumber = modelo.NumeroDeCelular;
+
+                if (!usuario.PhoneNumberConfirmed)
+                    await EnviarSmsConfirmacaoAsync(usuario);
+                else
+                    usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
+
+                var resultadoUpdate = await _userManager.UpdateAsync(usuario);
+
+                if (resultadoUpdate.Succeeded)
+                    return RedirectToAction("Index", "Home");
+
+                AdicionaErros(resultadoUpdate);
+            }
+            return View();
+        }
+
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task EnviarSmsConfirmacaoAsync(Usuario usuario)
+        {
+            var token =
+                await _userManager.GenerateChangePhoneNumberTokenAsync(
+                    usuario, usuario.PhoneNumber);
+
+            await _smsService.SendSmsAsync
+                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
+        }
+
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public IActionResult VerificacaoCodigoCelular()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public async Task<IActionResult> VerificacaoCodigoCelular(string token)
+        {
+            var usuario = await GetCurrentUserAsync();
+
+            var resultado =
+                await _userManager.ChangePhoneNumberAsync(
+                    usuario,
+                    usuario.PhoneNumber,
+                    token);
+
+            if (resultado.Succeeded)
+                return RedirectToAction("Index", "Home");
+
+            AdicionaErros(resultado);
+
+            return View();
+        }
+        #endregion
+
+        #region Acesso a Administradores
+        [Authorize(Roles = "Admin")]
         public IActionResult Registrar()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Registrar(RegistroContaViewModel registro)
         {
             if (ModelState.IsValid)
@@ -56,10 +241,11 @@ namespace E_Conc.Controllers
             return View(registro);
         }
 
+        [Authorize(Roles = "Admin")]
         private async Task EnviaEmailConfirmacaoAsync(Usuario usuario)
         {
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
-            var linkDeCallback = Url.Action(
+            string token = await _userManager.GenerateEmailConfirmationTokenAsync(usuario);
+            string linkDeCallback = Url.Action(
                                     "ConfirmaEmailAsync",
                                     "Conta",
                                     new { usuarioId = usuario.Id, token },
@@ -68,19 +254,20 @@ namespace E_Conc.Controllers
             await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Confirmação de Cadastro",
                        $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");
         }
+        #endregion
 
+        #region Métodos Auxiliares
         public async Task<IActionResult> ConfirmaEmailAsync(string usuarioId, string token)
         {
             if (usuarioId == null || token == null)
                 return View("Error");
 
-            //Após teste verificar se a conversão para inteiro vai funcionar, se não, voltar para string.
-            var usuario = _usuarioRepo.GetById(Convert.ToInt32(usuarioId));
+            Usuario usuario = _usuarioRepo.GetUsuarioById(usuarioId);
 
-            var result = await _userManager.ConfirmEmailAsync(usuario, token);
+            IdentityResult result = await _userManager.ConfirmEmailAsync(usuario, token);
 
             if (result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login");
             else
                 return View("Error");
         }
@@ -133,33 +320,6 @@ namespace E_Conc.Controllers
             return View(modelo);
         }
 
-        public async Task<IActionResult> VerificacaoDoisFatores(Usuario usuario)
-        {
-            var token =
-                await _userManager.GenerateTwoFactorTokenAsync(usuario, "SMS");
-
-            await _smsService.SendSmsAsync
-                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
-
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> VerificacaoDoisFatores(ContaVerificacaoDoisFatoresViewModel modelo)
-        {
-            var resultado =
-                await _signInManager.TwoFactorSignInAsync(
-                        "SMS",
-                        modelo.Token,
-                        isPersistent: modelo.ContinuarLogado,
-                        rememberClient: modelo.LembrarDesteComputador);
-
-            if (resultado.Succeeded)
-                return RedirectToAction("Index", "Home");
-
-            return View("Error");
-        }
-
         public IActionResult EsqueciSenha()
         {
             return View();
@@ -190,154 +350,19 @@ namespace E_Conc.Controllers
             return View();
         }
 
-        public IActionResult ConfirmaAlteracaoSenha(string usuarioId, string token)
-        {
-            var modelo = new ConfirmacaoAlteracaoSenhaViewModel(usuarioId, token);
-            return View(modelo);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> ConfirmaAlteracaoSenha(ConfirmacaoAlteracaoSenhaViewModel modelo)
-        {
-            if (ModelState.IsValid)
-            {
-                var usuario = _usuarioRepo.GetById(Convert.ToInt32(modelo.UsuarioId));
-                var result =
-                    await _userManager.ResetPasswordAsync(
-                    usuario,
-                    modelo.Token,
-                    modelo.NovaSenha);
-
-                if (result.Succeeded)
-                    return RedirectToAction("Index", "Home");
-
-                AdicionaErros(result);
-            }
-            return View();
-        }
-
-        public async Task<IActionResult> Logoff()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Index", "Home");
-        }
-
-        [HttpPost]
-        public IActionResult EsquecerNavegador()
-        {
-            foreach (var cookie in Request.Cookies.Keys)
-            {
-                if (!cookie.Equals("ContinuarLogado"))
-                    Response.Cookies.Delete(cookie);
-            }
-
-            return RedirectToAction("MinhaConta");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> DeslogarDeTodosOsLocais()
-        {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                 ClaimTypes.NameIdentifier).Value;
-
-            var usuario = await _userManager.FindByIdAsync(userId);
-
-            await _userManager.UpdateSecurityStampAsync(usuario);
-
-            return RedirectToAction("Index", "Home");
-        }
-
         private IActionResult SenhaOuUsuarioInvalidos()
         {
             ModelState.AddModelError("", "Credenciais Inválidas");
             return View("Login");
         }
 
-        public async Task<IActionResult> MinhaConta()
-        {
-            var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                ClaimTypes.NameIdentifier).Value;
-
-            var usuario = await _userManager.FindByIdAsync(userId);
-
-            var modelo = new ContaMinhaContaViewModel(
-                    usuario.NomeCompleto, 
-                    usuario.PhoneNumber, 
-                    usuario.TwoFactorEnabled,
-                    usuario.PhoneNumberConfirmed
-                );
-
-            return View(modelo);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
-        {
-            if (ModelState.IsValid)
-            {
-                var userId = _httpContextAccessor.HttpContext.User.FindFirst(
-                ClaimTypes.NameIdentifier).Value;
-
-                var usuario = await _userManager.FindByIdAsync(userId);
-
-                usuario.NomeCompleto = modelo.NomeCompleto;
-                usuario.PhoneNumber = modelo.NumeroDeCelular;               
-
-                if (!usuario.PhoneNumberConfirmed)                
-                    await EnviarSmsConfirmacaoAsync(usuario);
-                else
-                    usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
-
-                var resultadoUpdate = await _userManager.UpdateAsync(usuario);
-
-                if (resultadoUpdate.Succeeded)
-                    return RedirectToAction("Index", "Home");
-
-                AdicionaErros(resultadoUpdate);                
-            }
-            return View();
-        }
-
-        public async Task EnviarSmsConfirmacaoAsync(Usuario usuario)
-        {
-            var token = 
-                await _userManager.GenerateChangePhoneNumberTokenAsync(
-                    usuario, usuario.PhoneNumber);
-
-            await _smsService.SendSmsAsync
-                (usuario.PhoneNumber, $"Token de Confirmação: {token}");
-        }
-
-        public IActionResult VerificacaoCodigoCelular()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> VerificacaoCodigoCelular(string token)
-        {
-            var usuario = await GetCurrentUserAsync();
-
-            var resultado = 
-                await _userManager.ChangePhoneNumberAsync(
-                    usuario, 
-                    usuario.PhoneNumber, 
-                    token);
-
-            if (resultado.Succeeded)
-                return RedirectToAction("Index", "Home");
-
-            AdicionaErros(resultado);
-
-            return View();
-        }
-
         private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
 
         private void AdicionaErros(IdentityResult result)
         {
-            foreach (var error in result.Errors)            
+            foreach (var error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
+        #endregion
     }
 }
