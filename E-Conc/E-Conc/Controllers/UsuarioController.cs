@@ -11,13 +11,18 @@ namespace E_Conc.Controllers
     [Authorize(Roles = "Admin")]
     public class UsuarioController : Controller
     {
+        #region Propriedades
         private UserManager<Usuario> _userManager;
         private RoleManager<IdentityRole> _roleManager;
+        #endregion
+
+        #region Construtor
         public UsuarioController(UserManager<Usuario> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
         }
+        #endregion
 
         public IActionResult Index()
         {

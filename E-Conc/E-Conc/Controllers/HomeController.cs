@@ -1,7 +1,6 @@
 ﻿using E_Conc.Models.ViewModels;
 using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -9,10 +8,13 @@ namespace E_Conc.Controllers
 {
     public class HomeController : Controller
     {
-
+        #region Propriedades
         private readonly IEmailService _emailService;
+        #endregion
 
+        #region Construtor
         public HomeController(IEmailService emailService) => _emailService = emailService;
+        #endregion
 
         public IActionResult Index()
         {

@@ -18,17 +18,21 @@
     </div>
     <div class="form-group">
         <label for="email">E-mail</label>
-        <input type="email" required class="form-control input-lg"
+        <input type="email" required class="form-control input-lg" 
+               placeholder="Precisamos do seu E-mail para respondermos a sua solicitação! Seu e-mail não será divulgado."
                asp-for="Email" />
     </div>
     <div class="form-group">
         <label for="subject">Assunto</label>
         <input type="text" required class="form-control input-lg"
+                placeholder="Informe o objetivo do seu contato, ex: 'Problema de login', 'Como me inscrever no E-Conc', etc."
                asp-for="Subject" />
     </div>
     <div class="form-group">
         <label for="msg">Mensagem</label>
-        <textarea class="form-control" asp-for="Message" required></textarea>
+        <textarea class="form-control" asp-for="Message" required 
+                  placeholder="Informe o seu problema para que possamos te ajudar!">
+        </textarea>
     </div>
     <button type="submit" class="btn btn-success">Enviar</button>
 </form>

@@ -12,11 +12,14 @@ namespace E_Conc.Controllers
 {
     public class ProdutoController : Controller
     {
+        #region Propriedades
         private readonly IProdutoRepository _produtoRepo;
         private readonly IUsuarioRepository _usuarioRepo;
         private UserManager<Usuario> _userManager;
         private CarrosselViewModel _carrosselViewModel;
+        #endregion
 
+        #region Construtor
         public ProdutoController(IProdutoRepository produtoRepo,
                                  IUsuarioRepository usuarioRepo,
                                  UserManager<Usuario> userManager)
@@ -25,8 +28,10 @@ namespace E_Conc.Controllers
             _userManager = userManager;
             _usuarioRepo = usuarioRepo;
         }
+        #endregion
 
-        [Authorize]
+        #region Acesso a Administradores, Orientadores e Alunos
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
         public IActionResult Carrossel()
         {
             var produtosDesenvolvimento = new CategoriaViewModel
@@ -54,7 +59,7 @@ namespace E_Conc.Controllers
             return View(_carrosselViewModel);
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
         public IActionResult Detalhes(int? produtoId)
         {
             if (produtoId != null)
@@ -68,7 +73,7 @@ namespace E_Conc.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
         public IActionResult VerTudo()
         {
             List<Produto> Produtos = _produtoRepo.GetAll().ToList();
@@ -76,12 +81,17 @@ namespace E_Conc.Controllers
             return View(Produtos);
         }
 
-        public IActionResult Cadastrar()
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public IActionResult TodosComprados()
         {
-            return View();
-        }
+            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
 
-        [HttpPost]
+            return View("MeusProdutos", produtos);
+        }
+        #endregion
+
+        #region Acesso a Administradores e Orientadores
+        [Authorize(Roles = "Admin, Orientador")]
         public IActionResult Cadastrar(Produto produto)
         {
             Produto novoProduto = new Produto
@@ -99,6 +109,45 @@ namespace E_Conc.Controllers
             return View("Resumo", _produtoRepo.AdicionaProduto(novoProduto));
         }
 
+        [Authorize(Roles = "Admin, Orientador")]
+        public IActionResult RemoverProduto(int? produtoId)
+        {
+            if (produtoId.HasValue)
+                _produtoRepo.RemoveProduto(produtoId);
+
+            return RedirectToAction("MeusProdutos");
+        }
+
+        [Authorize(Roles = "Admin, Orientador")]
+        public IActionResult Comprados()
+        {
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosDisponiveis(usuario);
+
+            return View("MeusProdutos", produtos);
+        }
+        #endregion
+
+        #region Acesso a Orientadores
+        [Authorize(Roles = "Orientador")]
+        public IActionResult MeusProdutos()
+        {
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosPorUsuario(usuario);
+
+            return View(produtos);
+        }
+
+        [Authorize(Roles = "Orientador")]
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+        #endregion
+
+        #region MétodosAuxiliares
         private Usuario AtribuiUsuarioCorrente()
         {
             var usuarioEmail = _userManager.FindByEmailAsync(User.Identity.Name);
@@ -118,42 +167,6 @@ namespace E_Conc.Controllers
 
             return string.Empty;
         }
-
-        [Authorize]
-        public IActionResult RemoverProduto(int? produtoId)
-        {
-            if (produtoId.HasValue)
-                _produtoRepo.RemoveProduto(produtoId);
-
-            return RedirectToAction("MeusProdutos");
-        }
-
-        [Authorize]
-        public IActionResult MeusProdutos()
-        {
-            Usuario usuario = AtribuiUsuarioCorrente();
-
-            List<Produto> produtos = _produtoRepo.GetProdutosPorUsuario(usuario);
-
-            return View(produtos);
-        }
-
-        [Authorize]
-        public IActionResult Comprados()
-        {
-            Usuario usuario = AtribuiUsuarioCorrente();
-
-            List<Produto> produtos = _produtoRepo.GetProdutosDisponiveis(usuario);
-
-            return View("MeusProdutos", produtos);
-        }
-
-        [Authorize]
-        public IActionResult TodosComprados()
-        {
-            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
-
-            return View("MeusProdutos", produtos);
-        }
+        #endregion
     }
 }
