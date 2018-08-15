@@ -27,6 +27,11 @@
                            asp-action="Detalhes"
                            asp-route-produtoId="@(produto.Id)">Ver Produto</a>
                     </div>
+                    <div>
+                        <a asp-controller="Produto"
+                           asp-action="Editar"
+                           asp-route-produtoId="@(produto.Id)">Editar</a>
+                    </div>
                 </div>
             </div>
         </div>

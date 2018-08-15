@@ -13,5 +13,6 @@ namespace E_Conc.Data.Interfaces
         List<Produto> GetProdutosPorUsuario(Usuario usuario);
         List<Produto> GetProdutosDisponiveis(Usuario usuario);
         List<Produto> GetProdutosComprados();
+        void UpdateDispProduto(int? produtoId);
     }
 }

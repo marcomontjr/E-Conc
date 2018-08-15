@@ -48,10 +48,19 @@
                class="btn btn-danger">
                 Remover Produto
             </a>
+
+            <a asp-controller="Produto"
+               asp-action="Editar"
+               asp-route-produtoId="@(Model.Id)"
+               id="EditButton"
+               class="btn btn-default">
+                Editar Produto
+            </a>
+
             <a asp-controller="Produto"
                asp-action="MeusProdutos"
                class="btn btn-success"
-               id="ConfirmButton">                
+               id="ConfirmButton">
                 Confirmar
             </a>
         </div>
@@ -68,5 +77,9 @@
 
     $("#RemoveButton").click(function () {
         $($('#RemoverProdutoCadastro').modal('show'))
+    });
+
+    $("#EditButton").click(function () {
+        $($('#EditarProdutoCadastro').modal('show'))
     });
 </script>
