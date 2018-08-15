@@ -12,13 +12,12 @@ namespace E_Conc.Data.Repository
         public ItemPedidoRepository(Contexto context, IHttpContextAccessor contextAccessor)
             : base(context, contextAccessor) { }
 
-        public ItemPedido AddItemPedido(int produtoId)
+        public ItemPedido AddItemPedido(int produtoId, Usuario comprador)
         {
             var produto = (from p in _context.Produtos
                             .Include(u => u.Usuario)
-                            .Include(c => c.Curso)
                            where p.Id.Equals(produtoId)
-                           select p).Single();
+                           select p).Single();            
 
             //TODO: Implementar a Busca do Aluno para a realização da compra. Passar o Aluno buscado como segundo
             //parâmetro do ItemPedido
@@ -29,7 +28,7 @@ namespace E_Conc.Data.Repository
                     .Where(ip => ip.Produto.Id == produto.Id)
                     .Any())
                 {
-                    var itemPedido = new ItemPedido(produto, produto.Usuario);
+                    var itemPedido = new ItemPedido(produto, comprador);
                     _context.ItensPedido.Add(itemPedido);
 
                     _context.SaveChanges();
@@ -48,7 +47,6 @@ namespace E_Conc.Data.Repository
             var itemPedido = (from ip in _context.ItensPedido
                               .Include(u => u.Usuario)
                               .Include(p => p.Produto)
-                              .ThenInclude(c => c.Curso)
                               where ip.Id == itemPedidoId
                               select ip).Single();
 

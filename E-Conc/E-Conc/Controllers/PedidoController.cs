@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Threading.Tasks;
 using E_Conc.Data.Interfaces;
 using E_Conc.Models;
 using E_Conc.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Conc.Controllers
@@ -14,10 +16,12 @@ namespace E_Conc.Controllers
         private readonly IItemPedidoRespository _itemPedidoRepo;
         private readonly IEmailService _emailService;
         private readonly ISmsService _smsService;
+        private UserManager<Usuario> _userManager;
         #endregion
 
         #region Construtor
-        public PedidoController(IProdutoRepository produtoRepo,
+        public PedidoController(UserManager<Usuario> userManager,
+                                IProdutoRepository produtoRepo,
                                 IItemPedidoRespository itemPedidoRepo,
                                 IEmailService emailService,
                                 ISmsService smsService)
@@ -26,15 +30,18 @@ namespace E_Conc.Controllers
             _itemPedidoRepo = itemPedidoRepo;
             _emailService = emailService;
             _smsService = smsService;
+            _userManager = userManager;
         }
         #endregion
 
         #region Acesso a Alunos
         [Authorize(Roles = "Aluno")]
-        public IActionResult Carrinho(int? produtoId)
+        public async Task<IActionResult> Carrinho(int? produtoId)
         {
+            Usuario usuarioComprador = await GetCurrentUserAsync();
+
             if (produtoId.HasValue)
-                return View(_itemPedidoRepo.AddItemPedido(produtoId.Value));
+                return View(_itemPedidoRepo.AddItemPedido(produtoId.Value, usuarioComprador));
 
             return View();
         }
@@ -93,6 +100,8 @@ namespace E_Conc.Controllers
                        "(Email: " + emailAluno + 
                        "), att Equipe E-Conc");
         }
+
+        private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
         #endregion
     }
 }

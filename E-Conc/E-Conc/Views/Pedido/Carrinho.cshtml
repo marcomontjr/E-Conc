@@ -39,7 +39,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a asp-action="RemoverItemDoCarrinho" 
+            <a asp-action="RemoverItemDoCarrinho"
                asp-route-itemPedido="@(Model.Id)"
                class="btn btn-danger">
                 Remover Item do Carrinho
@@ -55,4 +55,17 @@
 @Html.Partial("~/Views/Modals/FinalizarPedido.cshtml", Model)
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/Carrinho.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#CarrinhoModal').modal('show')
+
+        $("#removeButton").click(function () {
+            $('#RemoverItemCarrinhoModal').modal('show')
+        });
+
+        $("#resumoButton").click(function () {
+            $('#FinalizarPedidoModal').modal('show')
+        });
+    });
+</script>
