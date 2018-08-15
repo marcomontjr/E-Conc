@@ -75,10 +75,10 @@ namespace E_Conc.Data.Repository
                         .Where(p => p.Usuario.Equals(usuario)).ToList();
         }
 
-        public List<Produto> GetProdutosDisponiveis(Usuario usuario)
+        public List<Produto> GetProdutosDisponiveisPorUsuario(Usuario usuario)
         {
             return _context.Produtos
-                        .Where(u => u.Usuario == usuario && !u.Disponivel)
+                        .Where(u => u.Usuario == usuario && u.Disponivel)
                         .ToList();
         }
 
@@ -129,6 +129,13 @@ namespace E_Conc.Data.Repository
                 else
                     productToUpdate.Disponivel = true;
             }
+        }
+
+        public List<Produto> GetProdutosCompradosPorUsuario(Usuario usuario)
+        {
+            return _context.Produtos
+                        .Where(u => u.Usuario == usuario && !u.Disponivel)
+                        .ToList();
         }
     }
 }

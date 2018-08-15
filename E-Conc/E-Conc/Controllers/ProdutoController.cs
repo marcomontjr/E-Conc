@@ -81,7 +81,7 @@ namespace E_Conc.Controllers
             return View(Produtos);
         }
 
-        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        [Authorize(Roles = "Admin")]
         public IActionResult TodosComprados()
         {
             List<Produto> produtos = _produtoRepo.GetProdutosComprados();
@@ -118,16 +118,6 @@ namespace E_Conc.Controllers
                 _produtoRepo.RemoveProduto(produtoId);
 
             return RedirectToAction("MeusProdutos");
-        }
-
-        [Authorize(Roles = "Admin, Orientador")]
-        public IActionResult Comprados()
-        {
-            Usuario usuario = AtribuiUsuarioCorrente();
-
-            List<Produto> produtos = _produtoRepo.GetProdutosDisponiveis(usuario);
-
-            return View("MeusProdutos", produtos);
         }
         #endregion
 
@@ -166,6 +156,39 @@ namespace E_Conc.Controllers
 
             return View("Resumo", _produtoRepo.AdicionaProduto(novoProduto));
         }
+
+        [Authorize(Roles = "Orientador")]
+        public IActionResult Disponiveis()
+        {
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosDisponiveisPorUsuario(usuario);
+
+            return View("MeusProdutos", produtos);
+        }
+
+        [Authorize(Roles = "Orientador")]
+        public IActionResult Comprados()
+        {
+            Usuario usuario = AtribuiUsuarioCorrente();
+
+            List<Produto> produtos = _produtoRepo.GetProdutosCompradosPorUsuario(usuario);
+
+            return View("MeusProdutos", produtos);
+        }
+
+        [Authorize(Roles = "Orientador")]
+        public IActionResult FinalizarProjeto()
+        {
+            return View();
+        }
+
+        //[HttpPost]
+        //[Authorize(Roles = "Orientador")]
+        //public IActionResult FinalizarProjeto()
+        //{
+            
+        //}
         #endregion
 
         #region MétodosAuxiliares

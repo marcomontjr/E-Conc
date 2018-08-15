@@ -2,40 +2,5 @@
 
 <br />
 
-<div class="container">
-    <h2>Produtos Disponíveis</h2>
-
-    <p>Selecione uma das categorias abaixo para visualizar os projetos</p>
-    @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
-          "Ver Todas as Categorias",  new { @class = "form-control", @id = "Categorias"}
-    );
-
-    <input type="text" placeholder="Pesquisar Produto" class="form-control input-lg" id="filtro" />
-</div>
-
-@foreach (var produto in Model)
-{
-    <div class="@produto.Categoria bloco">
-        <div class="item  col-xs-4 col-lg-4">
-            <br /><br /><br />
-            <div class="thumbnail panel panel-default">
-                <img width="220" height="220" class="group list-group-image" src="~/images/Produtos/@produto.Arquivo" />
-                <div class="caption panel-footer text-center">
-                    <h4 class="group inner list-group-item-heading">
-                        @produto.Nome
-                    </h4>
-                    <div>
-                        <a asp-controller="Produto"
-                           asp-action="Detalhes"
-                           asp-route-produtoId="@(produto.Id)">Ver Produto</a>
-                    </div>
-                 </div>
-            </div>
-        </div>
-    </div>
-
-}
-
-<script src="~/lib/jquery/dist/jquery.js"></script>
-<script src="~/js/SelecionarCategoria.js"></script>
-<script src="~/js/PesquisarProduto.js"></script>
+<h2>Produtos Disponíveis</h2>
+@Html.Partial("~/Views/Partials/ListaProdutosPartial.cshtml", Model)

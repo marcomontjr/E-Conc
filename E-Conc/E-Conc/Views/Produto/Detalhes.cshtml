@@ -19,6 +19,24 @@
                     Adicionar ao Carrinho
                 </a>
             }
+            else
+            {
+                <a class="btn btn-success"
+                   asp-controller="Produto"
+                   asp-action="Editar"
+                   asp-route-produtoId="@(Model.Id)">                    
+                    Editar
+                </a>
+                @if (!Model.Disponivel)
+                {
+                    <a class="btn btn-success"
+                       asp-controller="Produto"
+                       asp-action="FinalizarProjeto"
+                       asp-route-produtoId="@(Model.Id)">
+                        Finalizar Projeto
+                    </a>
+                }
+            }
         </div>
         <div class="col-md-12">
             <div style="width:100%;border-top:1px solid silver">

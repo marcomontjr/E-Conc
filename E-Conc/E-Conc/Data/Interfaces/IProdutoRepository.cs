@@ -11,8 +11,9 @@ namespace E_Conc.Data.Interfaces
         Produto AdicionaProduto(Produto produto);
         void RemoveProduto(int? produtoId);
         List<Produto> GetProdutosPorUsuario(Usuario usuario);
-        List<Produto> GetProdutosDisponiveis(Usuario usuario);
-        List<Produto> GetProdutosComprados();
+        List<Produto> GetProdutosDisponiveisPorUsuario(Usuario usuario);
+        List<Produto> GetProdutosCompradosPorUsuario(Usuario usuario);
         void UpdateDispProduto(int? produtoId);
+        List<Produto> GetProdutosComprados();
     }
 }
