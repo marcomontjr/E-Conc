@@ -24,7 +24,7 @@ namespace E_Conc.Data.Repository
             if (produto != null)
                 return produto;
 
-            throw new System.Exception("Produto não Encontrado");
+            throw new Exception("Produto não Encontrado");
         }
 
         public List<Produto> GetProdutosPorCategoria(Categoria categoria)
@@ -44,7 +44,12 @@ namespace E_Conc.Data.Repository
             if (produto != null)
             {
                 _context.Produtos.Add(produto);
+
+                var produtoLog = new ProdutoLog(produto, "Produto Cadastrado", DateTime.Now);
+
+                _context.ProdutoLog.Add(produtoLog);
                 _context.SaveChanges();
+                _context.Dispose();
             }
 
             return produto;
@@ -86,22 +91,44 @@ namespace E_Conc.Data.Repository
 
         public new void Update(Produto produto)
         {
-            var productToUpdate = _context.Produtos
+            if (produto != null)
+            {
+                var productToUpdate = _context.Produtos
                                     .Where(p => p.Id == produto.Id)
                                     .Single();
 
-            if (productToUpdate != null)
+                produto.Usuario = productToUpdate.Usuario;
+
+                if (productToUpdate != null)
+                {
+                    productToUpdate.Arquivo = produto.Arquivo;
+                    productToUpdate.Categoria = produto.Categoria;
+                    productToUpdate.Curso = produto.Curso;
+                    productToUpdate.Descricao = produto.Descricao;
+                    productToUpdate.Nome = produto.Nome;
+                    productToUpdate.Requisitos = produto.Requisitos;                    
+
+                    _context.SaveChanges();
+                    _context.Dispose();
+                }
+                else
+                    throw new ArgumentNullException("Produto Não Existe");
+            }
+        }
+
+        public void UpdateDispProduto(int? produtoId)
+        {
+            if (produtoId != null)
             {
-                if (productToUpdate.Disponivel)                
+                var productToUpdate = _context.Produtos
+                                    .Where(p => p.Id == produtoId)
+                                    .Single();
+
+                if (productToUpdate.Disponivel)
                     productToUpdate.Disponivel = false;
                 else
                     productToUpdate.Disponivel = true;
-
-                _context.SaveChanges();
-                _context.Dispose();
             }
-            else            
-                throw new ArgumentNullException("Produto Não Existe");
         }
     }
 }

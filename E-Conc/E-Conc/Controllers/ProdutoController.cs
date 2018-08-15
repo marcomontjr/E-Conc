@@ -90,23 +90,25 @@ namespace E_Conc.Controllers
         }
         #endregion
 
-        #region Acesso a Administradores e Orientadores
+        #region Acesso a Administradores e Orientadores   
         [Authorize(Roles = "Admin, Orientador")]
-        public IActionResult Cadastrar(Produto produto)
+        public IActionResult Editar(int? produtoId)
         {
-            Produto novoProduto = new Produto
-            {
-                Nome = produto.Nome,
-                Arquivo = AtribuiNomeArquivo(produto.Categoria),
-                Descricao = produto.Descricao,
-                Disponivel = true,
-                Categoria = produto.Categoria,
-                Curso = produto.Curso,
-                Usuario = AtribuiUsuarioCorrente(),
-                Requisitos = produto.Requisitos
-            };
+            var produtoToUpdate = _produtoRepo.GetById(produtoId);            
 
-            return View("Resumo", _produtoRepo.AdicionaProduto(novoProduto));
+            return View(produtoToUpdate);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Admin, Orientador")]
+        public IActionResult Editar(Produto produto)
+        {
+            produto.Arquivo = AtribuiNomeArquivo(produto.Categoria);
+
+            if (produto != null)            
+                _produtoRepo.Update(produto);
+
+            return View("Resumo", produto);            
         }
 
         [Authorize(Roles = "Admin, Orientador")]
@@ -144,6 +146,25 @@ namespace E_Conc.Controllers
         public IActionResult Cadastrar()
         {
             return View();
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Orientador")]
+        public IActionResult Cadastrar(Produto produto)
+        {
+            Produto novoProduto = new Produto
+            {
+                Nome = produto.Nome,
+                Arquivo = AtribuiNomeArquivo(produto.Categoria),
+                Descricao = produto.Descricao,
+                Disponivel = true,
+                Categoria = produto.Categoria,
+                Curso = produto.Curso,
+                Usuario = AtribuiUsuarioCorrente(),
+                Requisitos = produto.Requisitos
+            };
+
+            return View("Resumo", _produtoRepo.AdicionaProduto(novoProduto));
         }
         #endregion
 
