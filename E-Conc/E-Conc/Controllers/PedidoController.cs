@@ -51,7 +51,9 @@ namespace E_Conc.Controllers
         {
             if (itemPedidoId.HasValue)
             {
-                var itemPedido = _itemPedidoRepo.GetById(itemPedidoId.Value);
+                ItemPedido itemPedido = _itemPedidoRepo.GetById(itemPedidoId.Value);
+                _produtoRepo.Update(itemPedido.Produto);
+
                 string emailAluno = User.Identity.Name;
 
                 EnviaEmailParaOrientador(itemPedido.Usuario, itemPedido.Produto.Nome, emailAluno);
