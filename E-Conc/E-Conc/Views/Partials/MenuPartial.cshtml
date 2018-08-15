@@ -29,6 +29,7 @@
         <ul class="dropdown-menu">
             <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
             <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
+            <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
             @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
             {
                 <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>
@@ -37,8 +38,12 @@
             {
                 <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
                 <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
+                <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
             }
-            <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
+            }
         </ul>
     </li>
 }
