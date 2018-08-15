@@ -116,18 +116,17 @@ namespace E_Conc.Data.Repository
             }
         }
 
-        public void UpdateDispProduto(int? produtoId)
+        public void UpdateDispProduto(int? produtoId, bool disponibilizaProduto)
         {
             if (produtoId != null)
             {
                 var productToUpdate = _context.Produtos
                                     .Where(p => p.Id == produtoId)
                                     .Single();
+              
+                 productToUpdate.Disponivel = disponibilizaProduto;
 
-                if (productToUpdate.Disponivel)
-                    productToUpdate.Disponivel = false;
-                else
-                    productToUpdate.Disponivel = true;
+                _context.SaveChanges();
             }
         }
 
