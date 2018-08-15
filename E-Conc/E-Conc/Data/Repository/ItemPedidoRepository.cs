@@ -17,10 +17,7 @@ namespace E_Conc.Data.Repository
             var produto = (from p in _context.Produtos
                             .Include(u => u.Usuario)
                            where p.Id.Equals(produtoId)
-                           select p).Single();            
-
-            //TODO: Implementar a Busca do Aluno para a realização da compra. Passar o Aluno buscado como segundo
-            //parâmetro do ItemPedido
+                           select p).Single();  
 
             if (produto != null)
             {
