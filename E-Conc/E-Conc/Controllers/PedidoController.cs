@@ -52,7 +52,7 @@ namespace E_Conc.Controllers
             if (itemPedidoId.HasValue)
             {
                 ItemPedido itemPedido = _itemPedidoRepo.GetById(itemPedidoId.Value);
-                _produtoRepo.UpdateDispProduto(itemPedido.Produto.Id);
+                _produtoRepo.UpdateDispProduto(itemPedido.Produto.Id, false);
 
                 string emailAluno = User.Identity.Name;
 

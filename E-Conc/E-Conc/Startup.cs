@@ -67,6 +67,7 @@ namespace E_Conc
             services.Configure<SmsSettings>(Configuration.GetSection("SmsSettings"));
        
             services.AddTransient<IProdutoRepository, ProdutoRepository>();
+            services.AddTransient<IProdutoLogRepository, ProdutoLogRepository>();
             services.AddTransient<IItemPedidoRespository, ItemPedidoRepository>();
             services.AddTransient<IUsuarioRepository, UsuarioRepository>();
             services.AddMvc();

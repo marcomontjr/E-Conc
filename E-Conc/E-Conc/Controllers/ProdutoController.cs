@@ -5,6 +5,7 @@ using E_Conc.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,6 +16,7 @@ namespace E_Conc.Controllers
         #region Propriedades
         private readonly IProdutoRepository _produtoRepo;
         private readonly IUsuarioRepository _usuarioRepo;
+        private readonly IProdutoLogRepository _produtoLogRepo;
         private UserManager<Usuario> _userManager;
         private CarrosselViewModel _carrosselViewModel;
         #endregion
@@ -22,11 +24,13 @@ namespace E_Conc.Controllers
         #region Construtor
         public ProdutoController(IProdutoRepository produtoRepo,
                                  IUsuarioRepository usuarioRepo,
+                                 IProdutoLogRepository produtoLogRepo,
                                  UserManager<Usuario> userManager)
         {
             _produtoRepo = produtoRepo;
             _userManager = userManager;
             _usuarioRepo = usuarioRepo;
+            _produtoLogRepo = produtoLogRepo;
         }
         #endregion
 
@@ -178,17 +182,29 @@ namespace E_Conc.Controllers
         }
 
         [Authorize(Roles = "Orientador")]
-        public IActionResult FinalizarProjeto()
+        public IActionResult FinalizarProjeto(int? produtoId)
         {
-            return View();
+            var produto = _produtoRepo.GetById(produtoId);
+
+            var finalizacaoProjeto = 
+                new FinalizarProjetoViewModel(produto, produto.Id, "", true);
+
+            return View(finalizacaoProjeto);
         }
 
-        //[HttpPost]
-        //[Authorize(Roles = "Orientador")]
-        //public IActionResult FinalizarProjeto()
-        //{
-            
-        //}
+        [HttpPost]
+        [Authorize(Roles = "Orientador")]
+        public IActionResult FinalizarProjeto(FinalizarProjetoViewModel finalizarProjeto)
+        {
+            var produto = _produtoRepo.GetById(finalizarProjeto.ProdutoId);
+
+            _produtoRepo.UpdateDispProduto(produto.Id, finalizarProjeto.DeveSerDisponibilizado);
+
+            var produtoLog = new ProdutoLog(produto, finalizarProjeto.InformacoesProjeto, DateTime.Now);
+            _produtoLogRepo.Create(produtoLog);
+
+            return RedirectToAction("MeusProdutos");
+        }
         #endregion
 
         #region MétodosAuxiliares

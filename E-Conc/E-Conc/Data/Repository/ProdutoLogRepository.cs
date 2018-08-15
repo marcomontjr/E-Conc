@@ -8,5 +8,12 @@ namespace E_Conc.Data.Repository
     {
         public ProdutoLogRepository(Contexto context, IHttpContextAccessor contextAccessor)
             : base(context, contextAccessor) { }
+
+        public new void Create(ProdutoLog produtoLog)
+        {
+            _context.Add(produtoLog);
+            _context.SaveChanges();
+            _context.Dispose();
+        }
     }
 }
