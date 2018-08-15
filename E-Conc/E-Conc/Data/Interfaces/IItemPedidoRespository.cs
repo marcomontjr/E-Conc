@@ -5,7 +5,7 @@ namespace E_Conc.Data.Interfaces
 {
     public interface IItemPedidoRespository : IRepository<ItemPedido>
     {
-        ItemPedido AddItemPedido(int produtoId);
+        ItemPedido AddItemPedido(int produtoId, Usuario comprador);
         void RemoveItemPedido(int itemPedidoId);
     }
 }
