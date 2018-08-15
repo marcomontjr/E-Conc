@@ -9,8 +9,13 @@ namespace E_Conc.Data.Configuration
         public void Configure(EntityTypeBuilder<ProdutoLog> builder)
         {
             builder
-                .HasOne(p => p.Produto)
-                .WithMany();
+                .HasOne(pl => pl.Produto)
+                .WithMany()
+                .IsRequired();
+
+            builder
+                .Property(pl => pl.Mensagem)
+                .IsRequired();
         }
     }
 }

@@ -48,9 +48,20 @@ namespace E_Conc.Data.Repository
                               select ip).Single();
 
             if (itemPedido != null)
+            {
+                GravaLogProdutoComprado(itemPedido.Produto);
                 return itemPedido;
-            
-                throw new ArgumentNullException("Pedido Não Encontrado");
+            }
+
+            throw new ArgumentNullException("Pedido Não Encontrado");
+        }
+
+        public void GravaLogProdutoComprado(Produto produto)
+        {
+            var produtoLog = new ProdutoLog(produto, "Produto Comprado", DateTime.Now);            
+
+            _context.ProdutoLog.Add(produtoLog);
+            _context.SaveChanges();
         }
 
         public void RemoveItemPedido(int itemPedidoId)

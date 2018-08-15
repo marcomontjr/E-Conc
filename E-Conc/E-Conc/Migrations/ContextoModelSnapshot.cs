@@ -70,6 +70,26 @@ namespace E_Conc.Migrations
                     b.ToTable("Produtos");
                 });
 
+            modelBuilder.Entity("E_Conc.Models.ProdutoLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DataLog");
+
+                    b.Property<string>("Mensagem")
+                        .IsRequired();
+
+                    b.Property<int?>("ProdutoId")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("ProdutoLog");
+                });
+
             modelBuilder.Entity("E_Conc.Models.Usuario", b =>
                 {
                     b.Property<string>("Id")
@@ -258,6 +278,14 @@ namespace E_Conc.Migrations
                     b.HasOne("E_Conc.Models.Usuario", "Usuario")
                         .WithMany()
                         .HasForeignKey("UsuarioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("E_Conc.Models.ProdutoLog", b =>
+                {
+                    b.HasOne("E_Conc.Models.Produto", "Produto")
+                        .WithMany()
+                        .HasForeignKey("ProdutoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

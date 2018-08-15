@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using E_Conc.Data.Interfaces;
 using E_Conc.Enum;
@@ -81,6 +82,26 @@ namespace E_Conc.Data.Repository
             return _context.Produtos
                         .Where(u => !u.Disponivel)
                         .ToList();
+        }
+
+        public new void Update(Produto produto)
+        {
+            var productToUpdate = _context.Produtos
+                                    .Where(p => p.Id == produto.Id)
+                                    .Single();
+
+            if (productToUpdate != null)
+            {
+                if (productToUpdate.Disponivel)                
+                    productToUpdate.Disponivel = false;
+                else
+                    productToUpdate.Disponivel = true;
+
+                _context.SaveChanges();
+                _context.Dispose();
+            }
+            else            
+                throw new ArgumentNullException("Produto Não Existe");
         }
     }
 }
