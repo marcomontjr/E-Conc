@@ -85,12 +85,16 @@ namespace E_Conc.Controllers
             return View(Produtos);
         }
 
-        [Authorize(Roles = "Admin")]
-        public IActionResult TodosComprados()
+        [Authorize(Roles = "Admin, Orientador, Aluno")]
+        public IActionResult Historico(int produtoId)
         {
-            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
+            var produtoLog = _produtoLogRepo.GetByIdProduto(produtoId);
 
-            return View("MeusProdutos", produtos);
+            if (produtoLog != null)
+                return View(produtoLog);
+            else
+                return View("SemHistorico");
+            
         }
         #endregion
 
@@ -122,6 +126,16 @@ namespace E_Conc.Controllers
                 _produtoRepo.RemoveProduto(produtoId);
 
             return RedirectToAction("MeusProdutos");
+        }
+        #endregion
+
+        #region Acesso a Administradores
+        [Authorize(Roles = "Admin")]
+        public IActionResult TodosComprados()
+        {
+            List<Produto> produtos = _produtoRepo.GetProdutosComprados();
+
+            return View("MeusProdutos", produtos);
         }
         #endregion
 

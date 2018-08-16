@@ -8,6 +8,8 @@ namespace E_Conc.Models
         public string Mensagem { get; set; }
         public DateTime DataLog { get; set; }
 
+        public ProdutoLog() { }
+
         public ProdutoLog(Produto produto, string mensagem, DateTime dataLog)
         {
             Produto = produto;

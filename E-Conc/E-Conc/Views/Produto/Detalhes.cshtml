@@ -24,7 +24,7 @@
                 <a class="btn btn-default"
                    asp-controller="Produto"
                    asp-action="Editar"
-                   asp-route-produtoId="@(Model.Id)">                    
+                   asp-route-produtoId="@(Model.Id)">
                     Editar
                 </a>
                 @if (!Model.Disponivel)
@@ -37,6 +37,12 @@
                     </a>
                 }
             }
+            <a class="btn btn-success"
+               asp-controller="Produto"
+               asp-action="Historico"
+               asp-route-produtoId="@(Model.Id)">
+                Histórico
+            </a>
         </div>
         <div class="col-md-12">
             <div style="width:100%;border-top:1px solid silver">
