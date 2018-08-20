@@ -17,15 +17,13 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="navbar-header">
-            <a asp-controller="Home" asp-action="Index" class="navbar-brand"></a>
-        </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav Cabecalho">
-                @Html.Partial("~/Views/Partials/MenuPartial.cshtml")
-            </ul>
-        </div>
+    <nav class="navbar navbar-custom navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a asp-controller="Home" asp-action="Index" class="navbar-brand"></a>
+            </div>            
+            @Html.Partial("~/Views/Partials/MenuPartial.cshtml")
+        </div>     
     </nav>
     <div class="container body-content">
         @RenderBody()
