@@ -1,19 +1,28 @@
 ﻿@model List<ProdutoLog>
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="~/css/Historico.css" rel="stylesheet" />
 <br/><br />
 <br /><br />
-<body>
     <div class="timeline">
-        @foreach (var item in Model)
+        @for (var i = 0; i < Model.Count; i++)
         {
-           <div class="container center">
-               <div class="content">
-                   <h2>@item.DataLog.Date.Year</h2>
-                   <p>@item.Mensagem</p>
-               </div>
-           </div>           
+            @if (i % 2 == 0)
+            {
+                <div class="container left">
+                    <div class="content">
+                        <h2>@Model[i].DataLog.Date.Year</h2>
+                        <p>@Model[i].Mensagem</p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="container right">
+                    <div class="content">
+                        <h2>@Model[i].DataLog.Date.Year</h2>
+                        <p>@Model[i].Mensagem</p>
+                    </div>
+                </div>
+            }
         }
     </div>
-</body>

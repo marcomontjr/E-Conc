@@ -17,41 +17,40 @@
                 color: white;
             }
 </style>
-
-@if (User.Identity.IsAuthenticated)
-{
-    <li class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown"
-           asp-controller="Produto" asp-action="Carrossel">
-            Produtos
-            <span class="caret"></span>
-        </a>
-        <ul class="dropdown-menu">
-            <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
-            <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
-            <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
-            @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
-            {
-                <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>
-            }
-            @if (this.User.IsInRole("Orientador"))
-            {
-                <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
-                <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
-                <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
-            }
-            @if (this.User.IsInRole("Admin"))
-            {
-                <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
-            }
-        </ul>
-    </li>
-}
-
 <div class="topnav">
-    <a asp-controller="Home" asp-action="Index" class="menu-item">Home</a>
-    <a asp-controller="Home" asp-action="Sobre" class="menu-item">Sobre</a>
-    <a asp-controller="Home" asp-action="Contato" class="menu-item">Contato</a>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown"
+               asp-controller="Produto" asp-action="Carrossel">
+                Produtos
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
+                <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
+                <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
+                @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
+                {
+                    <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>
+                }
+                @if (this.User.IsInRole("Orientador"))
+                {
+                    <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
+                    <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
+                    <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
+                }
+                @if (this.User.IsInRole("Admin"))
+                {
+                    <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
+                }
+            </ul>
+        </li>
+    }
+
+    <a asp-controller="Home" asp-action="Index">Home</a>
+    <a asp-controller="Home" asp-action="Sobre">Sobre</a>
+    <a asp-controller="Home" asp-action="Contato">Contato</a>
 
     @if (this.User.IsInRole("Admin"))
     {
@@ -63,9 +62,7 @@
         var username = @User.Identity.Name;
 
         <a asp-controller="Conta" asp-action="Logoff">Logoff</a>
-        <p class="navbar-text">
-            Olá, <a asp-controller="Conta" asp-action="MinhaConta"> @(username.Split('@')[0])</a>
-        </p>
+        <a asp-controller="Conta" asp-action="MinhaConta">@(username.Split('.')[0])</a>       
     }
     else
     {
