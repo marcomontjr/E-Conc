@@ -54,3 +54,13 @@
     display: flex;
     align-items: center;
 }
+
+.navbar-inverse .navbar-nav li a {
+    margin-top: 2rem;
+    padding-right: 3rem;
+    color: #337ab7;
+}
+
+.navbar-inverse .navbar-nav {
+    float: right;
+}
