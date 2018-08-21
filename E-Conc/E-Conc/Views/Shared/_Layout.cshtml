@@ -17,11 +17,15 @@
     </environment>
 </head>
 <body>
-    <nav class="navbar navbar-custom navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-custom navbar-inverse navbar-fixed-top ">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a asp-controller="Home" asp-action="Index" class="navbar-brand"></a>
-            </div>            
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" 
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
             @Html.Partial("~/Views/Partials/MenuPartial.cshtml")
         </div>     
     </nav>
