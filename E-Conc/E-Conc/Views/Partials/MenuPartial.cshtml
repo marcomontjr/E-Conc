@@ -1,50 +1,56 @@
-﻿<div id="navbarNav">
-<ul class="nav navbar-nav">
-    <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-    <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
-    <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
-
-    @if (!User.Identity.IsAuthenticated)
-    {
-        <li><a asp-controller="Conta" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+﻿<style>
+    ul.nav a:hover {
+        color: #0f3cbb !important;
     }
-    else
-    {
-        var username = @User.Identity.Name;
+</style>
 
-        <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown"
-               asp-controller="Produto" asp-action="Carrossel">
-                Produtos
-                <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-                <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
-                <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
-                <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
-                @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
-                {
-                    <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>
-                }
-                @if (this.User.IsInRole("Orientador"))
-                {
-                    <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
-                    <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
-                    <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
-                }
-                @if (this.User.IsInRole("Admin"))
-                {
-                    <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
-                }
-            </ul>
-        </li>
-        @if (this.User.IsInRole("Admin"))
+<div id="navbarNav">
+    <ul class="nav navbar-nav">
+        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li><a asp-controller="Home" asp-action="Sobre">Sobre</a></li>
+        <li><a asp-controller="Home" asp-action="Contato">Contato</a></li>
+
+        @if (!User.Identity.IsAuthenticated)
         {
-            <li><a asp-controller="Administracao" asp-action="Index">Painel Administrativo</a></li>
+            <li><a asp-controller="Conta" asp-action="Login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
         }
+        else
+        {
+            var username = @User.Identity.Name;
 
-        <li><a asp-controller="Conta" asp-action="Logoff"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
-        <li><a asp-controller="Conta" asp-action="MinhaConta">Olá @(username.Split('.')[0])</a></li>
-    }
-</ul>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown"
+                   asp-controller="Produto" asp-action="Carrossel">
+                    Produtos
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
+                    <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
+                    <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
+                    @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
+                    {
+                        <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>
+                    }
+                    @if (this.User.IsInRole("Orientador"))
+                    {
+                        <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
+                        <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
+                        <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
+                    }
+                    @if (this.User.IsInRole("Admin"))
+                    {
+                        <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
+                    }
+                </ul>
+            </li>
+            @if (this.User.IsInRole("Admin"))
+            {
+                <li><a asp-controller="Administracao" asp-action="Index">Painel Administrativo</a></li>
+            }
+
+            <li><a asp-controller="Conta" asp-action="Logoff"><span class="glyphicon glyphicon-log-out"></span> Logoff</a></li>
+            <li><a asp-controller="Conta" asp-action="MinhaConta">Olá @(username.Split('.')[0])</a></li>
+        }
+    </ul>
 </div>
