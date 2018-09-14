@@ -4,7 +4,7 @@
   <img src="http://i67.tinypic.com/30wxjr7.jpg"/>
 </p>
 
-O E-Conc é uma plataforma que permite alunos de determinada instituição visualizarem temas de Conclusão de Curso (Tg's, TCC's, Monografias, etc.), o objetivo da plataforma é ajudar alunos a efetivamente escolherem temas sugeridos por professores e mestres para sua conclusão de curso.
+O e-Conc é uma plataforma que permite alunos de determinada instituição visualizarem temas de Conclusão de Curso (Tg's, TCC's, Monografias, etc.), o objetivo da plataforma é ajudar alunos a efetivamente escolherem temas sugeridos por professores e mestres para sua conclusão de curso.
 
 A Plataforma Segue um mecanismo consagrado na UX (User Experience) que são os E-Commerces, ou seja, toda a interatividade do aluno com a plataforma apresentará funcionalidades semelhantes ao arcabouço genérico de um E-Commerce (Adicionar Item ao Carrinho, Sistemas de Carrossel para visualização de produtos em destaque, Página de resumo da compra, etc.).
 
