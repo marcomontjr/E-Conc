@@ -8,18 +8,18 @@
     <div asp-validation-summary="All"></div>
     <br /><br />
     <br /><br />
-    <input type="text" placeholder="Nome" required class="form-control input-lg"
+    <input type="text" placeholder="Nome do Projeto" required class="form-control input-lg"
            asp-for="Nome" />
     <br />
     <input type="text" placeholder="Descrição" required class="form-control input-lg"
            asp-for="Descricao" />
     <br />
     @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
-          "Ver Todas as Categorias",  new { @class = "form-control"}
+          "Selecione uma Categoria",  new { @class = "form-control" }
     )
     <br />
     @Html.DropDownList("Curso", new SelectList(Enum.GetValues(typeof(Curso))),
-          "Cursos",  new { @class = "form-control"}
+          "Selecione um Curso",  new { @class = "form-control"}
     )
     <br /> <br />
     <label>Qual conhecimento o aluno deve ter para realizar este projeto? Cadastre um ou mais requisitosseparados por vírgula (exemplo: C#, Sql, etc.)</label>

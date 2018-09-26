@@ -99,6 +99,14 @@ namespace E_Conc.Controllers
         #endregion
 
         #region Acesso a Administradores e Orientadores   
+
+
+        [Authorize(Roles = "Admin, Orientador")]
+        public IActionResult Cadastrar()
+        {
+            return View();
+        }
+
         [Authorize(Roles = "Admin, Orientador")]
         public IActionResult Editar(int? produtoId)
         {
@@ -148,12 +156,6 @@ namespace E_Conc.Controllers
             List<Produto> produtos = _produtoRepo.GetProdutosPorUsuario(usuario);
 
             return View(produtos);
-        }
-
-        [Authorize(Roles = "Orientador")]
-        public IActionResult Cadastrar()
-        {
-            return View();
         }
 
         [HttpPost]

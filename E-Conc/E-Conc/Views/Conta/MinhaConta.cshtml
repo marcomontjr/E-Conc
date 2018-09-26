@@ -5,36 +5,52 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<style>
+    html, body {
+        overflow-y: hidden;
+    }
+    img {
+        float: right;
+    }
+</style>
+
+<br /><br />
 <h2>Minha Conta</h2>
 
-<form method="post" asp-controller="Conta" asp-action="EsquecerNavegador">
-    <button type="submit" class="btn btn-lg btn-primary btn-block">Esquecer Este Navegador</button>
-</form>
+<div class="row">
+    <img src="~/images/Promocional/BandeiraNacional.jpg" class="img-responsive" />
+    <div class="col-md-6">
+        <form method="post" asp-controller="Conta" asp-action="MinhaConta">
+            <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
+                   asp-for="NomeCompleto" />
+            <br />
+            <input type="text" placeholder="Número de Celular" required class="form-control input-lg"
+                   asp-for="NumeroDeCelular" />
+            <br />
+            @if (Model.NumeroCelularConfirmado)
+            {
+                <input type="checkbox" class="form-check-input" asp-for="HabilitarAutenticacaoDeDoisFatores" />
+                <label class="form-check-label">Habilitar Autenticação de Dois Fatores</label>
+            }
+            else
+            {
+                <p>
+                    Informe e Confirme seu número de Celular para habilitar a autenticação
+                    com 2 fatores!.
+                </p>
 
-<form method="post" asp-controller="Conta" asp-action="DeslogarDeTodosOsLocais">
-    <button type="submit" class="btn btn-lg btn-primary btn-block">Deslogar de Todos os Locais</button>
-</form>
-
-<form method="post" asp-controller="Conta" asp-action="MinhaConta">
-    <input type="text" placeholder="Nome Completo" required class="form-control input-lg"
-           asp-for="NomeCompleto" />
-    <br />
-    <input type="text" placeholder="Número de Celular" required class="form-control input-lg"
-           asp-for="NumeroDeCelular" />
-    <br />
-    @if (Model.NumeroCelularConfirmado)
-    {
-        <input type="checkbox" class="form-check-input" asp-for="HabilitarAutenticacaoDeDoisFatores" />
-        <label class="form-check-label">Habilitar Autenticação de Dois Fatores</label>
-    }
-    else
-    {
-        <p>
-            Informe e Confirme seu número de Celular para habilitar a autenticação
-            com 2 fatores!.
-        </p>
-
-        <a asp-action="VerificacaoCodigoCelular">Clique Aqui para verificar o token recebido!</a>
-    }
-    <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar</button>
-</form>
+                <a asp-action="VerificacaoCodigoCelular">Clique Aqui para verificar o token recebido!</a>
+            }
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Salvar</button>
+        </form>
+        <br />
+        <form method="post" asp-controller="Conta" asp-action="EsquecerNavegador">
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Esquecer Este Navegador</button>
+        </form>
+        <br />
+        <form method="post" asp-controller="Conta" asp-action="DeslogarDeTodosOsLocais">
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Deslogar de Todos os Locais</button>
+        </form>
+        <br />
+    </div>
+</div>
