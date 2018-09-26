@@ -4,26 +4,18 @@
     ViewData["Title"] = "EditarFuncoes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Funções do Usuário @Model.NomeCompleto</h2>
-<h5>@Model.UserName</h5>
+<br/><br />
+<h3>Funções do Usuário @Model.NomeCompleto</h3>
 <h5>@Model.Email</h5>
 <hr/>
 
 <form method="post" asp-controller="Usuario" asp-action="EditarFuncoes"> 
     <div class="form-horizontal">
         @Html.HiddenFor(model => model.Id)
-
-        <h4>Selecione as Funções</h4>
-        <br />
-        <hr />
         <table>
             <tr>
                 <th>
-                    Selecionado
-                </th>
-                <th>
-                    Função
+                    Funções
                 </th>
             </tr>
             @Html.EditorFor(modelo => modelo.Funcoes)
