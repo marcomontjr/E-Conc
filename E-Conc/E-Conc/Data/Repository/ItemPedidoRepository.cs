@@ -59,7 +59,6 @@ namespace E_Conc.Data.Repository
         public ItemPedido GetItemPedidoByProductId(int? ProdutoId)
         {
             return _context.ItensPedido
-                    .Include(p => p.Produto)
                     .Include(u => u.Usuario)
                     .Where(ip => ip.Produto.Id == ProdutoId)                    
                     .First();
