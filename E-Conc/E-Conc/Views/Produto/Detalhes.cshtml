@@ -22,7 +22,7 @@
                     <br/>
                     <a class="btn btn-primary"
                        asp-controller="Pedido"
-                       asp-action="DadosProjeto"
+                       asp-action="DadosDesenvolvimento"
                        asp-route-produtoId="@(Model.Id)">
                         Info. Desenvolvimento
                     </a>
@@ -57,12 +57,12 @@
                     </a>
                 }
             }
-            <a class="btn btn-success"
-               asp-controller="Produto"
-               asp-action="Historico"
-               asp-route-produtoId="@(Model.Id)">
-                Histórico
-            </a>
+           <a class="btn btn-success"
+              asp-controller="Produto"
+              asp-action="Historico"
+              asp-route-produtoId="@(Model.Id)">
+               Histórico
+           </a>
         </div>
         <div class="col-md-12">
             <div style="width:100%;border-top:1px solid silver">

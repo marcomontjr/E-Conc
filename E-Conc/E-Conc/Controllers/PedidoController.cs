@@ -79,7 +79,7 @@ namespace E_Conc.Controllers
 
         #region Orientadores
         [Authorize(Roles = "Orientador")]
-        public IActionResult DadosProjeto(int? ProdutoId)
+        public IActionResult DadosDesenvolvimento(int? ProdutoId)
         {
             ItemPedido itemPedido = _itemPedidoRepo.GetItemPedidoByProductId(ProdutoId);
 
