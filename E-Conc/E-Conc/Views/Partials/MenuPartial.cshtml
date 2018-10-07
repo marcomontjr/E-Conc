@@ -26,7 +26,7 @@
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown"
                    asp-controller="Produto" asp-action="Carrossel">
-                    Produtos
+                    Projetos
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -39,13 +39,13 @@
                     }
                     @if (this.User.IsInRole("Orientador"))
                     {
-                        <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Produtos</a></li>
-                        <li><a asp-controller="Produto" asp-action="Comprados">Meus Produtos Comprados</a></li>
-                        <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Produtos Disponíveis</a></li>
+                        <li><a asp-controller="Produto" asp-action="MeusProdutos">Meus Projetos</a></li>
+                        <li><a asp-controller="Produto" asp-action="Comprados">Meus Projetos Comprados</a></li>
+                        <li><a asp-controller="Produto" asp-action="Disponiveis">Meus Projetos Disponíveis</a></li>
                     }
                     @if (this.User.IsInRole("Admin"))
                     {
-                        <li><a asp-controller="Produto" asp-action="TodosComprados">Produtos Comprados</a></li>
+                        <li><a asp-controller="Produto" asp-action="TodosComprados">Projetos Comprados</a></li>
                     }
                 </ul>
             </li>

@@ -184,7 +184,7 @@ namespace E_Conc.Controllers
 
             List<Produto> produtos = _produtoRepo.GetProdutosDisponiveisPorUsuario(usuario);
 
-            return View("MeusProdutos", produtos);
+            return View(produtos);
         }
 
         [Authorize(Roles = "Orientador")]
@@ -194,7 +194,7 @@ namespace E_Conc.Controllers
 
             List<Produto> produtos = _produtoRepo.GetProdutosCompradosPorUsuario(usuario);
 
-            return View("MeusProdutos", produtos);
+            return View(produtos);
         }
 
         [Authorize(Roles = "Orientador")]

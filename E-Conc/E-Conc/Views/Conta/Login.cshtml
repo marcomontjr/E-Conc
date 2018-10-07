@@ -8,32 +8,36 @@
     img {
         float: left;
     }
+
     form {
         margin-right: 5%;
         margin-top: 15%;
     }
+
     .row {
         margin-top: 10%;
     }
 </style>
 
 <div class="row">
-    <img src="~/images/Logo/ArteLogo.png" class="img-responsive"/>
-    <div class="col-md-6">         
-            <form role="form" method="post" asp-controller="Conta" asp-action="Login">
-                <input type="email" name="email" placeholder="Email" required class="form-control input-lg"
-                       asp-for="Email" />
-                <br />
-                <input type="password" placeholder="Senha" required class="form-control input-lg"
-                       asp-for="Senha" />
-                <br />
-                <input type="checkbox" class="form-check-input" asp-for="ContinuarLogado">
-                <label class="form-check-label">Continuar Logado</label>
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
-                <br />
-                <div align="center">
-                    <a asp-action="EsqueciSenha">Esqueci Minha Senha</a>
-                </div>
-            </form>
+    <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
+    <div class="col-md-6">
+        <form role="form" method="post" asp-controller="Conta" asp-action="Login">
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+            <input placeholder="Email" class="form-control input-lg"
+                   asp-for="Email" />
+            <br />
+            <input type="password" placeholder="Senha" required class="form-control input-lg"
+                   asp-for="Senha" />
+            <br />
+            <input type="checkbox" class="form-check-input" asp-for="ContinuarLogado">
+            <label class="form-check-label">Continuar Logado</label>
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
+            <br />
+            <div align="center">
+                <a asp-action="EsqueciSenha">Esqueci Minha Senha</a>
+            </div>
+        </form>
     </div>
 </div>

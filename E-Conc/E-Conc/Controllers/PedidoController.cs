@@ -77,6 +77,16 @@ namespace E_Conc.Controllers
         }
         #endregion
 
+        #region Orientadores
+        [Authorize(Roles = "Orientador")]
+        public IActionResult DadosProjeto(int? ProdutoId)
+        {
+            ItemPedido itemPedido = _itemPedidoRepo.GetItemPedidoByProductId(ProdutoId);
+
+            return View(itemPedido);
+        }
+        #endregion
+
         #region Métodos Auxiliares
         private void EnviarSmsParaOrientador(Usuario usuario)
         {
@@ -102,7 +112,7 @@ namespace E_Conc.Controllers
                        "(Email: " + emailAluno + 
                        "), att Equipe E-Conc");
         }
-
+        
         private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
         #endregion
     }
