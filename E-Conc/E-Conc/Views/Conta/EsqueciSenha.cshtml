@@ -1,11 +1,29 @@
-﻿<h2>Esqueci Minha Senha</h2>
-<p>Preencha o campo de email com seu endereço de email cadastrado no fórum e enviaremos a ele as intruções para você recuperar sua senha</p>
+﻿<style>
+    img {
+        float: left;
+    }
 
-<form role="form" method="post" asp-controller="Conta" asp-action="EsqueciSenha">
-    <br />
+    form {
+        margin-right: 5%;
+        margin-top: 15%;
+    }
+</style>
+
+<br /><br />
+<h2>Esqueci Minha Senha</h2>
+<p>
+    Preencha o campo de email com seu endereço de email cadastrado no fórum e enviaremos
+    a ele as intruções para você recuperar sua senha
+</p>
+
+<div class="row">
     <img src="~/images/Logo/ArteLogo.png" class="img-responsive" />
-    <br />
-    <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
-    <br />
-    <button type="submit" class="btn btn-lg btn-primary btn-block">Enviar E-Mail</button>
-</form>
+    <div class="col-md-6">
+        <form role="form" method="post" asp-controller="Conta" asp-action="EsqueciSenha">
+            @Html.AntiForgeryToken()
+            <input type="email" name="email" placeholder="Email" required class="form-control input-lg" />
+            <br />
+            <button type="submit" class="btn btn-lg btn-primary btn-block">Enviar E-mail de Recuperação</button>
+        </form>
+    </div>
+</div>

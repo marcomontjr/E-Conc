@@ -278,6 +278,7 @@ namespace E_Conc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel modelo)
         {
             if (ModelState.IsValid)
@@ -326,6 +327,7 @@ namespace E_Conc.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> EsqueciSenha(string email)
         {
             if (ModelState.IsValid)

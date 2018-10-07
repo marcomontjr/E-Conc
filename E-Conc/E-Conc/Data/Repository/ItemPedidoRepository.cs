@@ -56,6 +56,15 @@ namespace E_Conc.Data.Repository
             throw new ArgumentNullException("Pedido Não Encontrado");
         }
 
+        public ItemPedido GetItemPedidoByProductId(int? ProdutoId)
+        {
+            return _context.ItensPedido
+                    .Include(p => p.Produto)
+                    .Include(u => u.Usuario)
+                    .Where(ip => ip.Produto.Id == ProdutoId)                    
+                    .First();
+        }
+
         public void GravaLogProdutoComprado(Produto produto)
         {
             var produtoLog = new ProdutoLog(produto, "Produto Comprado", DateTime.Now);            

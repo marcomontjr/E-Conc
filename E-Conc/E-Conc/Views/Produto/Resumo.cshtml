@@ -5,17 +5,17 @@
 @model Produto
 
 <br />
-
+<br />
 <h3>Resumo do Cadastro</h3>
 
-<h4>Confira os dados do produto cadastrado</h4>
+<h4>Confira os dados do projeto cadastrado</h4>
 
 <div class="panel panel-default">
     <div class="panel-body">
         <hr />
         <div class="row">
             <div class="col-md-8">
-                <h3>Dados do Produto</h3>
+                <h3>Dados do Projeto</h3>
                 <div>Nome: @(Model.Nome)</div>
                 <div>Descrição: @(Model.Descricao)</div>
                 <div>Categoria: @(Model.Categoria)</div>
@@ -41,26 +41,20 @@
 <div class="row">
     <div class="col-md-12">
         <div class="pull-right">
-            <a asp-controller="Produto"
-               asp-action="RemoverProduto"
-               asp-route-produtoId="@(Model.Id)"
-               id="RemoveButton"
+            <a id="RemoveButton"
                class="btn btn-danger">
-                Remover Produto
+                Remover Projeto
             </a>
 
             <a asp-controller="Produto"
                asp-action="Editar"
                asp-route-produtoId="@(Model.Id)"
-               id="EditButton"
                class="btn btn-default">
-                Editar Produto
+                Editar Projeto
             </a>
 
-            <a asp-controller="Produto"
-               asp-action="MeusProdutos"
-               class="btn btn-success"
-               id="ConfirmButton">
+            <a id="ConfirmButton"
+                class="btn btn-success">
                 Confirmar
             </a>
         </div>
@@ -77,9 +71,5 @@
 
     $("#RemoveButton").click(function () {
         $($('#RemoverProdutoCadastro').modal('show'))
-    });
-
-    $("#EditButton").click(function () {
-        $($('#EditarProdutoCadastro').modal('show'))
     });
 </script>
