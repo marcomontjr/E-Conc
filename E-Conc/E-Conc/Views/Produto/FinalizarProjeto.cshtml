@@ -12,10 +12,9 @@
     <div class="panel-body">
         <div class="row">
             <div class="col-md-12">
-                <h3>@(Model.Produto.Nome)</h3>
+                <h3>Projeto: </h3>@(Model.Produto.Nome)
             </div>
         </div>
-        <hr />
         <div class="row">
             <div class="col-md-8">
                 <h3>Dados do Projeto</h3>
@@ -24,20 +23,24 @@
                 <div>Requisitos: @(Model.Produto.Requisitos)</div>
             </div>
         </div>
-        <form role="form" method="post" asp-controller="Produto" asp-action="FinalizarProjeto">
-            <input type="hidden" asp-for="@Model.ProdutoId">
-            <input type="text" placeholder="Considerações Sobre o Projeto" required
-                   class="form-control input-lg" asp-for="InformacoesProjeto" />
-            <label>
-                O Projeto deve ficar disponível novamente para que outros alunos possa dar
-                continuidade no que foi feito?
-            </label>
-            <select asp-for="DeveSerDisponibilizado">
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-            </select>
-            <button type="submit" class="btn btn-lg btn-primary btn-block">Finalizar Projeto</button>
-        </form>
+        <br /><br />
+              <form role="form" method="post" asp-controller="Produto" asp-action="FinalizarProjeto">
+                  <input type="hidden" asp-for="@Model.ProdutoId">
+                  <input type="text" placeholder="Considerações Sobre o Projeto" required
+                         class="form-control input-lg" asp-for="InformacoesProjeto" />
+                  <br />
+                  <label>
+                      O Projeto deve ficar disponível novamente para que outros alunos possa dar
+                      continuidade no que foi feito?
+                  </label>
+                  <select class="form-control" 
+                      asp-for="DeveSerDisponibilizado">
+                      <option value="true">Sim</option>
+                      <option value="false">Não</option>
+                  </select>
+                  <br /><br />
+                  <button type="submit" class="btn btn-lg btn-primary btn-block">Finalizar Projeto</button>
+              </form>
         <hr />
     </div>
 </div>
