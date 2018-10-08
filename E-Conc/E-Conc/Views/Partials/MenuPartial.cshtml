@@ -32,7 +32,7 @@
                 <ul class="dropdown-menu">
                     <li><a asp-controller="Produto" asp-action="Carrossel">Destaque</a></li>
                     <li><a asp-controller="Produto" asp-action="VerTudo">Ver Todos</a></li>
-                    <li><a asp-controller="Produto" asp-action="VerDisponiveis">Disponíveis</a></li>
+                    <li><a asp-controller="Produto" asp-action="Disponiveis">Disponíveis</a></li>
                     @if (this.User.IsInRole("Admin") || this.User.IsInRole("Orientador"))
                     {
                         <li><a asp-controller="Produto" asp-action="Cadastrar">Cadastrar</a></li>

@@ -10,16 +10,42 @@
             <br /><br /><br />
             <h3>@Model.Nome</h3>
             <h5>Orientador:@Model.Usuario.NomeCompleto</h5>
-            @if (this.User.IsInRole("Orientador"))
+            @if (Model.Disponivel)
             {
-                @if (Model.Disponivel)
+                <h5>Status: Disponível</h5>
+
+                @if (this.User.IsInRole("Aluno"))
                 {
-                    <h5>Status: Disponível</h5>
+                    <a class="btn btn-success"
+                       asp-controller="Pedido"
+                       asp-action="Carrinho"
+                       asp-route-produtoId="@(Model.Id)">
+                        <span class="glyphicon glyphicon-shopping-cart"></span>
+                        Adicionar ao Carrinho
+                    </a>
                 }
                 else
                 {
-                    <h5>Status: Em Desenvolvimento</h5>
-                    <br/>
+                    <a class="btn btn-default"
+                       asp-controller="Produto"
+                       asp-action="Editar"
+                       asp-route-produtoId="@(Model.Id)">
+                        Editar
+                    </a>
+                }
+            }
+            else
+            {
+                <h5>Status: Em Desenvolvimento</h5>
+                @if (this.User.IsInRole("Orientador"))
+                {
+                    <a class="btn btn-success"
+                       asp-controller="Produto"
+                       asp-action="FinalizarProjeto"
+                       asp-route-produtoId="@(Model.Id)">
+                        Finalizar Projeto
+                    </a>
+
                     <a class="btn btn-primary"
                        asp-controller="Pedido"
                        asp-action="DadosDesenvolvimento"
@@ -28,41 +54,12 @@
                     </a>
                 }
             }
-
-            @if (this.User.IsInRole("Aluno"))
-            {
-                <a class="btn btn-success"
-                   asp-controller="Pedido"
-                   asp-action="Carrinho"
-                   asp-route-produtoId="@(Model.Id)">
-                    <span class="glyphicon glyphicon-shopping-cart"></span>
-                    Adicionar ao Carrinho
-                </a>
-            }
-            else
-            {
-                <a class="btn btn-default"
-                   asp-controller="Produto"
-                   asp-action="Editar"
-                   asp-route-produtoId="@(Model.Id)">
-                    Editar
-                </a>
-                @if (!Model.Disponivel)
-                {
-                    <a class="btn btn-success"
-                       asp-controller="Produto"
-                       asp-action="FinalizarProjeto"
-                       asp-route-produtoId="@(Model.Id)">
-                        Finalizar Projeto
-                    </a>
-                }
-            }
-           <a class="btn btn-success"
-              asp-controller="Produto"
-              asp-action="Historico"
-              asp-route-produtoId="@(Model.Id)">
-               Histórico
-           </a>
+            <a class="btn btn-success"
+               asp-controller="Produto"
+               asp-action="Historico"
+               asp-route-produtoId="@(Model.Id)">
+                Histórico
+            </a>
         </div>
         <div class="col-md-12">
             <div style="width:100%;border-top:1px solid silver">
