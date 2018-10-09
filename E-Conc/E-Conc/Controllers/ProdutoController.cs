@@ -219,7 +219,7 @@ namespace E_Conc.Controllers
             var produtoLog = new ProdutoLog(produto, finalizarProjeto.InformacoesProjeto, DateTime.Now);
             _produtoLogRepo.Create(produtoLog);
 
-            return RedirectToAction("MeusProdutos");
+            return RedirectToAction("   ");
         }
         #endregion
 
