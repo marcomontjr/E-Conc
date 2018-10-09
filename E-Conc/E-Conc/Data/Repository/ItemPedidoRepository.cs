@@ -44,6 +44,7 @@ namespace E_Conc.Data.Repository
             var itemPedido = (from ip in _context.ItensPedido
                               .Include(u => u.Usuario)
                               .Include(p => p.Produto)
+                              .Include(pu => pu.Produto.Usuario)
                               where ip.Id == itemPedidoId
                               select ip).Single();
 
