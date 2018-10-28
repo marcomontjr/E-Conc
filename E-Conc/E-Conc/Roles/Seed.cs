@@ -26,7 +26,8 @@ namespace E_Conc.Roles
             var admin = new Usuario
             {
                 UserName = Configuration.GetSection("UserSettings")["UserEmail"],
-                Email = Configuration.GetSection("UserSettings")["UserEmail"]                 
+                Email = Configuration.GetSection("UserSettings")["UserEmail"],
+                EmailConfirmed = true
             };
 
             string adminPassword = Configuration.GetSection("UserSettings")["UserPassword"];

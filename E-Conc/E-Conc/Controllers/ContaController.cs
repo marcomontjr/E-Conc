@@ -286,7 +286,10 @@ namespace E_Conc.Controllers
                 var usuario = await _userManager.FindByEmailAsync(modelo.Email);
 
                 if (usuario == null)
-                    SenhaOuUsuarioInvalidos();
+                {
+                    ModelState.AddModelError("", "Senha ou Usuário Inválidos");
+                    return View("Login");
+                }                    
 
                 var signInResult = await _signInManager.PasswordSignInAsync(
                                     usuario,
@@ -313,10 +316,10 @@ namespace E_Conc.Controllers
                     if (senhaCorreta)
                         ModelState.AddModelError("", "A conta está bloqueada");
                     else
-                        SenhaOuUsuarioInvalidos();
+                        ModelState.AddModelError("", "Senha ou Usuário Inválidos");
                 }
                 else
-                    SenhaOuUsuarioInvalidos();
+                    ModelState.AddModelError("", "Senha ou Usuário Inválidos");
             }
             return View(modelo);
         }
@@ -350,12 +353,6 @@ namespace E_Conc.Controllers
                 return View("EmailAlteracaoSenhaEnviado");
             }
             return View();
-        }
-
-        private IActionResult SenhaOuUsuarioInvalidos()
-        {
-            ModelState.AddModelError("", "Credenciais Inválidas");
-            return View("Login");
         }
 
         private Task<Usuario> GetCurrentUserAsync() => _userManager.GetUserAsync(User);
