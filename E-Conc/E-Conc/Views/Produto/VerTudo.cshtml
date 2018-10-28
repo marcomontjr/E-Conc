@@ -1,6 +1,10 @@
 ﻿@model IEnumerable<Produto>
 
-<br />
-<br />
+<style>
+    h2 {
+        margin-top: 10%;
+    }
+</style>
+    
 <h2>Projetos Disponíveis</h2>
 @Html.Partial("~/Views/Partials/ListaProdutosPartial.cshtml", Model)

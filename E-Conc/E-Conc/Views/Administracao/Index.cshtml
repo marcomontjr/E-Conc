@@ -1,7 +1,19 @@
-﻿<br /><br /><br />
+﻿<style>
+    #AdmNameInfo{
+        margin-top: 10%;
+    }
+    h2 {
+        margin-top: 10%;
+    }
+</style>
 <h2>Página Dedicada aos Administradores do E-Conc</h2>
 <p>Seja Bem-Vindo ao seu painel de administração!</p>
 
 <a asp-controller="Conta" asp-action="Registrar">Cadastrar Novo Usuário</a>
-<br/>
+<br />
 <a asp-controller="Usuario" asp-action="Index">Autorização de Usuários</a>
+
+<p id="AdmNameInfo">
+    Sr.(a) Administrador(a), caso ainda não tenha feito, clique sobre seu e-mail no canto superior
+       direito para informar seu nome e seu número de telefone.
+</p>

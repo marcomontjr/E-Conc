@@ -1,32 +1,45 @@
-﻿<div class="container">    
-    <p>Selecione uma das categorias abaixo para visualizar os projetos</p>
-    @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
-          "Ver Todas as Categorias",  new { @class = "form-control", @id = "Categorias"}
-    );
+﻿<style>
+    #NoProjectsAvailable{
+        margin-top: 5%;
+    }
+</style>
 
-    <input type="text" placeholder="Pesquisar Produto" class="form-control input-lg" id="filtro" />
-</div>
+@if (Model.Count > 0)
+{ 
+    <div class="container">
+        <p>Selecione uma das categorias abaixo para visualizar os projetos</p>
+        @Html.DropDownList("Categoria", new SelectList(Enum.GetValues(typeof(Categoria))),
+              "Ver Todas as Categorias",  new { @class = "form-control", @id = "Categorias"}
+        );
 
-@foreach (var produto in Model)
-{
-    <div class="@produto.Categoria bloco">
-        <div class="item  col-xs-4 col-lg-4">
-            <br /><br /><br />
-            <div class="thumbnail panel panel-default">
-                <img width="220" height="220" class="group list-group-image" src="~/images/Produtos/@produto.Arquivo" />
-                <div class="caption panel-footer text-center">
-                    <h4 class="group inner list-group-item-heading">
-                        @produto.Nome
-                    </h4>
-                    <div>
-                        <a asp-controller="Produto"
-                           asp-action="Detalhes"
-                           asp-route-produtoId="@(produto.Id)">Ver Projeto</a>
+        <input type="text" placeholder="Pesquisar Produto" class="form-control input-lg" id="filtro" />
+    </div>
+
+    @foreach (var produto in Model)
+    {
+        <div class="@produto.Categoria bloco">
+            <div class="item  col-xs-4 col-lg-4">
+                <br /><br /><br />
+                <div class="thumbnail panel panel-default">
+                    <img width="220" height="220" class="group list-group-image" src="~/images/Produtos/@produto.Arquivo" />
+                    <div class="caption panel-footer text-center">
+                        <h4 class="group inner list-group-item-heading">
+                            @produto.Nome
+                        </h4>
+                        <div>
+                            <a asp-controller="Produto"
+                               asp-action="Detalhes"
+                               asp-route-produtoId="@(produto.Id)">Ver Projeto</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    }
+}
+else
+{
+    <h4 id="NoProjectsAvailable">Não Existem Projetos Disponíveis no Momento</h4>
 }
 
 <script src="~/lib/jquery/dist/jquery.js"></script>
