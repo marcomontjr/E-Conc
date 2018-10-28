@@ -24,7 +24,7 @@
     <div class="col-md-6">
         <form role="form" method="post" asp-controller="Conta" asp-action="Login">
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <input placeholder="Email" class="form-control input-lg"
                    asp-for="Email" />
             <br />
