@@ -151,6 +151,16 @@ namespace E_Conc.Controllers
         [Authorize(Roles = "Admin, Orientador, Aluno")]
         public async Task<IActionResult> MinhaConta(ContaMinhaContaViewModel modelo)
         {
+            //System.Text.RegularExpressions.Match Match =
+            //        System.Text.RegularExpressions.Regex
+            //        .Match(modelo.NumeroDeCelular, @"^[1-9][1-9]{2}(?:[2-8]|[1-9])[0-9]{3}[0-9]{4}$");
+
+            //if (!Match.Success)
+            //{
+            //    ModelState.AddModelError("", "Este Número de Telefone não é Válido");
+            //    return View("MinhaConta", modelo);
+            //}
+
             if (ModelState.IsValid)
             {
                 var userId = _httpContextAccessor.HttpContext.User.FindFirst(
@@ -161,15 +171,16 @@ namespace E_Conc.Controllers
                 usuario.NomeCompleto = modelo.NomeCompleto;
                 usuario.PhoneNumber = modelo.NumeroDeCelular;
 
-                if (!usuario.PhoneNumberConfirmed)
-                    await EnviarSmsConfirmacaoAsync(usuario);
-                else
-                    usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
+                //if (!usuario.PhoneNumberConfirmed)
+                //    await EnviarSmsConfirmacaoAsync(usuario);
+                //else
+                usuario.PhoneNumberConfirmed = true;
+                usuario.TwoFactorEnabled = modelo.HabilitarAutenticacaoDeDoisFatores;
 
                 var resultadoUpdate = await _userManager.UpdateAsync(usuario);
 
                 if (resultadoUpdate.Succeeded)
-                    return RedirectToAction("Index", "Home");
+                    return View("MinhaContaSucesso");
 
                 AdicionaErros(resultadoUpdate);
             }
@@ -233,7 +244,15 @@ namespace E_Conc.Controllers
                 if (result.Succeeded)
                 {
                     await EnviaEmailConfirmacaoAsync(novoUsuario);
-                    return View("AguardandoConfirmacao");
+                    UsuarioEditarFuncoesViewModel EditFuncoes = new UsuarioEditarFuncoesViewModel()
+                    {
+                        Id = novoUsuario.Id,
+                        Email = novoUsuario.Email,
+                        NomeCompleto = novoUsuario.NomeCompleto,
+                        UserName = novoUsuario.Email
+                    };
+
+                    return RedirectToAction("EditarFuncoes", "Usuario", EditFuncoes);
                 }
                 else
                     AdicionaErros(result);
@@ -252,7 +271,9 @@ namespace E_Conc.Controllers
                                     Request.HttpContext.Request.Scheme);
 
             await _emailService.SendEmailAsync(usuario.Email, "E-Conc - Confirmação de Cadastro",
-                       $"Bem-Vindo ao E-Conc, clique aqui {linkDeCallback} para confirmar seu email!");
+                       $"Bem-Vindo ao E-Conc, clique no link abaixo para confirmar seu email:" +
+                       "\n\n" +
+                       $" {linkDeCallback}");
         }
         #endregion
 

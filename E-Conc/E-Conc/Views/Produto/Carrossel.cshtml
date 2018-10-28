@@ -8,51 +8,54 @@
 
 @for (var i = 0; i < 4; i++)
 {
-      <div id="my-carousel@(i)" class="carousel slide" data-ride="carousel">
+     @if (Model.CategoriasViewModel[i].Produtos.Count > 0)
+     {
+        <div id="my-carousel@(i)" class="carousel slide" data-ride="carousel">
 
-          <!-- Wrapper for slides -->
-          @switch (((Categoria)i))
-          {
-              case Categoria.Desenvolvimento:
-                  <h3>Desenvolvimento</h3>
-                  break;
-              case Categoria.Empreendedorismo:
-                  <h3>Empreendedorismo</h3>
-                  break;
-              case Categoria.IniciacaoCientifica:
-                  <h3>Iniciação Científica</h3>
-                  break;
-              case Categoria.PesquisaAcademica:
-                  <h3>Pesquisa Acadêmica</h3>
-                  break;
-              default:
-                  <h3>Categoria Não Encontrada</h3>
-                  break;
-          }
+            <!-- Wrapper for slides -->
+            @switch (((Categoria)i))
+            {
+                case Categoria.Desenvolvimento:
+                    <h3>Desenvolvimento</h3>
+                    break;
+                case Categoria.Empreendedorismo:
+                    <h3>Empreendedorismo</h3>
+                    break;
+                case Categoria.IniciacaoCientifica:
+                    <h3>Iniciação Científica</h3>
+                    break;
+                case Categoria.PesquisaAcademica:
+                    <h3>Pesquisa Acadêmica</h3>
+                    break;
+                default:
+                    <h3>Categoria Não Encontrada</h3>
+                    break;
+            }
 
-          <div class="carousel-inner" role="listbox">
-              <div class="item active">
-                  <div class="row">
-                      @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Take(4))
-                  </div>
-              </div>
+            <div class="carousel-inner" role="listbox">
+                <div class="item active">
+                    <div class="row">
+                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Take(4))
+                    </div>
+                </div>
 
-              <div class="item">
-                  <div class="row">
-                      @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Skip(4))
-                  </div>
-              </div>
+                <div class="item">
+                    <div class="row">
+                        @Html.Partial("~/Views/Partials/CarrosselPartial.cshtml", Model.CategoriasViewModel[i].Produtos.Skip(4))
+                    </div>
+                </div>
 
-              <!--Controls-->
-              <a class="left carousel-control" href="#my-carousel@(i)" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                  <span class="sr-only">Previous</span>
-              </a>
-              <a class="right carousel-control" href="#my-carousel@(i)" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                  <span class="sr-only">Next</span>
-              </a>
-              <!-- Controls -->
-          </div>
-      </div>
-}
+                <!--Controls-->
+                <a class="left carousel-control" href="#my-carousel@(i)" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#my-carousel@(i)" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <!-- Controls -->
+            </div>
+        </div>
+      }
+ }

@@ -4,15 +4,19 @@
     ViewData["Title"] = "Registrar";
 }
 
+<style>
+    .login-form{
+        margin-top: 10%;
+    }
+</style>
+
 <section class="login-form">
     <form role="form" method="post" asp-controller="Conta" asp-action="Registrar">
-        <div asp-validation-summary="All"></div>
-        <br /><br />
-        <br /><br />
+        <div asp-validation-summary="All"></div>        
         <input type="email" placeholder="Email" required class="form-control input-lg"
                asp-for="Email" />
         <br />
-        <input type="text" placeholder="Registro Acadêmico(RA)" required class="form-control input-lg"
+        <input type="text" placeholder="Registro Acadêmico(RA)" class="form-control input-lg"
                asp-for="Ra" />
         <br />
         <input type="password" placeholder="Senha" required class="form-control input-lg"
@@ -31,10 +35,6 @@
         <input type="text" placeholder="Sigla da Instituição" required class="form-control input-lg"
                asp-for="InstituicaoSigla" />
         <br />
-        <button type="submit" class="btn btn-lg btn-primary btn-block">Entrar</button>
-        <br />
-        <div align="center">
-            <a href="#">Esqueci Minha Senha</a>
-        </div>
+        <button type="submit" class="btn btn-lg btn-primary btn-block">Cadastrar</button>        
     </form>
 </section>
