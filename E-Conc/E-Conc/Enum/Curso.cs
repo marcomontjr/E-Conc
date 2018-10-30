@@ -2,15 +2,11 @@
 {
     public enum Curso
     {
-        AnaliseDesenvolvimentoSistemas = 0,
-        FabricacaoMecanica = 1,
-        ProjetosMecanicos = 2,
-        Polímeros = 3,
-        EletronicaAutomotiva = 4,
-        GestaoEmpresarial = 5,
-        Logistica = 6,
-        ManufaturaAvancada = 7,
-        ProcessosMetalurgicos = 8,
-        SistemasBiomedicos = 9
-    }
+        Sistemas = 0,
+        Engenharia = 1,
+        Polímeros = 2,
+        Gestao = 3,
+        Logistica = 4,
+        Manufatura = 5,        
+     }
 }
