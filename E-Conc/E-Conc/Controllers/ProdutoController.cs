@@ -45,10 +45,10 @@ namespace E_Conc.Controllers
                 (_produtoRepo.GetProdutosPorCategoria(Categoria.Empreendedorismo));
 
             var produtosIniciacaoCientifica = new CategoriaViewModel
-                (_produtoRepo.GetProdutosPorCategoria(Categoria.IniciacaoCientifica));
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.Iniciacao_Cientifica));
 
             var produtosPesquisaAcademica = new CategoriaViewModel
-                (_produtoRepo.GetProdutosPorCategoria(Categoria.PesquisaAcademica));
+                (_produtoRepo.GetProdutosPorCategoria(Categoria.Pesquisa_Academica));
 
             CategoriaViewModel[] _categoriaViewModel = new CategoriaViewModel[]
             {
@@ -236,10 +236,10 @@ namespace E_Conc.Controllers
                 return "Desenvolvimento.jpg";
             else if (categoria.Equals(Categoria.Empreendedorismo))
                 return "Empreendedorismo.jpg";
-            else if (categoria.Equals(Categoria.IniciacaoCientifica))
-                return "IniciacaoCientifica.jpg";
-            else if (categoria.Equals(Categoria.PesquisaAcademica))
-                return "PesquisaAcademica.jpg";
+            else if (categoria.Equals(Categoria.Iniciacao_Cientifica))
+                return "Iniciacao_Cientifica.jpg";
+            else if (categoria.Equals(Categoria.Pesquisa_Academica))
+                return "Pesquisa_Academica.jpg";
 
             return string.Empty;
         }

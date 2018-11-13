@@ -124,7 +124,9 @@ namespace E_Conc.Data.Repository
                                     .Where(p => p.Id == produtoId)
                                     .Single();
               
-                 productToUpdate.Disponivel = disponibilizaProduto;
+                productToUpdate.Disponivel = disponibilizaProduto;
+                var NomeArquivo  = productToUpdate.Arquivo.Split(".jpg");
+                productToUpdate.Arquivo = NomeArquivo[0] + "_Indisponivel.png";
 
                 _context.SaveChanges();
             }
