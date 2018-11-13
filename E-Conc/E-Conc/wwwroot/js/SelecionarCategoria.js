@@ -6,10 +6,10 @@
     } else if (categoriaEscolhida === "Empreendedorismo") {
         MostraEmpreendedorismo();
         return;
-    } else if (categoriaEscolhida === "IniciacaoCientifica") {
+    } else if (categoriaEscolhida === "Iniciacao_Cientifica") {
         MostraIniciacaoCientifica();
         return;
-    } else if (categoriaEscolhida === "PesquisaAcademica") {
+    } else if (categoriaEscolhida === "Pesquisa_Academica") {
         MostraPesquisaAcademica();
         return;
     }
@@ -20,34 +20,34 @@
 function MostraDesenvolvimento() {
     $('.Desenvolvimento').show();
     $(".Empreendedorismo").hide();
-    $(".IniciacaoCientifica").hide();
-    $(".PesquisaAcademica").hide();
+    $(".Iniciacao_Cientifica").hide();
+    $(".Pesquisa_Academica").hide();
 }
 
 function MostraEmpreendedorismo() {
     $(".Empreendedorismo").show();
     $('.Desenvolvimento').hide();
-    $(".IniciacaoCientifica").hide();
-    $(".PesquisaAcademica").hide();
+    $(".Iniciacao_Cientifica").hide();
+    $(".Pesquisa_Academica").hide();
 }
 
 function MostraIniciacaoCientifica() {
-    $(".IniciacaoCientifica").show();
+    $(".Iniciacao_Cientifica").show();
     $(".Empreendedorismo").hide();
     $('.Desenvolvimento').hide();
-    $(".PesquisaAcademica").hide();
+    $(".Pesquisa_Academica").hide();
 }
 
 function MostraPesquisaAcademica() {
-    $(".PesquisaAcademica").show();
-    $(".IniciacaoCientifica").hide();
+    $(".Pesquisa_Academica").show();
+    $(".Iniciacao_Cientifica").hide();
     $(".Empreendedorismo").hide();
     $('.Desenvolvimento').hide();
 }
 
 function MostraTudo() {
-    $(".PesquisaAcademica").show();
-    $(".IniciacaoCientifica").show();
+    $(".Pesquisa_Academica").show();
+    $(".Iniciacao_Cientifica").show();
     $(".Empreendedorismo").show();
     $('.Desenvolvimento').show();
 }
