@@ -125,8 +125,12 @@ namespace E_Conc.Data.Repository
                                     .Single();
               
                 productToUpdate.Disponivel = disponibilizaProduto;
-                var NomeArquivo  = productToUpdate.Arquivo.Split(".jpg");
-                productToUpdate.Arquivo = NomeArquivo[0] + "_Indisponivel.png";
+
+                if (!disponibilizaProduto)
+                {
+                    var NomeArquivo = productToUpdate.Arquivo.Split(".jpg");
+                    productToUpdate.Arquivo = NomeArquivo[0] + "_Indisponivel.png";
+                }                
 
                 _context.SaveChanges();
             }

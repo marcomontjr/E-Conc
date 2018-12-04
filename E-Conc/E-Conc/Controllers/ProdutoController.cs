@@ -214,12 +214,14 @@ namespace E_Conc.Controllers
         {
             var produto = _produtoRepo.GetById(finalizarProjeto.ProdutoId);
 
+            finalizarProjeto.Produto = produto;
+
             _produtoRepo.UpdateDispProduto(produto.Id, finalizarProjeto.DeveSerDisponibilizado);
 
             var produtoLog = new ProdutoLog(produto, finalizarProjeto.InformacoesProjeto, DateTime.Now);
             _produtoLogRepo.Create(produtoLog);
 
-            return RedirectToAction("   ");
+            return RedirectToAction("MeusProdutos");
         }
         #endregion
 
