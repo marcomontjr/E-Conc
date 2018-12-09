@@ -75,3 +75,14 @@ Tecnologias Utilizadas:
 <p align="center">
   <img src="https://http2.mlstatic.com/visual-studio-2017-enterprise-serial-original-oficial-D_NQ_NP_728140-MLB26381529662_112017-O.webp"/>
 </p>
+
+<h1>Passo a Passo</h1>
+
+1. Após Baixar o projeto, abra o projeto com o Visual Studio e com ambiente .Net Core devidamnete instalado, configure o arquivo appsettings.json na solution e insira sua conexão com o banco de dados.
+
+2. Rode o projeto,com isso o banco de dados e o usuário padrão administrador será criado.
+
+3. Acesse a plataforma com os seguintes dados:
+
+Usuário: econcrelacionamento@gmail.com
+Senha: Teste@123
