@@ -78,7 +78,7 @@ Tecnologias Utilizadas:
 
 <h1>Passo a Passo</h1>
 
-1. Após Baixar o projeto, abra o projeto com o Visual Studio e com ambiente .Net Core devidamnete instalado,configure o arquivo appsettings.json na solution e insira sua conexão com o banco de dados.
+1. Após Baixar o projeto, abra o projeto com o Visual Studio e com ambiente .Net Core devidamnete instalado, configure o arquivo appsettings.json na solution e insira sua conexão com o banco de dados.
 
 2. Rode o projeto,com isso o banco de dados e o usuário padrão administrador será criado.
 
